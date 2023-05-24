@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0;
+        }
+
+        header {
+            display: flex;
+            flex-direction: row;
+            
+            background-color: #FF7F7F;
+
+            padding: 0;
+            height: 150px;
+        }
+        header h1 {
+            font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+            font-size: 75px;
+            margin: auto;
+            color: #F9E79F;
+            text-shadow: -1px -1px 0 black, 4px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black; 
+        }
+        header img:hover{
+            animation: agitar 0.3s ease-in-out infinite;
+        }
+
+        @media (max-width: 750px) {
+            header h1 {
+                font-size: 50px;
+            }
+        }
+        @keyframes agitar {
+            0% {
+                transform: rotate(0);
+            }
+            20% {
+                transform: rotate(-10deg);
+            }
+            40% {
+                transform: rotate(10deg);
+            }
+            60% {
+                transform: rotate(-10deg);
+            }
+            80% {
+                transform: rotate(10deg);
+            }
+            100% {
+                transform: rotate(0);
+            }
+}
+
+    </style>
+</head>
+<body>
+    <header>
+        <img src="view/img/logo.png" width=10% alt="logo">
+        <h1>Quéjate ¡No te calles!</h1>
+    </header>
+
+    <nav>
+
+    </nav>
+    
+</body>
+</html>
