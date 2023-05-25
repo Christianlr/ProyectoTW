@@ -1,0 +1,9 @@
+main .inicio {
+    background-color: #E2FCFB;
+    padding: 7px;
+    margin: 7px;
+}
+
+main .inicio h2 {
+    text-align: center;
+}
