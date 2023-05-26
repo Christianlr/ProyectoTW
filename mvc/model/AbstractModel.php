@@ -14,16 +14,11 @@ abstract class AbstractModel {
         return $result['current_schema'];
     }
 
-    public function query($select, $params=[]) {
+    public function query($select) {
         try {
-            if (empty($params))
-                $pq = $this->db->query($select);
-            else {
-                $pq = $this->db->prepare($select);
-                $pq = execute($params);
-            }
-            $result = $pq->fetch(PDO::FETCH_ASSOC); 
-            
+            $pq = $this->db->query($select);
+            $result = $pq->fetchAll(PDO::FETCH_ASSOC); 
+                
         } catch (PDOException $e) {
             $result = null;
         }
@@ -34,12 +29,12 @@ abstract class AbstractModel {
         $existe = $this->query("SELECT COUNT(*) AS C FROM information_schema.tables 
                                 WHERE table_schema='".$this->getCurrentSchema()."' AND
                                 table_name='".$tab."'");
-        return ($existe['C']==0) ? false : true;
+        return ($existe[0]["C"]==0) ? false : true;
     }
 
     public function columnCount($tableName) {
         $q = $this->query("SELECT COUNT(*) AS C FROM information_schema.columns WHERE table_name='$tableName'");
-        return $q['C'];
+        return $q[0]["C"];
     }
 
     public abstract function get($publicKey);
