@@ -71,12 +71,12 @@
                         <div class="card-body">
                             <form novalidate class="formulario-login">
                                 <div class="mb-1">
-                                    <label class="mb-0" for="email" class="form-label">{{ name }}</label>
+                                    <label class="mb-0" for="email" class="form-label">Email:</label>
                                     <input type="text" class="form-control input-login " id="email"
                                         name="email">
                                 </div>
                                 <div class="mb-1">
-                                    <label class="mb-0" for="contrasenia">{{ contrasenia }}</label>
+                                    <label class="mb-0" for="contrasenia">Contraseña:</label>
                                     <input type="password" class="form-control input-login " name="contrasenia">
                                 </div>
                                 <div class="text-center mt-2">
@@ -94,9 +94,9 @@
                                     Lo que más añaden
                                 </div>
                                 <ol type="i" class="list-group-flush mt-2">
-                                    <li>Hola</li>
-                                    <li>Hola</li>
-                                    <li>Hola</li>
+                                    {% for i in 0..2 %}
+                                        <li>({{ total[i] }}) {{nombre[i]}}</li>
+                                    {% endfor %}
                                 </ol>
                             </div>
                         </div>
