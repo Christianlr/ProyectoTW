@@ -14,13 +14,13 @@ class Db {
 	private function __construct() {}
 
     private static function connect() {
-        $this->host = constant('DB_HOST');
-		$this->db = constant('DB');
-		$this->user = constant('DB_USER');
-		$this->pass = constant('DB_PASS');
+        self::$host = constant('DB_HOST');
+		self::$db = constant('DB');
+		self::$user = constant('DB_USER');
+		self::$pass = constant('DB_PASS');
 
 		try {
-           $conection = new PDO('mysql:host='.$this->host.'; dbname='.$this->db, $this->user, $this->pass);
+           $conection = new PDO('mysql:host='.self::$host.'; dbname='.self::$db, self::$user, self::$pass);
         } catch (PDOException $e) {
             echo $e->getMessage();
             exit();
