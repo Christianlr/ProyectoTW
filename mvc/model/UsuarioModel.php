@@ -27,7 +27,15 @@ class UsuarioModel extends AbstractModel {
     }
 
     public function get($email) {
-        $r = $this->query('SELECT * FROM usuarios WHERE email=:email', ['email'=>$email]);
+        $r = $this->query("SELECT * FROM usuarios WHERE email='" . $email ."'");
+        return empty($r) ? null : $r;
+    }
+
+    //Devuelve un array con el nombre y los apellidos del usuario con el email dado
+    public function getNombreApellidos($email) {
+        $r = $this->query("select nombre, apellidos 
+                            from usuarios 
+                            where email= '" . $email. "'");
         return empty($r) ? null : $r;
     }
 }
