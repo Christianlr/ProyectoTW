@@ -14,14 +14,21 @@ abstract class AbstractModel {
         return $result['current_schema'];
     }
 
-    public function query($select) {
+    public function query($select, $params=[]) {
         try {
-            $pq = $this->db->query($select);
-            $result = $pq->fetchAll(PDO::FETCH_ASSOC); 
-                
+            if(empty($params)) {
+                $pq = $this->db->query($select);
+                $result = $pq->fetchAll(PDO::FETCH_ASSOC);
+            } 
+            else { 
+                $pq = $this->db->prepare($select);
+                $pq->execute($params);
+                $result = $pq->fetch(PDO::FETCH_ASSOC); 
+            }   
         } catch (PDOException $e) {
-            $result = null;
+            $result = null; 
         }
+
         return $result;
     }
 
