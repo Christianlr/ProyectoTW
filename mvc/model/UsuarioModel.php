@@ -38,5 +38,27 @@ class UsuarioModel extends AbstractModel {
                             where email= '" . $email. "'");
         return empty($r) ? null : $r;
     }
+
+    public function getTipoUsuario($email) {
+        $r = $this->query("select rol 
+                            from usuarios 
+                            where email= '" . $email. "'");
+        return empty($r) ? null : $r;
+    }
+
+    public function setFoto($email, $foto) {
+        $consulta = "UPDATE usuarios SET foto = ? WHERE email = ?";
+        $sentencia = $this->db->prepare($consulta);
+
+        $sentencia->bindParam(1, $foto, PDO::PARAM_LOB);
+        $sentencia->bindParam(2, $email);
+        
+        $sentencia->execute();    
+    }
+
+    public function getFoto($email) {
+        $resultado = $this->query("SELECT foto FROM usuarios WHERE email = :email", ['email'=>$email]);
+        return base64_encode($resultado['foto']);
+    }
 }
 ?>

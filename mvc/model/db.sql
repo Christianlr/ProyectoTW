@@ -28,7 +28,7 @@ CREATE TABLE incidencias (
     fecha datetime DEFAULT NULL,
     lugar varchar(45) COLLATE utf8_spanish2_ci DEFAULT NULL,
     keywords varchar(100) COLLATE utf8_spanish2_ci DEFAULT NULL,
-    id_usuario varchar(100) COLLATE utf8_spanish2_ci DEFAULT NULL,
+    id_usuario varchar(100) COLLATE utf8_spanish2_ci NOT NULL,
     estado varchar(20) COLLATE utf8_spanish2_ci DEFAULT NULL,
     PRIMARY KEY (id),
     CONSTRAINT fk_incidencia_usuario FOREIGN KEY (id_usuario) REFERENCES usuarios (email) ON DELETE CASCADE ON UPDATE CASCADE
