@@ -30,21 +30,25 @@
             <li class="nav-item">
             <a class="nav-link active p-0" aria-current="page" href="#">Ver incidencias</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link active p-0" aria-current="page" href="#">Nueva incidencia</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link active p-0" aria-current="page" href="#">Mis incidencias</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link active p-0" aria-current="page" href="#">Gestión de usuarios</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link active p-0" aria-current="page" href="#">Ver log</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link active p-0" aria-current="page" href="#">Gestión de BBDD</a>
-            </li>  
+            {% if rolUsuario == "colaborador" or rolUsuario == "administrador" %}
+                <li class="nav-item">
+                    <a class="nav-link active p-0" aria-current="page" href="#">Nueva incidencia</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active p-0" aria-current="page" href="#">Mis incidencias</a>
+                </li>
+            {% endif %}
+            {% if rolUsuario == "administrador" %}
+                <li class="nav-item">
+                    <a class="nav-link active p-0" aria-current="page" href="#">Gestión de usuarios</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active p-0" aria-current="page" href="#">Ver log</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active p-0" aria-current="page" href="#">Gestión de BBDD</a>
+                </li> 
+            {% endif %} 
         </ul>
     </nav>
     <div class="mainAside">
