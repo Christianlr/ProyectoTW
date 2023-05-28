@@ -27,7 +27,7 @@ class UsuarioModel extends AbstractModel {
     }
 
     public function get($email) {
-        $r = $this->query("SELECT * FROM usuarios WHERE email='" . $email ."'");
+        $r = $this->query("SELECT * FROM usuarios WHERE email='" . addslashes($email) ."'");
         return empty($r) ? null : $r;
     }
 
@@ -35,21 +35,23 @@ class UsuarioModel extends AbstractModel {
     public function getNombreApellidos($email) {
         $r = $this->query("select nombre, apellidos 
                             from usuarios 
-                            where email= '" . $email. "'");
+                            where email= '" . addslashes($email). "'");
         return empty($r) ? null : $r;
     }
 
     public function getTipoUsuario($email) {
         $r = $this->query("select rol 
                             from usuarios 
-                            where email= '" . $email. "'");
+                            where email= '" . addslashes($email). "'");
         return empty($r) ? null : $r;
     }
 
     public function setFoto($email, $foto) {
         $consulta = "UPDATE usuarios SET foto = ? WHERE email = ?";
         $sentencia = $this->db->prepare($consulta);
+        $foto = file_get_contents(addslashes($foto));
 
+        $email = addslashes($email);
         $sentencia->bindParam(1, $foto, PDO::PARAM_LOB);
         $sentencia->bindParam(2, $email);
         
@@ -57,8 +59,16 @@ class UsuarioModel extends AbstractModel {
     }
 
     public function getFoto($email) {
-        $resultado = $this->query("SELECT foto FROM usuarios WHERE email = :email", ['email'=>$email]);
+        $resultado = $this->query("SELECT foto FROM usuarios WHERE email = :email", ['email'=>addslashes($email)]);
         return base64_encode($resultado['foto']);
+    }
+
+    public function existeUsuario($email, $password) {
+        $existe = $this->query("SELECT COUNT(*) as C 
+                                FROM usuarios
+                                WHERE email = '".addslashes($email)."' and 
+                                password = SHA2('".addslashes($password)."', 256)");
+        return ($existe[0]["C"]==0) ? false : true;
     }
 }
 ?>

@@ -35,12 +35,13 @@ abstract class AbstractModel {
     public function tableExists($tab) {
         $existe = $this->query("SELECT COUNT(*) AS C FROM information_schema.tables 
                                 WHERE table_schema='".$this->getCurrentSchema()."' AND
-                                table_name='".$tab."'");
+                                table_name='".addslashes($tab)."'");
         return ($existe[0]["C"]==0) ? false : true;
     }
 
     public function columnCount($tableName) {
-        $q = $this->query("SELECT COUNT(*) AS C FROM information_schema.columns WHERE table_name='$tableName'");
+        $q = $this->query("SELECT COUNT(*) AS C FROM information_schema.columns 
+                            WHERE table_name='". addslashes($tableName). "'");
         return $q[0]["C"];
     }
 

@@ -29,7 +29,7 @@ class IncidenciasModel extends AbstractModel {
     }
 
     public function get($id) {
-        $r = $this->query("SELECT * FROM incidencias WHERE id='" . $id ."'");
+        $r = $this->query("SELECT * FROM incidencias WHERE id='" . addslashes($id) ."'");
         return empty($r) ? null : $r;
     }
 

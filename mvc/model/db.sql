@@ -1,3 +1,4 @@
+-- Active: 1685277857137@@127.0.0.1@3306@quejate
 DROP TABLE log;
 CREATE TABLE log (
     id int(11) NOT NULL AUTO_INCREMENT,
