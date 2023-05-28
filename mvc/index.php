@@ -3,24 +3,23 @@ require 'twig/vendor/autoload.php';
 require_once "model/UsuarioModel.php";
 require_once "model/IncidenciasModel.php";
 
-
 session_start();
 
 $loader = new \Twig\Loader\FilesystemLoader('view/html');
 $twig = new \Twig\Environment($loader);
 
 /* Obtencion de los rankings */
+#---------------------------------------------#
+
 $usuario = new UsuarioModel();
 $incidencia = new IncidenciasModel();
-
-//---------
-
-
-//---------
+#-------
+$usuario->setFoto('admin@admin.admin', 'view/img/enrique.png');
+#-------
 
 $top = $incidencia->getTopUsuarios();
 
-//$nombresRanking=[];
+$nombresRanking=[];
 $counter = 0;
 foreach ($top as $fila) {
     $nombresRanking[] = $usuario->getNombreApellidos($fila["id_usuario"]);
@@ -33,26 +32,47 @@ $total = [];
 foreach ($top as $t)
     $total[] = $t["count"];
 
+#----------------------------------------------#
+
 /* Comprobacion de usuario registrado */
+#----------------------------------------------#
+
 $nombre = null;
 $tipoUsuario = null;
 $foto = null;
+$datosUsuario;
+$verificacion = true; //Si true todo esta bien
 
-if (isset($_POST['email'])) {
-    $nombre = $usuario->getNombreApellidos($_POST['email']);
-    $nombre = $nombre[0]["nombre"] . " " . $nombre[0]["apellidos"];
+if (!empty($_POST['email']) && !empty($_POST['contrasenia'])) {
+    $verificacion = $usuario->existeUsuario($_POST['email'], $_POST['contrasenia']);
 
-    $tipoUsuario = $usuario->getTipoUsuario($_POST['email']);
-    $tipoUsuario = $tipoUsuario[0]['rol'];
-    $foto = $usuario->getFoto($_POST['email']);
+    if ($verificacion) {
+        $nombre = $usuario->getNombreApellidos($_POST['email']);
+        $nombre = $nombre[0]["nombre"] . " " . $nombre[0]["apellidos"];
 
-    $_SESSION['rolUsuario'] = $tipoUsuario;
+        $tipoUsuario = $usuario->getTipoUsuario($_POST['email']);
+        $tipoUsuario = $tipoUsuario[0]['rol'];
+        $foto = $usuario->getFoto($_POST['email']);
+
+        $datosUsuario[] = $nombre;
+        $datosUsuario[] = $tipoUsuario;
+        $datosUsuario[] = $foto;
+    } 
+    else {
+        $nombre = 'incorrecto';
+        $tipoUsuario = 'anonimo';
+        $datosUsuario[] = $tipoUsuario;
+    }
 }
 else {
+    if (!empty($_POST['email']) || !empty($_POST['contrasenia']))
+        $nombre = 'incorrecto';
+
     $tipoUsuario = 'anonimo';
-    $_SESSION['rolUsuario'] = 'anonimo';
+    $datosUsuario[] = $tipoUsuario;
 }
 
+$_SESSION['datosUsuario'] = $datosUsuario;
 
 echo $twig->render('index.html', [
         'total' => $total,
