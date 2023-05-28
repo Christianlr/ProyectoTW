@@ -12,3 +12,8 @@ img.cardUsuario {
     vertical-align: center;
     margin-bottom: 10px;
 }
+
+.errorUsuario {
+    color: rgb(177, 9, 9);
+    font-size: small;
+}

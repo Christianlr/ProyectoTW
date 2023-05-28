@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="view/css/default.css">
     <link rel="stylesheet" href="view/css/mainInicio.css">
     <link rel="stylesheet" href="view/css/cardUsuario.css">
-    
+
 </head>
 
 <body>
@@ -63,6 +63,9 @@
                     <div class="card color-card">
                         <div class="card-body">
                             {% if rolUsuario == "anonimo" %}
+                                {% if nombreUsuario == "incorrecto" %}
+                                    <p id="errorUsuario">El usuario o contraseña son incorrectos</p>
+                                {% endif %}
                                 <form action="" novalidate class="formulario-login" method="post">
                                     <div class="mb-1">
                                         <label class="mb-0" for="email" class="form-label">Email:</label>
