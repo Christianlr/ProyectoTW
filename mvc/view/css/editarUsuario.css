@@ -1,0 +1,23 @@
+h2.editUser {
+    background-color: #E2FCFB;
+    margin: 7px;
+    margin-bottom: 0;
+    padding: 25px;
+    text-align: center;
+}
+
+.imgUsuario {
+    width: 7%;
+    vertical-align: bottom;
+}
+
+.form-group-row {
+    margin-bottom: 10px;
+}
+
+.formulario {
+    background-color: #F6E6C6;
+    margin: 7px;
+    margin-top: 0;
+    padding: 30px;
+}

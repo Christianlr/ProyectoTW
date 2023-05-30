@@ -1,0 +1,67 @@
+{% extends 'default.html' %}
+
+{% block main %}
+<div>
+    <h2 class="editUser">Edición de usuario</h2>
+</div>
+
+<form action="controller/editarUsuarioController.php" method="POST" class="formulario" enctype="multipart/form-data">
+    <div class="form-group-row">
+        <label for="fotoActual">Foto:</label>
+        <img class="imgUsuario" src="data:image/jpeg;base64,{{ imgUsuario }}" alt="Foto actual">
+        <input type="file" id="nuevaFoto" name="examinar" accept="image/*"> 
+    </div>
+    
+    <div class="form-group-row">
+        <label for="nombre">Nombre:</label>
+        <input type="text" name="nombre" id="nombre">
+
+    </div>
+    
+    <div class="form-group-row">
+        <label for="apellidos">Apellidos:</label>
+        <input type="text" name="apellidos" id="apellidos">
+    </div>
+    
+    <div class="form-group-row">
+        <label for="email">Email:</label>
+        <input type="text" name="email" id="email">
+    </div>
+    
+    <div class="form-group-row">
+        <label for="clave">Clave:</label>
+        <input type="password" name="clave1" id="clave">
+        <input type="password" name="clave2">
+    </div>
+    
+    <div class="form-group-row">
+        <label for="direccion">Dirección:</label>
+        <input type="text" name="direccion" id="direccion">
+    </div>
+    
+    <div class="form-group-row">
+        <label for="telefono">Teléfono</label>
+        <input type="text" name="telefono" id="telefono">
+    </div>
+    
+    <div class="form-group-row">
+        <label for="select">Rol:</label>
+        <select name="select">
+            <option value="Colaborador" selected>Colaborador</option>
+            <option value="Administrador">Administrador</option>
+        </select>
+    </div>
+    
+    <div class="form-group-row">
+        <label for="select">Estado:</label>
+        <select name="select">
+            <option value="Activo" selected>Activo</option>
+            <option value="Inactivo">Inactivo</option>
+        </select>
+    </div>
+    
+
+    <input type="submit" name="enviar" value="Modificar usuario">
+</form>
+
+{% endblock %}
