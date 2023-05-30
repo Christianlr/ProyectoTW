@@ -1,5 +1,5 @@
 <?php
-require_once 'model/Db.php';
+require_once 'Db.php';
 
 abstract class AbstractModel {
     protected $db;

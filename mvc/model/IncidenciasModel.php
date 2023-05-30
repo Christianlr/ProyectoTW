@@ -1,5 +1,5 @@
 <?php
-require_once "model/AbstractModel.php";
+require_once "AbstractModel.php";
 
 class IncidenciasModel extends AbstractModel {
     function __construct() { 

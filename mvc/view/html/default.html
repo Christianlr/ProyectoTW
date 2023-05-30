@@ -6,9 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="view/css/default.css">
-    <link rel="stylesheet" href="view/css/mainInicio.css">
-    <link rel="stylesheet" href="view/css/cardUsuario.css">
+    <link rel="stylesheet" href="../view/css/default.css">
+    <link rel="stylesheet" href="../view/css/mainInicio.css">
+    <link rel="stylesheet" href="../view/css/cardUsuario.css">
+    {% if css is defined %}
+        <link rel="stylesheet" href="{{css}}">
+    {% endif %}
 
 </head>
 
@@ -18,7 +21,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     
     <header>
-        <img src="view/img/logo.png" width=150px alt="logo">
+        <img src="../view/img/logo.png" width=150px alt="logo">
         <h1>Quéjate ¡No te calles!</h1>
     </header>
     <h2 class="subtitulo">
@@ -68,7 +71,7 @@
                         <div class="card-body">
                             {% if rolUsuario == "anonimo" %}
                                 {% if nombreUsuario == "incorrecto" %}
-                                    <p id="errorUsuario">El usuario o contraseña son incorrectos</p>
+                                    <p class="errorUsuario">El usuario o contraseña son incorrectos</p>
                                 {% endif %}
                                 <form action="" novalidate class="formulario-login" method="post">
                                     <div class="mb-1">
@@ -91,14 +94,21 @@
                                 <div class="d-flex align-items-center justify-content-center">
                                     <img class="cardUsuario" src="data:image/jpeg;base64,{{ imgUsuario }}" alt="Imagen">
                                 </div>
-                                <form action="" novalidate class="formulario-login">
-                                    <div class="text-center mt-2">                                
-                                        <button type="enviar"
-                                        class="btn pt-1 pl-2 pr-2 color-aside color-boton-encima mr-2">Editar</button>
-                                        <button type="enviar"
-                                            class="btn pt-1 pl-2 pr-2 color-aside color-boton-encima">Logout</button>
-                                    </div>
-                                </form>
+                                <div class="align-forms">
+                                    <form action="editarUsuarioController.php" novalidate class="formulario-login">
+                                        <div class="text-center mt-2">                                
+                                            <input type="submit"
+                                            class="btn pt-1 pl-2 pr-2 color-aside color-boton-encima mr-2" value="Editar">
+                                        </div>
+                                    </form>
+
+                                    <form action="inicioController.php" novalidate class="formulario-login">
+                                        <div class="text-center mt-2"> 
+                                            <input type="submit"
+                                                class="btn pt-1 pl-2 pr-2 color-aside color-boton-encima" value="Logout">
+                                        </div>
+                                    </form>
+                                </div>
                             {% endif %}
 
                             

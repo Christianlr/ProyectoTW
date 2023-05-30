@@ -1,4 +1,4 @@
--- Active: 1685277857137@@127.0.0.1@3306@quejate
+-- Active: 1684834928654@@127.0.0.1@3306@quejate
 insert into usuarios values("admin@admin.admin", "Enrique", "Araque Espinosa", SHA2('contraseña', 256), null, null, null, "activo", "administrador");
 insert into usuarios values("christian@admin.admin", "Christian", "López Román", SHA2('Swap1234', 256), "607890670", 'c/periodista, 1, 4B', null, "activo", "administrador");
 insert into usuarios values("colab@gmail.com", "Pepa", "Cerda Pig", SHA2('pepa', 256), null, null, null, "activo", "colaborador");
