@@ -31,6 +31,34 @@ class UsuarioModel extends AbstractModel {
         return empty($r) ? null : $r;
     }
 
+    public function getNombre($email) {
+        $r = $this->query("select nombre
+                            from usuarios 
+                            where email= '" . addslashes($email). "'");
+        return empty($r) ? null : $r[0]['nombre'];
+    }
+
+    public function getApellidos($email) {
+        $r = $this->query("select apellidos 
+                            from usuarios 
+                            where email= '" . addslashes($email). "'");
+        return empty($r) ? null : $r[0]['apellidos'];
+    }
+    
+    public function getDireccion($email) {
+        $r = $this->query("select direccion
+                            from usuarios 
+                            where email= '" . addslashes($email). "'");
+        return empty($r) ? null : $r[0]['direccion'];
+    }
+
+    public function getTelefono($email) {
+        $r = $this->query("select telefono 
+                            from usuarios 
+                            where email= '" . addslashes($email). "'");
+        return empty($r) ? null : $r[0]['telefono'];
+    }
+
     //Devuelve un array con el nombre y los apellidos del usuario con el email dado
     public function getNombreApellidos($email) {
         $r = $this->query("select nombre, apellidos 
@@ -43,7 +71,12 @@ class UsuarioModel extends AbstractModel {
         $r = $this->query("select rol 
                             from usuarios 
                             where email= '" . addslashes($email). "'");
-        return empty($r) ? null : $r;
+        return empty($r) ? null : $r[0]['rol'];
+    }
+
+    public function getFoto($email) {
+            $resultado = $this->query("SELECT foto FROM usuarios WHERE email = :email", ['email'=>addslashes($email)]);
+            return base64_encode($resultado['foto']);
     }
 
     public function setFoto($email, $foto) {
@@ -56,11 +89,6 @@ class UsuarioModel extends AbstractModel {
         $sentencia->bindParam(2, $email);
         
         $sentencia->execute();    
-    }
-
-    public function getFoto($email) {
-        $resultado = $this->query("SELECT foto FROM usuarios WHERE email = :email", ['email'=>addslashes($email)]);
-        return base64_encode($resultado['foto']);
     }
 
     public function existeUsuario($email, $password) {
