@@ -13,12 +13,11 @@ $twig = new \Twig\Environment($loader);
 $usuario = new UsuarioModel();
 $incidencia = new IncidenciasModel();
 
+
 echo $twig->render('editarUsuario.html', [
     'css' => '../view/css/editarUsuario.css',
     'total' => $_SESSION['rankingAdd'][0],
     'nombresRanking' => $_SESSION['rankingAdd'][1],
-    'nombreUsuario' => $_SESSION['datosUsuario'][1],
-    'rolUsuario' => $_SESSION['datosUsuario'][2],
-    'imgUsuario' => $_SESSION['datosUsuario'][3]
+    'datosUsuario' => $_SESSION['datosUsuario']
 ]);
 ?>

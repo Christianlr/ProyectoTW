@@ -33,7 +33,7 @@
             <li class="nav-item">
             <a class="nav-link active p-0" aria-current="page" href="#">Ver incidencias</a>
             </li>
-            {% if rolUsuario == "colaborador" or rolUsuario == "administrador" %}
+            {% if datosUsuario.rol == "colaborador" or datosUsuario.rol == "administrador" %}
                 <li class="nav-item">
                     <a class="nav-link active p-0" aria-current="page" href="#">Nueva incidencia</a>
                 </li>
@@ -41,7 +41,7 @@
                     <a class="nav-link active p-0" aria-current="page" href="#">Mis incidencias</a>
                 </li>
             {% endif %}
-            {% if rolUsuario == "administrador" %}
+            {% if datosUsuario.rol == "administrador" %}
                 <li class="nav-item">
                     <a class="nav-link active p-0" aria-current="page" href="#">Gestión de usuarios</a>
                 </li>
@@ -69,8 +69,8 @@
                     <!-- Login (CARD) -->
                     <div class="card color-card">
                         <div class="card-body">
-                            {% if rolUsuario == "anonimo" %}
-                                {% if nombreUsuario == "incorrecto" %}
+                            {% if datosUsuario.rol == "anonimo" %}
+                                {% if datosUsuario.nombre == "incorrecto" %}
                                     <p class="errorUsuario">El usuario o contraseña son incorrectos</p>
                                 {% endif %}
                                 <form action="" novalidate class="formulario-login" method="post">
@@ -89,10 +89,10 @@
                                     </div>
                                 </form>
                             {% else %}
-                                <h1 class="cardUsuario">{{ nombreUsuario }}</h1>
-                                <h2 class="cardUsuario">{{ rolUsuario }}</h2>
+                                <h1 class="cardUsuario">{{ datosUsuario.nombreCompleto }}</h1>
+                                <h2 class="cardUsuario">{{ datosUsuario.rol }}</h2>
                                 <div class="d-flex align-items-center justify-content-center">
-                                    <img class="cardUsuario" src="data:image/jpeg;base64,{{ imgUsuario }}" alt="Imagen">
+                                    <img class="cardUsuario" src="data:image/jpeg;base64,{{ datosUsuario.foto }}" alt="Imagen">
                                 </div>
                                 <div class="align-forms">
                                     <form action="editarUsuarioController.php" novalidate class="formulario-login">

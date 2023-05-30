@@ -7,7 +7,7 @@ h2.editUser {
 }
 
 .imgUsuario {
-    width: 7%;
+    width: 20%;
     vertical-align: bottom;
 }
 
@@ -20,4 +20,8 @@ h2.editUser {
     margin: 7px;
     margin-top: 0;
     padding: 30px;
+}
+
+.form-elements {
+    width: 50%;
 }

@@ -41,9 +41,6 @@ foreach ($top as $t)
 /* Comprobacion de usuario registrado */
 #----------------------------------------------#
 
-$nombre = null;
-$tipoUsuario = null;
-$foto = null;
 $datosUsuario;
 $verificacion = true; //Si true todo esta bien
 
@@ -51,42 +48,34 @@ if (!empty($_POST['email']) && !empty($_POST['contrasenia'])) {
     $verificacion = $usuario->existeUsuario($_POST['email'], $_POST['contrasenia']);
 
     if ($verificacion) {
-        $nombre = $usuario->getNombreApellidos($_POST['email']);
-        $nombre = $nombre[0]["nombre"] . " " . $nombre[0]["apellidos"];
-
-        $tipoUsuario = $usuario->getTipoUsuario($_POST['email']);
-        $tipoUsuario = $tipoUsuario[0]['rol'];
-        $foto = $usuario->getFoto($_POST['email']);
-
-        $datosUsuario[] = htmlentities($_POST['email']);
-        $datosUsuario[] = $nombre;
-        $datosUsuario[] = $tipoUsuario;
-        $datosUsuario[] = $foto;
+        $datosUsuario['email'] = htmlentities($_POST['email']);
+        $datosUsuario['nombre'] = $usuario->getNombre($_POST['email']);
+        $datosUsuario['apellidos'] = $usuario->getApellidos($_POST['email']);
+        $datosUsuario['rol'] = $usuario->getTipoUsuario($_POST['email']);
+        $datosUsuario['foto'] = $usuario->getFoto($_POST['email']);
+        $datosUsuario['direccion'] = $usuario->getDireccion($_POST['email']);
+        $datosUsuario['telefono'] = $usuario->getTelefono($_POST['email']);
+        $datosUsuario['nombreCompleto'] = $datosUsuario['nombre'] . " " . $datosUsuario['apellidos'];
     } 
     else {
-        $nombre = 'incorrecto';
-        $tipoUsuario = 'anonimo';
-        $datosUsuario[] = $tipoUsuario;
+        $datosUsuario['nombre'] = 'incorrecto';
+        $datosUsuario['rol'] = 'anonimo';
     }
 }
 else {
     if (!empty($_POST['email']) || !empty($_POST['contrasenia']))
-        $nombre = 'incorrecto';
+        $datosUsuario['nombre'] = 'incorrecto';
 
-    $tipoUsuario = 'anonimo';
-    $datosUsuario[] = $tipoUsuario;
+    $datosUsuario['rol'] = 'anonimo';
 }
 
 $_SESSION['datosUsuario'] = $datosUsuario;
 $_SESSION['rankingAdd'][0] = $total;
 $_SESSION['rankingAdd'][1] = $nombresRanking;
 
-
 echo $twig->render('index.html', [
         'total' => $total,
         'nombresRanking' => $nombresRanking,
-        'nombreUsuario' => $nombre,
-        'rolUsuario' => $tipoUsuario,
-        'imgUsuario' => $foto
+        'datosUsuario' => $_SESSION['datosUsuario']
     ]);
 ?>
