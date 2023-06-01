@@ -3,11 +3,7 @@ require '../twig/vendor/autoload.php';
 require_once "../model/UsuarioModel.php";
 require_once "../model/IncidenciasModel.php";
 
-
-
 session_start();
-var_dump($_SESSION);
-
 
 $loader = new \Twig\Loader\FilesystemLoader('../view/html');
 $twig = new \Twig\Environment($loader);
@@ -17,9 +13,6 @@ $twig = new \Twig\Environment($loader);
 
 $usuario = new UsuarioModel();
 $incidencia = new IncidenciasModel();
-#-------
-//$usuario->setFoto('admin@admin.admin', 'view/img/enrique.png');
-#-------
 
 $top = $incidencia->getTopUsuarios();
 
@@ -40,6 +33,8 @@ foreach ($top as $t)
 
 /* Comprobacion de usuario registrado */
 #----------------------------------------------#
+if (isset($_POST['logout'])) 
+    $_SESSION['datosUsuario'] = array();
 
 $datosUsuario;
 $verificacion = true; //Si true todo esta bien
@@ -55,6 +50,7 @@ if (!empty($_POST['email']) && !empty($_POST['contrasenia'])) {
         $datosUsuario['foto'] = $usuario->getFoto($_POST['email']);
         $datosUsuario['direccion'] = $usuario->getDireccion($_POST['email']);
         $datosUsuario['telefono'] = $usuario->getTelefono($_POST['email']);
+        $datosUsuario['estado'] = $usuario->getEstado($_POST['email']);
         $datosUsuario['nombreCompleto'] = $datosUsuario['nombre'] . " " . $datosUsuario['apellidos'];
     } 
     else {
@@ -69,7 +65,9 @@ else {
     $datosUsuario['rol'] = 'anonimo';
 }
 
-$_SESSION['datosUsuario'] = $datosUsuario;
+if (empty($_SESSION['datosUsuario']) || (isset($_SESSION['datosUsuario']) && $_SESSION['datosUsuario']['rol'] == 'anonimo'))
+    $_SESSION['datosUsuario'] = $datosUsuario;
+
 $_SESSION['rankingAdd'][0] = $total;
 $_SESSION['rankingAdd'][1] = $nombresRanking;
 

@@ -59,6 +59,13 @@ class UsuarioModel extends AbstractModel {
         return empty($r) ? null : $r[0]['telefono'];
     }
 
+    public function getEstado($email) {
+        $r = $this->query("select estado 
+                            from usuarios 
+                            where email= '" . addslashes($email). "'");
+        return empty($r) ? null : $r[0]['estado'];
+    }
+
     //Devuelve un array con el nombre y los apellidos del usuario con el email dado
     public function getNombreApellidos($email) {
         $r = $this->query("select nombre, apellidos 
@@ -82,13 +89,30 @@ class UsuarioModel extends AbstractModel {
     public function setFoto($email, $foto) {
         $consulta = "UPDATE usuarios SET foto = ? WHERE email = ?";
         $sentencia = $this->db->prepare($consulta);
-        $foto = file_get_contents(addslashes($foto));
+
+        if (base64_decode($foto, true)) {
+            $foto = base64_decode($foto);
+        } else {
+            $foto = file_get_contents($foto);
+        }
 
         $email = addslashes($email);
         $sentencia->bindParam(1, $foto, PDO::PARAM_LOB);
         $sentencia->bindParam(2, $email);
-        
-        $sentencia->execute();    
+
+        $sentencia->execute();
+  
+    }
+
+    public function setDatos($email, $clave, $dato) {
+        if ($clave == 'foto')
+            $this->setFoto($email, $dato);
+        else {
+            $r = $this->query("UPDATE usuarios 
+                                SET " . $clave . " = '" . addslashes($dato) . "'
+                                WHERE email = '".addslashes($email). "'"
+                            );
+        }
     }
 
     public function existeUsuario($email, $password) {
