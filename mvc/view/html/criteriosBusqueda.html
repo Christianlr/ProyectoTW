@@ -1,0 +1,104 @@
+{% extends 'incidencias.html' %}
+
+{% block criterios %}
+<div class="row">
+    <div class="col">
+        <form class="criterios-busqueda" method="post">
+            <h2>Criterios de búsqueda</h2>
+            <div class="datos">
+                <fieldset class="d-flex flex-wrap justify-content-start">
+                    <legend>Ordenar por:</legend>
+                    <div class="form-check m-0">
+                        <input type="radio" name="ordenar">
+                        <label class="form-check-label m-0">
+                            Antiguedad (primero la más reciente)
+                        </label>
+                    </div>
+                    <div class="form-check m-0">
+                        <input type="radio" name="ordenar">
+                        <label class="form-check-label m-0">
+                            Número de positivos (de más a menos)
+                        </label>
+                    </div>
+                    <div class="form-check m-0">
+                        <input type="radio" name="ordenar">
+                        <label class="form-check-label m-0">
+                            Número de positivos netos (de más a menos)
+                        </label>
+                    </div>
+                </fieldset>
+            </div>
+            <div class="datos">
+                <fieldset>
+                    <legend>Incidencias que contengan:</legend>
+                    <div class="datos">
+                        <div class="row align-items-center">
+                            <div class="col-12 col-md-2 col-sm-10 mb-1">
+                                <label class="col-form-label m-0">Texto de búsqueda:</label>
+                            </div>
+                            <div class="col-11 col-md-9 col-sm-11  mb-1 m-0">
+                                <input type="text" class="form-control" name="textoBusqueda">
+                            </div>
+                            <div class="col-12 col-md-2 col-sm-12 mb-1">
+                                <label class="col-form-label  m-0">Lugar:</label>
+                            </div>
+                            <div class="col-11 col-md-9 col-sm-11 mb-1 m-0">
+                                <input type="text" class="form-control" name="lugar">
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            <div class="datos">
+                <fieldset class="d-flex flex-wrap justify-content-start">
+                    <legend>Estado:</legend>
+                    <div class="form-check mr-5">
+                        <input class="form-check-input" type="checkbox" name="estado[]" id="estadoPendiente">
+                        <label class="form-check-label m-0" for="estadoPendiente">
+                            Pendiente
+                        </label>
+                    </div>
+                    <div class="form-check mr-5">
+                        <input class="form-check-input" type="checkbox" name="estado[]" id="estadoComprobada">
+                        <label class="form-check-label m-0" for="estadoComprobada">
+                            Comprobada
+                        </label>
+                    </div>
+                    <div class="form-check mr-5">
+                        <input class="form-check-input" type="checkbox" name="estado[]" id="estadoTramitada">
+                        <label class="form-check-label m-0" for="estadoTramitada">
+                            Tramitada
+                        </label>
+                    </div>
+                    <div class="form-check mr-5">
+                        <input class="form-check-input" type="checkbox" name="estado[]" id="estadoIrresoluble">
+                        <label class="form-check-label m-0" for="estadoIrresoluble">
+                            Irresoluble
+                        </label>
+                    </div>
+                    <div class="form-check mr-5">
+                        <input class="form-check-input" type="checkbox" name="estado[]" id="estadoResuelta">
+                        <label class="form-check-label m-0" for="estadoResuelta">
+                            Resuelta
+                        </label>
+                    </div>
+                </fieldset>
+
+                <div class="enviarDatos">
+                    <label class="d-block">
+                        Incidencias por página
+                        <select name="numeroIncidencias">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                    </label>
+                    <input class="d-block m-auto" type="submit" value="Aplicar criterios de búsqueda"
+                        name="enviarCriterios">
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock%}

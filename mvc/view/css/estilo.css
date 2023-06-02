@@ -1,67 +1,9 @@
-body {
-    margin: 0;
-}
-
-header {
-    display: flex;
-    flex-direction: row;
-    text-align: center;
-    background-color: #FF7F7F;
-    align-items: center;
-    padding: 0;
-    height: 150px;
-}
-
-header img {
-    justify-content: center;
-    align-items: center;
-}
-
-header h1 {
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-    font-size: 75px;
-    margin: auto;
-    color: #F9E79F;
-    text-shadow: -1px -1px 0 black, 4px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black; 
-}
-header img:hover{
-    animation: agitar 0.3s ease-in-out infinite;
-}
-
-.subtitulo {
-    padding: 5px;
-    margin: 0;
-    text-align: center;
-    font-size: medium;
-    font-weight: bold;
-    background-color: #F9E79F;
-}
-
-.miNav{
-    padding: 0px;
-    border-bottom: solid #D62323 2px;
-   
-}
-nav a {
-    color: black;
-}
-nav a:hover {
-    color: black;
-    background-color:#EFD044;
-}
-.mainAside {
-    display: flex;
-    flex-direction: row;
-}
-main {
-    flex-grow: 1;
-}
-
+/**************Colores**************/
 .color-aside{
-    background-color: #FECDB1;
+    background-color: #fddab9;
 }
 .color-card{
-    background-color: #F6E6C6;
+    background-color: #ffefd5;
 }
 .color-boton-encima:hover{
     border: 1px solid #D62323;
@@ -76,11 +18,53 @@ main {
     border: 1px solid  #F6E6C6;
     border-radius: 1px;
 }
-
 .input-login {
     padding: 2px;
 }
-footer .links {
+.footer-fondo {
+    background-color: #FF7F7F;
+}
+/**************Estilos***************/
+
+
+.titulo{
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: 75px;
+    color: #F9E79F;
+    text-shadow: -1px -1px 0 black, 4px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black; 
+}
+.animacion-logo {
+    width: 150px;
+}
+
+.subtitulo {
+    background-color: #F9E79F;
+}
+.subtitulo h2{
+    padding: 5px;
+    margin: 0;
+    text-align: center;
+    font-size: medium;
+    font-weight: bold;
+}
+
+.miNav{
+    padding: 0px;
+    border-bottom: solid #D62323 2px;
+}
+nav a {
+    color: black;
+}
+nav a:hover {
+    color: black;
+    background-color:#EFD044;
+}
+
+main {
+    flex-grow: 1;
+}
+
+footer.links {
     display: flex;
     background-color: #E46464;
     justify-content: space-between;
@@ -104,26 +88,43 @@ footer a:hover {
     text-decoration: none;
 }
 
-@media (max-width: 850px) {
-    header h1 {
-        font-size: 50px;
-    }
+main .inicio {
+    background-color: #E2FCFB;
+    padding: 7px;
+    margin:7px 0px;
+}
+.criterios-busqueda, .nueva-incidencia {
+    background-color:  #ffefd5;
+}
+fieldset, form h2, .nueva-incidencia h2{
+    background-color: #fcdbb6;
+}
+fieldset *, .enviarDatos *{
+    margin-left: 20px;
+}
+form {
+    padding-bottom: 20px;
+}
+legend {
+    margin-bottom: 3px;
+}
+.datos {
+    margin: 5px 0;
+}
+#informacionIncidencia { 
+    margin-right: 20px;
 }
 
-@media (max-width: 500px) {
-    header img {
-        width: 100px;
-        height: 100px;
-        vertical-align:middle;
-    }
-}
+main {
+    background-color: #fddab9;
+    padding: 20px;
 
-@media (max-width: 400px) {
-    header img {
-        display: none;
-    }
 }
+/***********Animaciones***********/
 
+.animacion-logo:hover {
+    animation: agitar 0.3s ease-in-out infinite;
+}
 @keyframes agitar {
     0% {
         transform: rotate(0);

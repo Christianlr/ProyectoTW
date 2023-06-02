@@ -17,3 +17,9 @@ img.cardUsuario {
     color: rgb(177, 9, 9);
     font-size: small;
 }
+
+.align-forms {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}

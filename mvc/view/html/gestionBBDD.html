@@ -1,0 +1,28 @@
+{% extends "prueba.html" %}
+
+{% block main %}
+
+<div class="row w-100 m-0">
+    <div class="col color-aside">
+        <h3>Indique la acción a realizar</h3>
+        <div class="acciones w-90 m-auto color-card">
+            <ul class="list-unstyled ml-2">
+                <li><a href="">Descargar copia de seguridad</a></li>
+                <li><a href="">Restaurar copia de seguridad</a></li>
+                <li><a href="">Borrar la BBDD (se reinicia)</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="row w-100 m-0">
+    <div class="col-12 d-flex justify-content-center color-bg-card">
+        <h2>Vas a proceder al borrado de la BBDD completa. Si pulsa el botón no hay forma de restaurar
+            la información. ¿Estás seguro de que desea borrar la BBDD?</h2>
+    </div>
+    <div class="col-12 p-2 color-card d-flex justify-content-center">
+        <form action="" method="post">
+            <input type="submit" name="borrarBBDD" value="Borrar BBDD">
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,149 @@
+{% extends 'prueba.html' %}
+
+    
+{% block main %}
+    {% block criterios %}
+    
+    {% endblock %}
+
+<div class="row w-100 m-0 incidencia">
+    <div class="col">
+        <div class="card color-bg-card mb-2">
+            <div class="card-header titulo-header text-light p-1">
+                <h2>Hierbajos</h2>
+            </div>
+            <div class="card-body">
+                <div class="row ">
+                    <div class="col d-flex flex-wrap justify-content-between justify-content-md-start">
+                        <div id="informacionIncidencia">
+                            <label class="font-weight-bold">Lugar:</label>
+                            <span>Mi barrio</span>
+                        </div>
+                        <div id="informacionIncidencia">
+                            <label class="font-weight-bold">
+                                Fecha:
+                            </label>
+                            <span>2023-05-02 15:25:53</span>
+                        </div>
+                        <div id="informacionIncidencia">
+                            <label class="font-weight-bold">
+                                Creado por:
+                            </label>
+                            <span>María López Perez</span>
+                        </div>
+                        <div id="informacionIncidencia">
+                            <label class="font-weight-bold">
+                                Palabras clave:
+                            </label>
+                            <span>Farolas,vandalismo</span>
+                        </div>
+                        <div id="informacionIncidencia">
+                            <label class="font-weight-bold">
+                                Estado:
+                            </label>
+                            <span>Pendiente</span>
+                        </div>
+                        <div id="informacionIncidencia">
+                            <label class="font-weight-bold">
+                                Valoraciones:
+                            </label>
+                            <span>Pos: 2,Neg: 0</span>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div id="informacionIncidencia">
+                            <label>Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+                                Voluptatibus quas voluptates quis. Molestiae, nulla error?
+                                Fugiat rem fugit nemo, eos odio id dolores quibusdam eveniet
+                                ipsa nisi, quaerat, autem atque.
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col d-flex flex-wrap justify-content-around">
+                        <img class="animacion-logo align-self-center" src="../view/img/logo.png">
+                        <img class="animacion-logo align-self-center" src="../view/img/logo.png">
+                        <img class="animacion-logo align-self-center" src="../view/img/logo.png">
+                        <img class="animacion-logo align-self-center" src="../view/img/logo.png">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-2">
+                        <div class="row">
+                            <div class="col">
+                                <label class="font-weight-bold">
+                                    Mario antonio Lopez
+                                </label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <span>
+                                    2023-05-02 15:25:53
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+                        Impedit
+                        exercitationem eius alias totam neque expedita atque molestiae, autem in,
+                        ratione nostrum. Accusamus provident voluptates iste tempora? Assumenda
+                        dolores
+                        obcaecati est
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-2">
+                        <div class="row">
+                            <div class="col color-incidencia">
+                                <label class="font-weight-bold">
+                                    Mario antonio Lopez
+                                </label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col color-incidencia">
+                                <span>
+                                    2023-05-02 15:25:53
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-10 color-incidencia">Lorem ipsum dolor, sit amet consectetur
+                        adipisicing elit. Impedit
+                        exercitationem eius alias totam neque expedita atque molestiae, autem in,
+                        ratione nostrum. Accusamus provident voluptates iste tempora? Assumenda
+                        dolores
+                        obcaecati est
+                    </div>
+                </div>
+            </div>
+            <div class="row color-card w-100 m-auto p-2">
+                <div class="col">
+                    <form class="p-0" action="" method="post">
+                        <textarea class="d-block w-100 form-control" name="comentarioNuevo" cols="30"
+                            rows="10"></textarea>
+                        <input class="m-auto d-block" type="submit" value="Escribir comentario">
+                    </form>
+                </div>
+            </div>
+            <div class="row color-card w-100 m-0">
+                <div class="col d-flex justify-content-end">
+                    <input type="image" class="icono m-2" src="../view/img/signo-de-hospital.png"
+                        alt="votoPositivo">
+                    <input type="image" class="icono m-2" src="../view/img/dejar-de-seguir.png"
+                        alt="votoNegativo">
+                    <input type="image" class="icono m-2" src="../view/img/comentarios.png" alt="comentario">
+                    <input type="image" class="icono m-2" src="../view/img/editar.png" alt="editar">
+                    <input type="image" class="icono m-2" src="../view/img/borrar.png" alt="borrar">
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

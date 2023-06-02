@@ -5,6 +5,7 @@ require_once "../model/IncidenciasModel.php";
 
 session_start();
 
+/* Cargamos twig para usar el render */
 $loader = new \Twig\Loader\FilesystemLoader('../view/html');
 $twig = new \Twig\Environment($loader);
 
@@ -65,6 +66,7 @@ else {
     $datosUsuario['rol'] = 'anonimo';
 }
 
+/* Si vamos a la pagina de inicio mantenemos la sesion */
 if (empty($_SESSION['datosUsuario']) || (isset($_SESSION['datosUsuario']) && $_SESSION['datosUsuario']['rol'] == 'anonimo'))
     $_SESSION['datosUsuario'] = $datosUsuario;
 
