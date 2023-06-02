@@ -26,7 +26,7 @@
             <div class="col-lg-1 col-md-3 d-none d-md-block">
                 <img class="animacion-logo img-fluid" src="img/logo.png" alt="logo">
             </div>
-            <div class="col-lg-11 col-md-9 col-12">
+            <div class="col-1 col-lg-11 col-md-9 col-12">
                 <h1 class="titulo">Quéjate ¡No te calles!</h1>
             </div>
         </div>
@@ -40,11 +40,10 @@
 
         <div class="row">
             <div class="col-lg-12 col-md-12 col-12 miNav">
-                <nav class="navbar navbar-expand-md navbar-light p-0">
+                <nav class="navbar subtitulo navbar-expand-md  navbar-light p-0">
                     <div class="row">
                         <div class="col d-block d-md-none">
-                            <span> Página web para informar de las incidencias de Limpiolandia
-                            </span>
+                            <h2> Página web para informar de las incidencias de Limpiolandia</h2>
                         </div>
                     </div>
                     <button class="navbar-toggler bg-light" type="button" data-toggle="collapse"
@@ -52,7 +51,7 @@
                         aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
-                    <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <div class="collapse navbar-collapse bg-light" id="navbarCollapse">
                         <ul class="navbar-nav nav-fill w-100">
                             <li class="nav-item">
                                 <a class="nav-link" href="#">Ver incidencias</a>
@@ -117,23 +116,23 @@
                         <form class="criterios-busqueda" method="post">
                             <h2>Criterios de búsqueda</h2>
                             <div class="datos">
-                                <fieldset class="d-flex">
+                                <fieldset class="d-flex flex-wrap justify-content-start">
                                     <legend>Ordenar por:</legend>
-                                    <div class="form-check">
-                                        <label>
-                                            <input type="radio" name="ordenar">
+                                    <div class="form-check m-0">
+                                        <input type="radio" name="ordenar">
+                                        <label class="form-check-label m-0">
                                             Antiguedad (primero la más reciente)
                                         </label>
                                     </div>
-                                    <div class="form-check">
-                                        <label>
-                                            <input type="radio" name="ordenar">
+                                    <div class="form-check m-0">
+                                        <input type="radio" name="ordenar">
+                                        <label class="form-check-label m-0">
                                             Número de positivos (de más a menos)
                                         </label>
                                     </div>
-                                    <div class="form-check">
-                                        <label>
-                                            <input type="radio" name="ordenar">
+                                    <div class="form-check m-0">
+                                        <input type="radio" name="ordenar">
+                                        <label class="form-check-label m-0">
                                             Número de positivos netos (de más a menos)
                                         </label>
                                     </div>
@@ -144,16 +143,16 @@
                                     <legend>Incidencias que contengan:</legend>
                                     <div class="datos">
                                         <div class="row align-items-center">
-                                            <div class="col-12 col-md-2 mb-1">
-                                                <label class="col-form-label">Texto de búsqueda:</label>
+                                            <div class="col-12 col-md-2 col-sm-10 mb-1">
+                                                <label class="col-form-label m-0">Texto de búsqueda:</label>
                                             </div>
-                                            <div class="col-12 col-md-9 mb-1">
+                                            <div class="col-11 col-md-9 col-sm-11  mb-1 m-0">
                                                 <input type="text" class="form-control" name="textoBusqueda">
                                             </div>
-                                            <div class="col-12 col-md-2 mb-1">
-                                                <label class="col-form-label">Lugar:</label>
+                                            <div class="col-12 col-md-2 col-sm-12 mb-1">
+                                                <label class="col-form-label  m-0">Lugar:</label>
                                             </div>
-                                            <div class="col-12 col-md-9 mb-1">
+                                            <div class="col-11 col-md-9 col-sm-11 mb-1 m-0">
                                                 <input type="text" class="form-control" name="lugar">
                                             </div>
                                         </div>
@@ -161,42 +160,48 @@
                                 </fieldset>
                             </div>
                             <div class="datos">
-                                <fieldset class="d-flex">
-                                    <legend>Estado: </legend>
-                                    <div class="form-check">
-                                        <label>
-                                            <input type="checkbox" name="estado[]">
+                                <fieldset class="d-flex flex-wrap justify-content-start">
+                                    <legend>Estado:</legend>
+                                    <div class="form-check mr-5">
+                                        <input class="form-check-input" type="checkbox" name="estado[]"
+                                            id="estadoPendiente">
+                                        <label class="form-check-label m-0" for="estadoPendiente">
                                             Pendiente
                                         </label>
                                     </div>
-                                    <div class="form-check">
-                                        <label>
-                                            <input type="checkbox" name="estado[]">
+                                    <div class="form-check mr-5">
+                                        <input class="form-check-input" type="checkbox" name="estado[]"
+                                            id="estadoComprobada">
+                                        <label class="form-check-label m-0" for="estadoComprobada">
                                             Comprobada
                                         </label>
                                     </div>
-                                    <div class="form-check">
-                                        <label>
-                                            <input type="checkbox" name="estado[]">
+                                    <div class="form-check mr-5">
+                                        <input class="form-check-input" type="checkbox" name="estado[]"
+                                            id="estadoTramitada">
+                                        <label class="form-check-label m-0" for="estadoTramitada">
                                             Tramitada
                                         </label>
                                     </div>
-                                    <div class="form-check">
-                                        <label>
-                                            <input type="checkbox" name="estado[]">
+                                    <div class="form-check mr-5">
+                                        <input class="form-check-input" type="checkbox" name="estado[]"
+                                            id="estadoIrresoluble">
+                                        <label class="form-check-label m-0" for="estadoIrresoluble">
                                             Irresoluble
                                         </label>
                                     </div>
-                                    <div class="form-check">
-                                        <label>
-                                            <input type="checkbox" name="estado[]">
+                                    <div class="form-check mr-5">
+                                        <input class="form-check-input" type="checkbox" name="estado[]"
+                                            id="estadoResuelta">
+                                        <label class="form-check-label m-0" for="estadoResuelta">
                                             Resuelta
                                         </label>
                                     </div>
                                 </fieldset>
+
                                 <div class="enviarDatos">
                                     <label class="d-block">
-                                        Incidencias por pagina
+                                        Incidencias por página
                                         <select name="numeroIncidencias">
                                             <option value="1">1</option>
                                             <option value="2">2</option>
@@ -205,62 +210,70 @@
                                             <option value="5">5</option>
                                         </select>
                                     </label>
-                                    <input class="d-block m-auto" type="submit" value="Aplicar criterios de búsqueda"
-                                        name="enviarCriterios">
+                                    <input class="d-block m-auto form-control" type="submit"
+                                        value="Aplicar criterios de búsqueda" name="enviarCriterios">
                                 </div>
                             </div>
+
                         </form>
                     </div>
                 </div>
+
                 <div class="row">
                     <div class="col">
-                        <div class="incidencia">
-                            <div class="card color-bg-card  mb-2">
-                                <div class="card-header titulo-header text-light p-1">
-                                    <h2>Hierbajos</h2>
+                        <div class="card color-bg-card mb-2">
+                            <div class="card-header titulo-header text-light p-1">
+                                <h2>Hierbajos</h2>
+                            </div>
+                            <div class="card-body">
+                                <div class="row ">
+                                    <div class="col d-flex flex-wrap justify-content-between justify-content-md-start">
+                                        <div id="informacionIncidencia">
+                                            <label class="font-weight-bold">Lugar:</label>
+                                            <span>Mi barrio</span>
+                                        </div>
+                                        <div id="informacionIncidencia">
+                                            <label class="font-weight-bold">
+                                                Fecha:
+                                            </label>
+                                            <span>2023-05-02 15:25:53</span>
+                                        </div>
+                                        <div id="informacionIncidencia">
+                                            <label class="font-weight-bold">
+                                                Creado por:
+                                            </label>
+                                            <span>María López Perez</span>
+                                        </div>
+                                        <div id="informacionIncidencia">
+                                            <label class="font-weight-bold">
+                                                Palabras clave:
+                                            </label>
+                                            <span>Farolas,vandalismo</span>
+                                        </div>
+                                        <div id="informacionIncidencia">
+                                            <label class="font-weight-bold">
+                                                Estado:
+                                            </label>
+                                            <span>Pendiente</span>
+                                        </div>
+                                        <div id="informacionIncidencia">
+                                            <label class="font-weight-bold">
+                                                Valoraciones:
+                                            </label>
+                                            <span>Pos: 2,Neg: 0</span>
+                                        </div>
+
+                                    </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col d-flex flex-wrap justify-content-around ">
+                                    <div class="col">
                                         <div id="informacionIncidencia">
-                                            <label>Lugar:
-                                                <span>Mi barrio</span>
+                                            <label>Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+                                                Voluptatibus quas voluptates quis. Molestiae, nulla error?
+                                                Fugiat rem fugit nemo, eos odio id dolores quibusdam eveniet
+                                                ipsa nisi, quaerat, autem atque.
                                             </label>
                                         </div>
-                                        <div id="informacionIncidencia">
-                                            <label>Fecha:
-                                                <span>2023-05-02 15:25:53</span>
-                                            </label>
-                                        </div>
-                                        <div id="informacionIncidencia">
-                                            <label>Creado por:
-                                                <span>María López Perez</span>
-                                            </label>
-                                        </div>
-                                        <div id="informacionIncidencia">
-                                            <label>Palabras clave:
-                                                <span>Farolas,vandalismo</span>
-                                            </label>
-                                        </div>
-                                        <div id="informacionIncidencia">
-                                            <label>Estado:<span>Pendiente</span>
-                                            </label>
-                                        </div>
-                                        <div id="informacionIncidencia">
-                                            <label>Valoraciones:
-                                                <span>Pos: 2,Neg: 0</span>
-                                            </label>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col d-flex flex-wrap justify-content-around ">
-                                                <div id="informacionIncidencia">
-                                                    <label>
-                                                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptatibus quas voluptates quis. Molestiae, nulla error? Fugiat rem fugit nemo, eos odio id dolores quibusdam eveniet ipsa nisi, quaerat, autem atque.
-                                                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptatibus quas voluptates quis. Molestiae, nulla error? Fugiat rem fugit nemo, eos odio id dolores quibusdam eveniet ipsa nisi, quaerat, autem atque.
-                                                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptatibus quas voluptates quis. Molestiae, nulla error? Fugiat rem fugit nemo, eos odio id dolores quibusdam eveniet ipsa nisi, quaerat, autem atque.
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        </div> 
                                     </div>
                                 </div>
                                 <div class="row">
@@ -272,14 +285,464 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-2">Mario antonio Lopez</div>
-                                    <div class="col">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Impedit exercitationem eius alias totam neque expedita atque molestiae, autem in, ratione nostrum. Accusamus provident voluptates iste tempora? Assumenda dolores obcaecati est!</div>
+                                    <div class="col-2">
+                                        <div class="row">
+                                            <div class="col">
+                                                <label class="font-weight-bold">
+                                                    Mario antonio Lopez
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <span>
+                                                    2023-05-02 15:25:53
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col">Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+                                        Impedit
+                                        exercitationem eius alias totam neque expedita atque molestiae, autem in,
+                                        ratione nostrum. Accusamus provident voluptates iste tempora? Assumenda
+                                        dolores
+                                        obcaecati est
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-2">
+                                        <div class="row">
+                                            <div class="col color-incidencia">
+                                                <label class="font-weight-bold">
+                                                    Mario antonio Lopez
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col color-incidencia">
+                                                <span>
+                                                    2023-05-02 15:25:53
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-10 color-incidencia">Lorem ipsum dolor, sit amet consectetur
+                                        adipisicing elit. Impedit
+                                        exercitationem eius alias totam neque expedita atque molestiae, autem in,
+                                        ratione nostrum. Accusamus provident voluptates iste tempora? Assumenda
+                                        dolores
+                                        obcaecati est
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row color-card w-100 m-auto p-2">
+                                <div class="col">
+                                    <form class="p-0" action="" method="post">
+                                        <textarea class="d-block w-100 form-control" name="comentarioNuevo" cols="30"
+                                            rows="10"></textarea>
+                                        <input class="m-auto d-block" type="submit" value="Escribir comentario">
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="row color-card w-100 m-0">
+                                <div class="col d-flex justify-content-end">
+                                    <input type="image" class="icono m-2" src="img/signo-de-hospital.png"
+                                        alt="votoPositivo">
+                                    <input type="image" class="icono m-2" src="img/dejar-de-seguir.png"
+                                        alt="votoNegativo">
+                                    <input type="image" class="icono m-2" src="img/comentarios.png" alt="comentario">
+                                    <input type="image" class="icono m-2" src="img/editar.png" alt="editar">
+                                    <input type="image" class="icono m-2" src="img/borrar.png" alt="borrar">
                                 </div>
                             </div>
                         </div>
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <form action="" class="nueva-incidencia" method="post">
+                            <h2>Datos Principales</h2>
+                            <div id="informacionIncidencia">
+                                <div class="col-12 col-md-2 mb-1">
+                                    <label class="col-form-label">Titulo:</label>
+                                </div>
+                                <div class="col-12 col-md-9 mb-1">
+                                    <input type="text" class="form-control" name="tituloIncidencia">
+                                </div>
+                            </div>
+                            <div id="informacionIncidencia">
+                                <div class="col-12 col-md-2 mb-1">
+                                    <label class="col-form-label">Descripción:</label>
+                                </div>
+                                <div class="col-12 col-md-9 mb-1">
+                                    <textarea class="d-block w-100 form-control" name="descripcion" cols="30"
+                                        rows="10"></textarea>
+                                </div>
+                            </div>
+                            <div id="informacionIncidencia">
+                                <div class="col-12 col-md-2 mb-1">
+                                    <label class="col-form-label">Lugar:</label>
+                                </div>
+                                <div class="col-12 col-md-9 mb-1">
+                                    <input type="text" class="form-control" name="LugarIncidencia">
+                                </div>
+                            </div>
+                            <div id="informacionIncidencia">
+                                <div class="col-12 col-md-2 mb-1">
+                                    <label class="col-form-label">Palabras clave:</label>
+                                </div>
+                                <div class="col-12 col-md-9 mb-1">
+                                    <input type="text" class="form-control" name="palabrasClaveIncidencia">
+                                </div>
+                            </div>
+                            <h2>Fotografías adjuntas</h2>
+                            <div id="informacionIncidencia">
+                                <form action="" method="post">
+                                    <div class="row">
+                                        <div class="col">
+                                            <img src="img/borrar.png" alt="">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col d-flex justify-content-start">
+                                            <input type="file" class="form-control color-card me-auto"
+                                                name="fotografia[]" value="Selecciona una foto">
+                                        </div>
+                                        <div class="col d-flex justify-content-end">
+                                            <input type="submit" class="mr-2" name="aniadeFoto" value="Añadir foto">
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
                     </div>
                 </div>
 
+                <div class="row">
+                    <div class="col rounded-card">
+                        <div class="row w-100 m-0">
+                            <div class="col color-aside text-center">
+                                <h2 class="m-auto">Gestión de usuarios</h2>
+                            </div>
+                        </div>
+                        <div class="row w-100 m-0">
+                            <div class="col color-aside">
+                                <h3>Indique la acción a realizar</h3>
+                                <div class="acciones w-90 m-auto color-card">
+                                    <ul class="list-unstyled ml-2">
+                                        <li class=""><a href="">Listado</a></li>
+                                        <li><a href="">Añadir nuevo</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row w-100 m-0">
+                            <div class="col d-flex flex-wrap justify-content-around color-bg-card ">
+                                <div class="card color-card mt-3 mb-3 rounded-card bg-light" style="width: 20rem;">
+                                    <img src="img/borrar.png" class="rounded-circle card-img-top" alt="...">
+                                    <div class="card-body color-aside">
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="d-block">
+                                                    <label class="font-weight-bold">Usuario:</label>
+                                                    <span>Antonio Pérez Pérez</span>
+                                                </div>
+                                                <div class="d-block">
+                                                    <label class="font-weight-bold">Email:</label>
+                                                    <span>antonio@sindominio.conocido</span>
+                                                </div>
+                                                <div class="d-block">
+                                                    <label class="font-weight-bold">Dirección:</label>
+                                                    <span>C/ de la Calle numero1</span>
+                                                </div>
+                                                <div class="d-block">
+                                                    <label class="font-weight-bold">Teléfono:</label>
+                                                    <span>666611111</span>
+                                                </div>
+                                                <div class="d-block">
+                                                    <label class="font-weight-bold">Rol:</label>
+                                                    <span>Colaborador</span>
+                                                </div>
+                                                <div class="d-block">
+                                                    <label class="font-weight-bold">Estado:</label>
+                                                    <span>Activo</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row  w-50 m-auto  d-flex justify-content-end ">
+                                            <div class="col d-flex justify-content-center p-2 color-card rounded-card">
+                                                <input type="image" class="icono mr-2" src="img/editar.png"
+                                                    alt="editar">
+                                                <input type="image" class="icono ml-3" src="img/borrar.png"
+                                                    alt="borrar">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="card color-card mt-3 mb-3 rounded-card bg-light" style="width: 20rem;">
+                                    <img src="img/borrar.png" class="rounded-circle card-img-top" alt="...">
+                                    <div class="card-body color-aside">
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="d-block">
+                                                    <label class="font-weight-bold">Usuario:</label>
+                                                    <span>Antonio Pérez Pérez</span>
+                                                </div>
+                                                <div class="d-block">
+                                                    <label class="font-weight-bold">Email:</label>
+                                                    <span>antonio@sindominio.conocido</span>
+                                                </div>
+                                                <div class="d-block">
+                                                    <label class="font-weight-bold">Dirección:</label>
+                                                    <span>C/ de la Calle numero1</span>
+                                                </div>
+                                                <div class="d-block">
+                                                    <label class="font-weight-bold">Teléfono:</label>
+                                                    <span>666611111</span>
+                                                </div>
+                                                <div class="d-block">
+                                                    <label class="font-weight-bold">Rol:</label>
+                                                    <span>Colaborador</span>
+                                                </div>
+                                                <div class="d-block">
+                                                    <label class="font-weight-bold">Estado:</label>
+                                                    <span>Activo</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row  w-50 m-auto  d-flex justify-content-end ">
+                                            <div class="col d-flex justify-content-center p-2 color-card rounded-card">
+                                                <input type="image" class="icono mr-2" src="img/editar.png"
+                                                    alt="editar">
+                                                <input type="image" class="icono ml-3" src="img/borrar.png"
+                                                    alt="borrar">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="card color-card mt-3 mb-3 rounded-card bg-light" style="width: 20rem;">
+                                    <img src="img/enrique.png" class="rounded-circle card-img-top " alt="...">
+                                    <div class="card-body color-aside">
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="d-block">
+                                                    <label class="font-weight-bold">Usuario:</label>
+                                                    <span>Antonio Pérez Pérez</span>
+                                                </div>
+                                                <div class="d-block">
+                                                    <label class="font-weight-bold">Email:</label>
+                                                    <span>antonio@sindominio.conocido</span>
+                                                </div>
+                                                <div class="d-block">
+                                                    <label class="font-weight-bold">Dirección:</label>
+                                                    <span>C/ de la Calle numero1</span>
+                                                </div>
+                                                <div class="d-block">
+                                                    <label class="font-weight-bold">Teléfono:</label>
+                                                    <span>666611111</span>
+                                                </div>
+                                                <div class="d-block">
+                                                    <label class="font-weight-bold">Rol:</label>
+                                                    <span>Colaborador</span>
+                                                </div>
+                                                <div class="d-block">
+                                                    <label class="font-weight-bold">Estado:</label>
+                                                    <span>Activo</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row  w-50 m-auto  d-flex justify-content-end ">
+                                            <div class="col d-flex justify-content-center p-2 color-card rounded-card">
+                                                <input type="image" class="icono mr-2" src="img/editar.png"
+                                                    alt="editar">
+                                                <input type="image" class="icono ml-3" src="img/borrar.png"
+                                                    alt="borrar">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card color-card mt-3 mb-3 rounded-card bg-light" style="width: 20rem;">
+                                    <img src="img/borrar.png" class="rounded-circle card-img-top" alt="...">
+                                    <div class="card-body color-aside">
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="d-block">
+                                                    <label class="font-weight-bold">Usuario:</label>
+                                                    <span>Antonio Pérez Pérez</span>
+                                                </div>
+                                                <div class="d-block">
+                                                    <label class="font-weight-bold">Email:</label>
+                                                    <span>antonio@sindominio.conocido</span>
+                                                </div>
+                                                <div class="d-block">
+                                                    <label class="font-weight-bold">Dirección:</label>
+                                                    <span>C/ de la Calle numero1</span>
+                                                </div>
+                                                <div class="d-block">
+                                                    <label class="font-weight-bold">Teléfono:</label>
+                                                    <span>666611111</span>
+                                                </div>
+                                                <div class="d-block">
+                                                    <label class="font-weight-bold">Rol:</label>
+                                                    <span>Colaborador</span>
+                                                </div>
+                                                <div class="d-block">
+                                                    <label class="font-weight-bold">Estado:</label>
+                                                    <span>Activo</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row  w-50 m-auto  d-flex justify-content-end ">
+                                            <div class="col d-flex justify-content-center p-2 color-card rounded-card">
+                                                <input type="image" class="icono mr-2" src="img/editar.png"
+                                                    alt="editar">
+                                                <input type="image" class="icono ml-3" src="img/borrar.png"
+                                                    alt="borrar">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card color-card mt-3 mb-3 rounded-card bg-light" style="width: 20rem;">
+                                    <img src="img/borrar.png" class="rounded-circle card-img-top" alt="...">
+                                    <div class="card-body color-aside">
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="d-block">
+                                                    <label class="font-weight-bold">Usuario:</label>
+                                                    <span>Antonio Pérez Pérez</span>
+                                                </div>
+                                                <div class="d-block">
+                                                    <label class="font-weight-bold">Email:</label>
+                                                    <span>antonio@sindominio.conocido</span>
+                                                </div>
+                                                <div class="d-block">
+                                                    <label class="font-weight-bold">Dirección:</label>
+                                                    <span>C/ de la Calle numero1</span>
+                                                </div>
+                                                <div class="d-block">
+                                                    <label class="font-weight-bold">Teléfono:</label>
+                                                    <span>666611111</span>
+                                                </div>
+                                                <div class="d-block">
+                                                    <label class="font-weight-bold">Rol:</label>
+                                                    <span>Colaborador</span>
+                                                </div>
+                                                <div class="d-block">
+                                                    <label class="font-weight-bold">Estado:</label>
+                                                    <span>Activo</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row  w-50 m-auto  d-flex justify-content-end ">
+                                            <div class="col d-flex justify-content-center p-2 color-card rounded-card">
+                                                <input type="image" class="icono mr-2" src="img/editar.png"
+                                                    alt="editar">
+                                                <input type="image" class="icono ml-3" src="img/borrar.png"
+                                                    alt="borrar">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card color-card mt-3 mb-3 rounded-card bg-light" style="width: 20rem;">
+                                    <img src="img/borrar.png" class="rounded-circle card-img-top" alt="...">
+                                    <div class="card-body color-aside">
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="d-block">
+                                                    <label class="font-weight-bold">Usuario:</label>
+                                                    <span>Antonio Pérez Pérez</span>
+                                                </div>
+                                                <div class="d-block">
+                                                    <label class="font-weight-bold">Email:</label>
+                                                    <span>antonio@sindominio.conocido</span>
+                                                </div>
+                                                <div class="d-block">
+                                                    <label class="font-weight-bold">Dirección:</label>
+                                                    <span>C/ de la Calle numero1</span>
+                                                </div>
+                                                <div class="d-block">
+                                                    <label class="font-weight-bold">Teléfono:</label>
+                                                    <span>666611111</span>
+                                                </div>
+                                                <div class="d-block">
+                                                    <label class="font-weight-bold">Rol:</label>
+                                                    <span>Colaborador</span>
+                                                </div>
+                                                <div class="d-block">
+                                                    <label class="font-weight-bold">Estado:</label>
+                                                    <span>Activo</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row  w-50 m-auto  d-flex justify-content-end ">
+                                            <div class="col d-flex justify-content-center p-2 color-card rounded-card">
+                                                <input type="image" class="icono mr-2" src="img/editar.png"
+                                                    alt="editar">
+                                                <input type="image" class="icono ml-3" src="img/borrar.png"
+                                                    alt="borrar">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="row w-100 m-0">
+                    <div class="col color-aside text-center">
+                        <h2 class="m-auto">Gestión de la BBDD</h2>
+                    </div>
+                </div>
+                <div class="row w-100 m-0">
+                    <div class="col color-aside">
+                        <h3>Indique la acción a realizar</h3>
+                        <div class="acciones w-90 m-auto color-card">
+                            <ul class="list-unstyled ml-2">
+                                <li><a href="">Descargar copia de seguridad</a></li>
+                                <li><a href="">Restaurar copia de seguridad</a></li>
+                                <li><a href="">Borrar la BBDD (se reinicia)</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="row w-100 m-0">
+                    <div class="col-12 d-flex justify-content-center color-bg-card">
+                        <h2>Vas a proceder al borrado de la BBDD completa. Si pulsa el botón no hay forma de restaurar
+                            la información. ¿Estás seguro de que desea borrar la BBDD?</h2>
+                    </div>
+                    <div class="col-12 p-2 color-card d-flex justify-content-center">
+                        <form action="" method="post">
+                            <input type="submit" name="borrarBBDD" value="Borrar BBDD">
+                        </form>
+                    </div>
+                </div>
+                <div class="row w-100 m-0">
+                    <div class="col color-card p-0">
+                        <h2 class="pt-3 pb-3">Eventos del sistema</h2>
+                        <div class="row w-100 m-0 color-aside">
+                            <div class="col-4 p-0"><span>2023-05-02 15:25:53</span></div>
+                            <div class="col-8 p-0">INFO: El usuario admin@localhost.domain accede al sistema</div>
+                        </div>
+                        <div class="row w-100 m-0 color-card">
+                            <div class="col-4 p-0"><span>2023-05-02 15:25:53</span></div>
+                            <div class="col-8 p-0">INFO: El usuario admin@localhost.domain accede al sistema</div>
+                        </div>
+                        <div class="row w-100 m-0 color-aside">
+                            <div class="col-4 p-0"><span>2023-05-02 15:25:53</span></div>
+                            <div class="col-8 p-0">INFO: El usuario admin@localhost.domain accede al sistema</div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="col-lg-2 z col-12 p-2 color-aside">
                 <div class="row">
@@ -342,7 +805,6 @@
             </div>
         </div>
     </div>
-
 </body>
 
 </html>

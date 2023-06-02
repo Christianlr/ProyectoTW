@@ -1,0 +1,19 @@
+h1.cardUsuario {
+    font-size: medium;
+    margin-bottom: 0;
+}
+h2.cardUsuario {
+    font-size: small;
+    color: cornflowerblue;
+    margin-top: 0;
+}
+img.cardUsuario {
+    width: 50%;
+    vertical-align: center;
+    margin-bottom: 10px;
+}
+
+.errorUsuario {
+    color: rgb(177, 9, 9);
+    font-size: small;
+}

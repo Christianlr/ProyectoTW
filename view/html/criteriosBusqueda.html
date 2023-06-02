@@ -1,0 +1,104 @@
+{% extends 'default.html' %}
+
+{% block criteriosBusqueda %}
+<div class="row">
+    <div class="col">
+        <form class="criterios-busqueda" method="post">
+            <h2>Criterios de búsqueda</h2>
+            <div class="datos">
+                <fieldset class="d-flex">
+                    <legend>Ordenar por:</legend>
+                    <div class="form-check">
+                        <label>
+                            <input type="radio" name="ordenar">
+                            Antiguedad (primero la más reciente)
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <label>
+                            <input type="radio" name="ordenar">
+                            Número de positivos (de más a menos)
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <label>
+                            <input type="radio" name="ordenar">
+                            Número de positivos netos (de más a menos)
+                        </label>
+                    </div>
+                </fieldset>
+            </div>
+            <div class="datos">
+                <fieldset>
+                    <legend>Incidencias que contengan:</legend>
+                    <div class="datos">
+                        <div class="row align-items-center">
+                            <div class="col-12 col-md-2 mb-1">
+                                <label class="col-form-label">Texto de búsqueda:</label>
+                            </div>
+                            <div class="col-12 col-md-9 mb-1">
+                                <input type="text" class="form-control" name="textoBusqueda">
+                            </div>
+                            <div class="col-12 col-md-2 mb-1">
+                                <label class="col-form-label">Lugar:</label>
+                            </div>
+                            <div class="col-12 col-md-9 mb-1">
+                                <input type="text" class="form-control" name="lugar">
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            <div class="datos">
+                <fieldset class="d-flex">
+                    <legend>Estado: </legend>
+                    <div class="form-check">
+                        <label>
+                            <input type="checkbox" name="estado[]">
+                            Pendiente
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <label>
+                            <input type="checkbox" name="estado[]">
+                            Comprobada
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <label>
+                            <input type="checkbox" name="estado[]">
+                            Tramitada
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <label>
+                            <input type="checkbox" name="estado[]">
+                            Irresoluble
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <label>
+                            <input type="checkbox" name="estado[]">
+                            Resuelta
+                        </label>
+                    </div>
+                </fieldset>
+                <div class="enviarDatos">
+                    <label class="d-block">
+                        Incidencias por pagina
+                        <select name="numeroIncidencias">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                    </label>
+                    <input class="d-block m-auto" type="submit" value="Aplicar criterios de búsqueda"
+                        name="enviarCriterios">
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

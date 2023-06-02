@@ -1,0 +1,86 @@
+{% extends 'default.html' %}
+
+{% block main %}
+<div>
+    <h2 class="editUser">Edición de usuario</h2>
+</div>
+
+<form action="controller/editarUsuarioController.php" method="POST" class="formulario" enctype="multipart/form-data">
+    
+    <div class="row align-items-center form-elements">
+        <div class="col-12 col-md-2 mb-1">
+            <label for="fotoActual">Foto:</label>
+            
+        </div>
+        
+        <div class="col-12 col-md-9 mb-1">
+            <img class="imgUsuario" src="data:image/jpeg;base64,{{ datosUsuario.foto }}" alt="Foto actual">
+            <input type="file" id="nuevaFoto" name="examinar" accept="image/*"> 
+        </div>
+        
+        
+        <div class="col-12 col-md-2 mb-1">
+            <label class="col-form-label">Nombre:</label>
+        </div>
+        <div class="col-12 col-md-9 mb-1">
+            <input type="text" class="form-control" name="nombre" value="{{datosUsuario.nombre}}">
+        </div>
+
+        <div class="col-12 col-md-2 mb-1">
+            <label class="col-form-label">Apellidos:</label>
+        </div>
+        <div class="col-12 col-md-9 mb-1">
+            <input type="text" class="form-control" name="apellidos" value="{{datosUsuario.apellidos}}">
+        </div>
+
+        <div class="col-12 col-md-2 mb-1">
+            <label class="col-form-label">Email:</label>
+        </div>
+        <div class="col-12 col-md-9 mb-1">
+            <input type="text" class="form-control" name="email" value="{{datosUsuario.email}}">
+        </div>
+
+        
+        <div class="col-12 col-md-2 mb-1">
+            <label class="col-form-label">Dirección:</label>
+        </div>
+        <div class="col-12 col-md-9 mb-1">
+            <input type="text" class="form-control" name="direccion" value="{{datosUsuario.direccion}}">
+        </div>
+        
+        
+        <div class="col-12 col-md-2 mb-1">
+            <label class="col-form-label">Teléfono:</label>
+        </div>
+        <div class="col-12 col-md-9 mb-1">
+            <input type="text" class="form-control" name="telefono" value="{{datosUsuario.telefono}}">
+        </div>
+        
+        <div class="col-12 col-md-2 mb-1">
+            <label class="col-form-label">Rol:</label>
+        </div>
+        <div class="col-12 col-md-9 mb-1">
+            <select name="select">
+                <option value="Colaborador" {{ datosUsuario.rol == 'colaborador' ? 'selected' : '' }}>Colaborador</option>
+                <option value="Administrador" {{ datosUsuario.rol == 'administrador' ? 'selected' : '' }}>Administrador</option>
+            </select>
+        </div>
+
+        <div class="col-12 col-md-2 mb-1">
+            <label class="col-form-label">Estado:</label>
+        </div>
+        <div class="col-12 col-md-9 mb-1">
+            <select name="select">
+                <option value="Activo" selected>Activo</option>
+                <option value="Inactivo">Inactivo</option>
+            </select>
+        </div>
+        
+        <div class="col-12 col-md-2 mb-1">
+            <input type="submit" name="enviar" value="Modificar usuario">
+        </div>
+        
+    </div>
+</form>
+
+{% endblock %}

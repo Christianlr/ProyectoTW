@@ -24,6 +24,9 @@
 .footer-fondo {
     background-color: #FF7F7F;
 }
+.color-incidencia{
+    background-color: #e5e6fa;
+}
 /**************Estilos***************/
 
 body {
@@ -99,10 +102,10 @@ main .inicio {
     padding: 7px;
     margin:7px 0px;
 }
-.criterios-busqueda {
+.criterios-busqueda, .nueva-incidencia {
     background-color:  #ffefd5;
 }
-fieldset, form h2{
+fieldset, form h2, .nueva-incidencia h2{
     background-color: #fcdbb6;
 }
 fieldset *, .enviarDatos *{
@@ -117,7 +120,18 @@ legend {
 .datos {
     margin: 5px 0;
 }
+span {
+    color: #445eff;
+}
+.icono{
+    width: 30px;
+    height: 30px;
+}
+img{width: 150px;}
 
+.rounded-card {
+    border-radius: 20px;
+  }
 
 /***********Animaciones***********/
 

@@ -1,0 +1,131 @@
+body {
+    margin: 0;
+}
+
+header {
+    display: flex;
+    flex-direction: row;
+    
+    background-color: #FF7F7F;
+
+    padding: 0;
+    height: 150px;
+}
+header h1 {
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: 75px;
+    margin: auto;
+    color: #F9E79F;
+    text-shadow: -1px -1px 0 black, 4px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black; 
+}
+header img:hover{
+    animation: agitar 0.3s ease-in-out infinite;
+}
+
+.subtitulo {
+    padding: 5px;
+    margin: 0;
+    text-align: center;
+    font-size: medium;
+    font-weight: bold;
+    background-color: #F9E79F;
+}
+
+.miNav{
+    padding: 0px;
+    border-bottom: solid #D62323 2px;
+   
+}
+nav a {
+    color: black;
+}
+nav a:hover {
+    color: black;
+    background-color:#EFD044;
+}
+.mainAside {
+    display: flex;
+    flex-direction: row;
+}
+main {
+    flex-grow: 1;
+}
+
+.color-aside{
+    background-color: #FECDB1;
+}
+.color-card{
+    background-color: #F6E6C6;
+}
+.color-boton-encima:hover{
+    border: 1px solid #D62323;
+}
+.titulo-header {
+    background-color: #445EFF;
+}
+.color-bg-card{
+    background-color: #E0ECF5;
+}
+.formulario-login {
+    border: 1px solid  #F6E6C6;
+    border-radius: 1px;
+}
+
+.align-forms {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.input-login {
+    padding: 2px;
+}
+footer .links {
+    display: flex;
+    background-color: #E46464;
+    justify-content: space-between;
+}
+
+footer ul {
+    list-style-type: none;
+    text-align: center;
+}
+
+footer li { 
+    flex-grow: 1;
+}
+
+footer a {
+    font-weight: bold;
+    color: #E7C943;
+}
+footer a:hover {
+    color: #E7C943;
+    text-decoration: none;
+}
+
+@media (max-width: 850px) {
+    header h1 {
+        font-size: 50px;
+    }
+}
+@keyframes agitar {
+    0% {
+        transform: rotate(0);
+    }
+    20% {
+        transform: rotate(-10deg);
+    }
+    40% {
+        transform: rotate(10deg);
+    }
+    60% {
+        transform: rotate(-10deg);
+    }
+    80% {
+        transform: rotate(10deg);
+    }
+    100% {
+        transform: rotate(0);
+    }
+}
