@@ -15,10 +15,14 @@ $twig = new \Twig\Environment($loader);
 $usuario = new UsuarioModel();
 $incidencia = new IncidenciasModel();
 
+$todo = $usuario->getAll();
+foreach ($todo as &$parte)
+    $parte['nombreCompleto'] = $parte['nombre'] . " " . $parte['apellidos'];
+
 echo $twig->render('gestionUsuarios.html', [
-    'css' => '../view/css/editarUsuario.css',
     'total' => $_SESSION['rankingAdd'][0],
     'nombresRanking' => $_SESSION['rankingAdd'][1],
-    'datosUsuario' => $_SESSION['datosUsuario']
+    'datosUsuario' => $_SESSION['datosUsuario'],
+    'datosCompletosUsuarios' => $todo
 ]);
 ?>

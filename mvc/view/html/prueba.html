@@ -124,7 +124,7 @@
                                 {% if datosUsuario.nombre == "incorrecto" %}
                                     <p class="errorUsuario">El usuario o contraseña son incorrectos</p>
                                 {% endif %}
-                                <form action="" novalidate method="post">
+                                <form action="inicioController.php" novalidate method="post">
                                     <div class="mb-1">
                                         <label class="mb-0" for="email" class="form-label">Email:</label>
                                         <input type="text" class="form-control input-login " id="email"
@@ -146,20 +146,16 @@
                                     <img class="cardUsuario" src="data:image/jpeg;base64,{{ datosUsuario.foto }}" alt="Imagen">
                                 </div>
                                 <div class="align-forms">
-                                    <form action="editarUsuarioController.php" novalidate>
-                                        <div class="text-center mt-2">                                
-                                            <input type="submit"
-                                            class="btn pt-1 pl-2 pr-2 color-aside color-boton-encima mr-2" name="editar" value="Editar">
-                                        </div>
-                                    </form>
-
-                                    <form action="inicioController.php" novalidate method="post">
-                                        <div class="text-center mt-2"> 
-                                            <input type="submit"
-                                                class="btn pt-1 pl-2 pr-2 color-aside color-boton-encima" name="logout" value="Logout">
-                                        </div>
-                                    </form>
+                                    <div class="text-center mt-2">
+                                        <a href="editarUsuarioController.php?email={{ datosUsuario.email }}" class="btn pt-1 pl-2 pr-2 color-aside color-boton-encima mr-2">
+                                            Editar
+                                        </a>
+                                        <form action="inicioController.php" novalidate method="post" class="d-inline">
+                                            <input type="submit" class="btn pt-1 pl-2 pr-2 color-aside color-boton-encima" name="logout" value="Logout">
+                                        </form>
+                                    </div>
                                 </div>
+                                
                             {% endif %}
 
                             

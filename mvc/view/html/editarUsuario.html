@@ -14,7 +14,7 @@
         </div>
         
         <div class="col-12 col-md-9 mb-1">
-            <img class="imgUsuario" src="data:image/jpeg;base64,{{(datosNuevos == null) ? datosUsuario.foto : datosNuevos.foto}}" alt="Foto actual">
+            <img class="imgUsuario" src="data:image/jpeg;base64,{{datosNuevos.foto}}" alt="Foto actual">
             {% if not confirmacion %}
                 <input type="file" id="nuevaFoto" name="examinar" accept="image/*"> 
             {% endif %}
@@ -25,7 +25,7 @@
             <label class="col-form-label">Nombre:</label>
         </div>
         <div class="col-12 col-md-9 mb-1">
-            <input type="text" class="form-control" name="nombre" value="{{(datosNuevos == null) ? datosUsuario.nombre : datosNuevos.nombre}}"
+            <input type="text" class="form-control" name="nombre" value="{{datosNuevos.nombre}}"
                     {{ confirmacion ? 'readonly' : '' }}>
         </div>
 
@@ -33,16 +33,16 @@
             <label class="col-form-label">Apellidos:</label>
         </div>
         <div class="col-12 col-md-9 mb-1">
-            <input type="text" class="form-control" name="apellidos" value="{{(datosNuevos == null) ? datosUsuario.apellidos : datosNuevos.apellidos}}"
+            <input type="text" class="form-control" name="apellidos" value="{{datosNuevos.apellidos}}"
                     {{ confirmacion ? 'readonly' : '' }}>
         </div>
 
         <div class="col-12 col-md-2 mb-1">
             <label class="col-form-label">Email:</label>
         </div>
-        <div class="col-12 col-md-9 mb-1 flex-row d-flex">
+        <div class="col-12 col-md-9 mb-1">
             <input type="text" class="form-control" name="email" 
-                value="{{(datosNuevos == null) ? datosUsuario.email : (datosNuevos.email != 'incorrecto') ? datosNuevos.email : ''}}"
+                value="{{datosNuevos.email != 'incorrecto' ? datosNuevos.email : ''}}"
                 {{ confirmacion ? 'readonly' : '' }}>
             {% if datosNuevos.email == 'incorrecto' %}
                 <p class="text-danger ml-2">El email introducido no es correcto</p>
@@ -55,7 +55,7 @@
             <label class="col-form-label">Dirección:</label>
         </div>
         <div class="col-12 col-md-9 mb-1">
-            <input type="text" class="form-control" name="direccion" value="{{(datosNuevos == null) ? datosUsuario.direccion : datosNuevos.direccion}}"
+            <input type="text" class="form-control" name="direccion" value="{{datosNuevos.direccion}}"
                     {{ confirmacion ? 'readonly' : '' }}>
         </div>
         
@@ -65,7 +65,7 @@
         </div>
         <div class="col-12 col-md-9 mb-1">
             <input type="text" class="form-control" name="telefono" 
-                value="{{(datosNuevos == null) ? datosUsuario.telefono : (datosNuevos.telefono != 'incorrecto') ? datosNuevos.telefono : ''}}"
+                value="{{datosNuevos.telefono != 'incorrecto' ? datosNuevos.telefono : ''}}"
                 {{ confirmacion ? 'readonly' : '' }}>
             {% if datosNuevos.telefono == 'incorrecto' %}
                 <p class="text-danger ml-2">El teléfono introducido no es correcto</p>

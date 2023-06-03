@@ -28,7 +28,24 @@ class UsuarioModel extends AbstractModel {
 
     public function get($email) {
         $r = $this->query("SELECT * FROM usuarios WHERE email='" . addslashes($email) ."'");
-        return empty($r) ? null : $r;
+        if (empty($r))
+            return null;
+
+        $r[0]['foto'] = base64_encode($r[0]['foto']);
+
+        return $r[0];
+    }
+
+    public function getAll() {
+        $r = $this->query("SELECT * FROM usuarios");
+        if (empty($r)) 
+            return null;
+        
+        // Recorrer los resultados y codificar la imagen en base64
+        foreach ($r as &$row) 
+            $row['foto'] = base64_encode($row['foto']);
+        
+        return $r;
     }
 
     public function getNombre($email) {
