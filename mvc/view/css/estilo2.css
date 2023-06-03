@@ -151,9 +151,12 @@ h1 a {
     color: #F9E79F;
 }
 .card-img-top {
-    object-fit: cover;
+    object-fit:cover;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
     height: 320px; /* Elige el tamaño deseado */
 }
+
 /****Animaciones****/
 
 .animacion-logo:hover {

@@ -49,7 +49,22 @@
             {% endif %}
         </div>
         
-
+        <div class="col-12 col-md-2 mb-1">
+            <label class="col-form-label">Clave:</label>
+        </div>
+        <div class="col-12 col-md-9 mb-1">
+            <div class="d-flex flex-row">
+                <input type="password" class="form-control mr-1" name="claveNueva"
+                    {{ confirmacion ? 'readonly' : '' }}>
+                <input type="password" class="form-control ml-1" name="claveConfirmacion"
+                    {{ confirmacion ? 'readonly' : '' }}>
+            </div>
+                
+            {% if datosNuevos.password == 'mal' %}
+                <p class="text-danger ml-2">La contraseña debe tener al menos 8 caracteres y coincidir en ambos campos.</p>
+            {% endif %}
+        </div>
+        
         
         <div class="col-12 col-md-2 mb-1">
             <label class="col-form-label">Dirección:</label>

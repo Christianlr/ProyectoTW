@@ -120,10 +120,21 @@ class UsuarioModel extends AbstractModel {
         $sentencia->execute();
   
     }
+    
+    public function setPassword($email, $password) {
+        echo $email . $password;
+        $query = "UPDATE usuarios SET password = SHA2(:password, 256) WHERE email = :email";
+        $params = array(':password' => $password, ':email' => $email);
+    
+        $this->query($query, $params);
+    }
+    
 
     public function setDatos($email, $clave, $dato) {
         if ($clave == 'foto')
             $this->setFoto($email, $dato);
+        else if ($clave == 'password')
+            $this->setPassword($email, $dato);
         else {
             $r = $this->query("UPDATE usuarios 
                                 SET " . $clave . " = '" . addslashes($dato) . "'

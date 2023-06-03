@@ -21,6 +21,12 @@ function camposCambiados($datosUsuarioSeleccionado) {
         if (base64_encode($foto_nueva) !== $datosUsuarioSeleccionado['foto']) 
             $camposCambiados['foto'] = base64_encode($foto_nueva);
     }
+    if (hash('sha256',rtrim($_POST['claveNueva'])) != $datosUsuarioSeleccionado['password'] && $_POST['claveNueva'] != '') {
+        $camposCambiados['password'] = rtrim($_POST['claveNueva']);
+        echo "se ha cambiado la contraseña";
+    }
+
+        
     if (rtrim($_POST['nombre']) != $datosUsuarioSeleccionado['nombre'] && $_POST['nombre'] != '')
         $camposCambiados['nombre'] = rtrim($_POST['nombre']);
     if (rtrim($_POST['apellidos']) != $datosUsuarioSeleccionado['apellidos'])
@@ -47,6 +53,14 @@ function comprobarFallos(&$campos) {
     }
     if (isset($campos['telefono']) && !preg_match("/^(\+34)?[ -]?(6|7|9)([0-9]){8}$/", $campos['telefono']) && $campos['telefono'] != '') {
         $campos['telefono'] = 'incorrecto';
+        $fallos = true;
+    }
+
+    if ((!empty($_POST['claveConfirmacion']) && !isset($campos['password'])) ||
+        (isset($campos['password']) && empty($_POST['claveConfirmacion'])) ||
+        (isset($campos['password']) && $campos['password'] != $_POST['claveConfirmacion']) ||
+        (isset($campos['password']) && strlen($campos['password']) < 8)) {
+        $campos['password'] = 'mal';
         $fallos = true;
     }
     return $fallos;
@@ -82,17 +96,12 @@ if (isset($_POST['modificarUsuario']) ) {
     //Comporobar si se han modificado campos
     $camposCambiados = camposCambiados($datosUsuarioSeleccionado);
     $fallos = comprobarFallos($camposCambiados);
-    if ($camposCambiados != null)
-        echo "SE HAN CAMBIADO CAMPOS";
-
-    $datosNuevos = null;
-    if ($camposCambiados != null) {
-        $fallos = comprobarFallos($camposCambiados);
-
+    var_dump($camposCambiados);
+    if ($camposCambiados != null) {  
         foreach ($datosUsuarioSeleccionado as $clave1 => $valor1) {
             foreach ($camposCambiados as $clave2 => $valor2) 
-                if ($clave1 == $clave2) 
-                    $datosNuevos[$clave2] = $valor2;  
+                if ($clave1 == $clave2)
+                    $datosNuevos[$clave2] = $valor2;             
 
             if (!isset($datosNuevos[$clave1]))
                 $datosNuevos[$clave1] = $valor1; 

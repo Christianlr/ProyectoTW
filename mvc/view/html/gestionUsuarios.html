@@ -22,9 +22,9 @@
         <div class="row w-100 m-0">
             <div class="col d-flex flex-wrap justify-content-around color-bg-card ">
                 {% for parte in datosCompletosUsuarios %}
-                    <div class="card color-card mt-3 mb-3 rounded-card bg-light" style="width: 20rem;">
-                        <img src="data:image/jpeg;base64,{{ parte.foto }}" class="rounded-circle card-img-top" alt="...">
-                        <div class="card-body color-aside">
+                    <div class="card color-card mt-3 mb-3 rounded-card bg-light" style="width: 18rem;">
+                        <img src="data:image/jpeg;base64,{{ parte.foto }}" class="card-img-top" alt="...">
+                        <div class="card-body color-aside d-flex flex-column">
                             <div class="row">
                                 <div class="col">
                                     <div class="d-block">
@@ -53,7 +53,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row w-50 m-auto d-flex justify-content-end">
+                            <div class="row w-50 d-flex  mt-auto mb-0 mr-1 align-self-end">
                                 <div class="col d-flex justify-content-center p-2 color-card rounded-card">
                                     <a href="editarUsuarioController.php?email={{ parte.email }}" class="icono mr-2">
                                         <img class="icono mr-2" src="../view/img/editar.png" alt="editar">

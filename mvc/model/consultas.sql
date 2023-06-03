@@ -5,6 +5,8 @@ insert into usuarios values("colab@gmail.com", "Pepa", "Cerda Pig", SHA2('pepa',
 insert into usuarios values("jacinto@hotmail.com", "Jacinto", "Pérez Castillo", SHA2('jacinto', 256), null, null, null, "activo", "colaborador");
 insert into usuarios values("juan@libros.com", "Juan", "Gómez Jurado", SHA2('juan', 256), null, null, null, "activo", "colaborador");
 insert into usuarios values("rafa@ugr.es", "Rafael", "Fuente Barranco", SHA2('rafa', 256), null, null, null, "activo", "colaborador");
+insert into usuarios values("prueba@gmail.com", "prueba", "prueba pepa", SHA2('pepa', 256), null, null, null, "activo", "colaborador");
+delete from usuarios where email = 'prueba@gmail.com';
 select * from usuarios;
 
 describe  incidencias;
