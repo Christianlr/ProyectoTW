@@ -59,6 +59,7 @@ if (isset($_POST['crearUsuario'])) {
         $campos['foto'] = file_get_contents($_FILES['examinar']['tmp_name']);
     else 
         $campos['foto'] = file_get_contents('../view/img/defaultProfile.png');
+    $campos['foto'] = base64_encode($campos['foto']);
     
     $fallos = comprobarFallos($usuario, $campos);
 
@@ -68,7 +69,6 @@ if (isset($_POST['crearUsuario'])) {
     else {
         $confirmacion = true;
         $usuario->crearUsuario($campos);
-        $campos['foto'] = base64_encode($campos['foto']);
     }
 }
 else if (isset($_POST['confirmarCreacionUsuario'])) {
