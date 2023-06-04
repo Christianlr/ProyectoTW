@@ -1,6 +1,6 @@
-h2.editUser {
+.editUser {
     background-color: #E2FCFB;
-    margin: 7px;
+    margin-top: 7px;
     margin-bottom: 0;
     padding: 25px;
     text-align: center;
@@ -16,8 +16,8 @@ h2.editUser {
 }
 
 .formulario {
-    background-color: #F6E6C6;
-    margin: 7px;
+    background-color: #fddab9;
+    margin-top: 7px;
     margin-top: 0;
     margin-bottom: 0;
     padding: 30px;

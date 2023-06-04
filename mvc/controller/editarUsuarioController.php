@@ -21,9 +21,8 @@ function camposCambiados($datosUsuarioSeleccionado) {
         if (base64_encode($foto_nueva) !== $datosUsuarioSeleccionado['foto']) 
             $camposCambiados['foto'] = base64_encode($foto_nueva);
     }
-    if (hash('sha256',rtrim($_POST['claveNueva'])) != $datosUsuarioSeleccionado['password'] && $_POST['claveNueva'] != '') {
+    if (isset($_POST['claveNueva']) && (hash('sha256',rtrim($_POST['claveNueva'])) != $datosUsuarioSeleccionado['password']) && ($_POST['claveNueva'] != '')) {
         $camposCambiados['password'] = rtrim($_POST['claveNueva']);
-        echo "se ha cambiado la contraseña";
     }
 
         
@@ -92,11 +91,12 @@ $datosUsuarioSeleccionado['nombreCompleto'] = $datosUsuarioSeleccionado['nombre'
 $confirmacion = null;
 $camposCambiados = null;
 $datosNuevos = $datosUsuarioSeleccionado;
+$archivoRender = 'editarUsuario.html';
 if (isset($_POST['modificarUsuario']) ) {
     //Comporobar si se han modificado campos
     $camposCambiados = camposCambiados($datosUsuarioSeleccionado);
     $fallos = comprobarFallos($camposCambiados);
-    var_dump($camposCambiados);
+
     if ($camposCambiados != null) {  
         foreach ($datosUsuarioSeleccionado as $clave1 => $valor1) {
             foreach ($camposCambiados as $clave2 => $valor2) 
@@ -122,14 +122,17 @@ if (isset($_POST['modificarUsuario']) ) {
         $confirmacion = true;
     }
 }
+else if (isset($_POST['confirmarModificacionUsuario'])) {
+    $archivoRender = 'confirmacionesUsuario.html';
+}
 
-
-echo $twig->render('editarUsuario.html', [
+echo $twig->render($archivoRender, [
     'css' => '../view/css/editarUsuario.css',
     'total' => $_SESSION['rankingAdd'][0],
     'nombresRanking' => $_SESSION['rankingAdd'][1],
     'datosUsuario' => $_SESSION['datosUsuario'],
     'datosNuevos' => $datosNuevos,
+    'tipo' => 'editar',
     'confirmacion' =>$confirmacion
 ]);
 ?>

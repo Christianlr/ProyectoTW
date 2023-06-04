@@ -12,6 +12,15 @@ select * from usuarios;
 describe  incidencias;
 
 select * from incidencias;
+insert into incidencias(titulo, id_usuario) values("13 inicidencia", "prueba@gmail.com");
+
+insert into incidencias(titulo, id_usuario) values("14 inicidencia", "prueba@gmail.com");
+
+insert into incidencias(titulo, id_usuario) values("15 inicidencia", "prueba@gmail.com");
+
+insert into incidencias(titulo, id_usuario) values("16 inicidencia", "prueba@gmail.com");
+
+insert into incidencias(titulo, id_usuario) values("17 inicidencia", "prueba@gmail.com");
 
 insert into incidencias(titulo, id_usuario) values("Primera incidencia", "jacinto@hotmail.com");
 insert into incidencias(titulo, id_usuario) values("Segunda incidencia", "rafa@ugr.es");

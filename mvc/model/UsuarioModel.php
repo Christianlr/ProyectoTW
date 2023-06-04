@@ -143,6 +143,42 @@ class UsuarioModel extends AbstractModel {
         }
     }
 
+    public function crearUsuario($campos) {
+        // Preparar la consulta SQL con marcadores de posición
+        $consulta = "INSERT INTO usuarios (email, nombre, apellidos, password, telefono, direccion, foto, estado, rol)
+                     VALUES (:email, :nombre, :apellidos, SHA2(:password, 256), :telefono, :direccion, :foto, :estado, :rol)";
+    
+        // Preparar los parámetros para la consulta
+        $parametros = array(
+            ':email' => $campos['email'],
+            ':nombre' => $campos['nombre'],
+            ':apellidos' => $campos['apellidos'],
+            ':password' => $campos['password'],
+            ':telefono' => $campos['telefono'],
+            ':direccion' => $campos['direccion'],
+            ':foto' => $campos['foto'],
+            ':estado' => $campos['estado'],
+            ':rol' => $campos['rol']
+        );
+    
+        // Ejecutar la consulta preparada con los parámetros
+        $r = $this->query($consulta, $parametros);
+    }
+    
+
+    public function borrarUsuario($email) {
+        $r = $this->query("DELETE FROM usuarios 
+                            WHERE email = '".addslashes($email). "'"
+                        );
+    }
+
+    public function existeCorreo($email) {
+        $existe = $this->query("SELECT COUNT(*) as C 
+                                FROM usuarios
+                                WHERE email = '".addslashes($email)."'"
+                                );
+        return ($existe[0]["C"]==0) ? false : true;
+    }
     public function existeUsuario($email, $password) {
         $existe = $this->query("SELECT COUNT(*) as C 
                                 FROM usuarios

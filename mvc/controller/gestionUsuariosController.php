@@ -9,9 +9,6 @@ session_start();
 $loader = new \Twig\Loader\FilesystemLoader('../view/html');
 $twig = new \Twig\Environment($loader);
 
-/* Obtencion de los rankings */
-#---------------------------------------------#
-
 $usuario = new UsuarioModel();
 $incidencia = new IncidenciasModel();
 
@@ -19,10 +16,11 @@ $todo = $usuario->getAll();
 foreach ($todo as &$parte)
     $parte['nombreCompleto'] = $parte['nombre'] . " " . $parte['apellidos'];
 
-echo $twig->render('gestionUsuarios.html', [
+echo $twig->render('accionGestionUsuarios.html', [
     'total' => $_SESSION['rankingAdd'][0],
     'nombresRanking' => $_SESSION['rankingAdd'][1],
     'datosUsuario' => $_SESSION['datosUsuario'],
-    'datosCompletosUsuarios' => $todo
+    'datosCompletosUsuarios' => $todo,
+    'extends' => 'gestionUsuarios.html'
 ]);
 ?>

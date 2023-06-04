@@ -3,22 +3,10 @@
 {% block main %}
 <div class="row">
     <div class="col rounded-card">
-        <div class="row w-100 m-0">
-            <div class="col color-aside text-center">
-                <h2 class="m-auto">Gestión de usuarios</h2>
-            </div>
-        </div>
-        <div class="row w-100 m-0">
-            <div class="col color-aside">
-                <h3>Indique la acción a realizar</h3>
-                <div class="acciones w-90 m-auto color-card">
-                    <ul class="list-unstyled ml-2">
-                        <li class=""><a href="">Listado</a></li>
-                        <li><a href="">Añadir nuevo</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+        {% block accionGestion %}
+        
+        {% endblock %}
+
         <div class="row w-100 m-0">
             <div class="col d-flex flex-wrap justify-content-around color-bg-card ">
                 {% for parte in datosCompletosUsuarios %}
@@ -58,7 +46,7 @@
                                     <a href="editarUsuarioController.php?email={{ parte.email }}" class="icono mr-2">
                                         <img class="icono mr-2" src="../view/img/editar.png" alt="editar">
                                     </a>
-                                    <a href="editarUsuarioController.php?email={{ parte.email }}" class="icono ml-3">
+                                    <a href="borrarUsuarioController.php?email={{ parte.email }}" class="icono ml-3">
                                         <img class="icono mr-2" src="../view/img/borrar.png" alt="borrar">
                                     </a>
                                 </div>

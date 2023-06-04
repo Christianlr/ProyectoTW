@@ -1,0 +1,13 @@
+{% extends "prueba.html" %}
+
+{% block main %}
+
+    {% if tipo == 'editar' %}
+        <h2 class="editUser">Se han modificado los datos del usuario</h2>
+    {% elseif tipo == 'crear' %}
+        <h2 class="editUser">El nuevo usuario ha sido añadido al sistema</h2>
+    {% else %}
+        <h2 class="editUser">El usuario ha sido borrado</h2>
+    {% endif %}
+
+{% endblock %}

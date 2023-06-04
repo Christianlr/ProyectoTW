@@ -1,0 +1,21 @@
+{% extends extends %}
+
+
+{% block accionGestion %}
+<div class="row w-100 m-0">
+    <div class="col color-aside text-center">
+        <h2 class="m-auto">Gestión de usuarios</h2>
+    </div>
+</div>
+<div class="row w-100 m-0">
+    <div class="col color-aside">
+        <h3>Indique la acción a realizar</h3>
+        <div class="acciones w-90 m-auto color-card">
+            <ul class="list-unstyled ml-2">
+                <li class=""><a href="gestionUsuariosController.php">Listado</a></li>
+                <li><a href="crearUsuarioController.php">Añadir nuevo</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}
