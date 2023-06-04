@@ -30,7 +30,7 @@ function camposCambiados($datosUsuarioSeleccionado) {
         $camposCambiados['nombre'] = rtrim($_POST['nombre']);
     if (rtrim($_POST['apellidos']) != $datosUsuarioSeleccionado['apellidos'])
         $camposCambiados['apellidos'] = rtrim($_POST['apellidos']);
-    if (rtrim($_POST['email']) != $datosUsuarioSeleccionado['email'])
+    if (rtrim($_POST['email']) != $datosUsuarioSeleccionado['email'] && !empty($_POST['email']))
         $camposCambiados['email'] = rtrim($_POST['email']);
     if (rtrim($_POST['direccion']) != $datosUsuarioSeleccionado['direccion'])
         $camposCambiados['direccion'] = rtrim($_POST['direccion']);
