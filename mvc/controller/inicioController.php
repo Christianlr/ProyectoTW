@@ -22,7 +22,7 @@ $counter = 0;
 foreach ($top as $fila) {
     $nombresRanking[] = $usuario->getNombreApellidos($fila["id_usuario"]);
 
-    $nombresRanking[$counter] = $nombresRanking[$counter][0]["nombre"] . " " . $nombresRanking[$counter][0]["apellidos"];
+    $nombresRanking[$counter] = $nombresRanking[$counter]["nombre"] . " " . $nombresRanking[$counter]["apellidos"];
     $counter++;
 }
 

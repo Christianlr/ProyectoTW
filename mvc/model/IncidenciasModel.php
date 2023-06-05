@@ -42,4 +42,29 @@ class IncidenciasModel extends AbstractModel {
                             limit 3;");
         return empty($r) ? null : $r;
     }
+
+    public function crearIncidencia($datos) {
+        $consulta = "INSERT INTO incidencias (titulo, descripcion, fecha, lugar, keywords, id_usuario, estado)
+                     VALUES (:titulo, :descripcion, :fecha, :lugar, :keywords, :id_usuario, :estado)";
+    
+        // Preparar los parámetros para la consulta
+        $parametros = array(
+            ':titulo' => $datos['titulo'],
+            ':descripcion' => $datos['descripcion'],
+            ':fecha' => $datos['fecha'],
+            ':lugar' => $datos['lugar'],
+            ':keywords' => $datos['palabrasClave'],
+            ':id_usuario' => $datos['usuario'],
+            ':estado' => $datos['estado']
+        );
+    
+        // Ejecutar la consulta preparada con los parámetros
+        $r = $this->query($consulta, $parametros);
+    }
+
+    public function getAll() {
+        $r = $this->query("SELECT * FROM incidencias");
+        return empty($r) ? null : $r;
+    }
+    
 }

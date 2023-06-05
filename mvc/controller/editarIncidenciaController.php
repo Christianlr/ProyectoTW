@@ -9,25 +9,31 @@ session_start();
 $loader = new \Twig\Loader\FilesystemLoader('../view/html');
 $twig = new \Twig\Environment($loader);
 
-/* Obtencion de los rankings */
-#---------------------------------------------#
-
 $usuario = new UsuarioModel();
 $incidencia = new IncidenciasModel();
 
+//---- FUNCIONES ----//
 
-$todasIncidencias = $incidencia->getAll();
 
-foreach ($todasIncidencias as &$parte) {
-    $nombreCompleto = $usuario->getNombreApellidos($parte['id_usuario']);
-    $parte['nombreUsuario'] = $nombreCompleto['nombre'] . " " . $nombreCompleto['apellidos'];
+//-------------------//
+$confirmacion = null;
+if (isset($_POST['enviarDatos'])) {
+    if (empty($_POST['titulo']) || empty($_POST['descripcion']) || empty($_POST['lugar']))
+        $confirmacion = false;
+    else {
+        $confirmacion = true;
+    }
+    
 }
 
-echo $twig->render('criteriosBusqueda.html', [
-    'css' => '../view/css/editarUsuario.css',
+$extends = 'editarIncidencia.html';
+echo $twig->render('nuevaIncidencia.html', [
     'total' => $_SESSION['rankingAdd'][0],
     'nombresRanking' => $_SESSION['rankingAdd'][1],
     'datosUsuario' => $_SESSION['datosUsuario'],
-    'todasIncidencias' => $todasIncidencias
+    'datosIncidencia' => $_POST,
+    'confirmacion' => $confirmacion,
+    'extends' => $extends,
+    'bloque' => 'incidencia'
 ]);
 ?>

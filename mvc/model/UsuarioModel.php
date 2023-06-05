@@ -88,7 +88,7 @@ class UsuarioModel extends AbstractModel {
         $r = $this->query("select nombre, apellidos 
                             from usuarios 
                             where email= '" . addslashes($email). "'");
-        return empty($r) ? null : $r;
+        return empty($r) ? null : $r[0];
     }
 
     public function getTipoUsuario($email) {

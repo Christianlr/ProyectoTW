@@ -67,7 +67,7 @@
                             {% if datosUsuario.rol == "colaborador" or datosUsuario.rol == "administrador" %}
 
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">Nueva incidencia</a>
+                                    <a class="nav-link" href="nuevaIncidenciaController.php">Nueva incidencia</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="#">Mis incidencias</a>
@@ -106,9 +106,15 @@
                 <div class="row">
                     <div class="col">
                         <main>
-                            {% block main %}
+                            {% if (incidencia is defined) %}
+                                {% block incidencia %}
 
-                            {% endblock %}   
+                                {% endblock %}   
+                            {% else %}
+                                {% block main %}
+
+                                {% endblock %}
+                            {% endif %}
                         </main>
                     </div>
                 </div>

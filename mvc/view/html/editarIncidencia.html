@@ -1,0 +1,32 @@
+{% extends "prueba.html" %}
+
+{% block main %} 
+<h2 class="editIncidencia">Editar incidencia</h2>
+
+{% block incidencia %}
+
+{% endblock %}
+
+<div class="nueva-incidencia">
+    <h2>Fotografías adjuntas:</h2>
+    <div id="informacionIncidencia">
+        <form action="" class="nueva-incidencia" method="post">
+            <div class="row">
+                {% if fotos is defined %}
+                <div class="col">
+                    <img class="imgUsuario" src="data:image/jpeg;base64,{{datosNuevos.foto}}" alt="Foto actual">
+                </div>
+                {% endif %}
+            </div>
+            <div class="row">
+                <div class="col d-flex justify-content-center">
+                    <input type="file" class="color-card me-auto" name="fotografia[]" value="Selecciona una foto">
+                </div>
+                <div class="col d-flex justify-content-start">
+                    <input type="submit" class="mr-2" name="aniadeFoto" value="Añadir foto">
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

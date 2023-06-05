@@ -8,42 +8,43 @@
 
 <div class="row w-100 m-0 incidencia">
     <div class="col">
+        {% for incidencia in todasIncidencias %}
         <div class="card color-bg-card mb-2">
             <div class="card-header titulo-header text-light p-1">
-                <h2>Hierbajos</h2>
+                <h2>{{ incidencia.titulo }}</h2>
             </div>
             <div class="card-body">
                 <div class="row ">
                     <div class="col d-flex flex-wrap justify-content-between justify-content-md-start">
-                        <div id="informacionIncidencia">
+                        <div id="informacionIncidencia" class="mr-2">
                             <label class="font-weight-bold">Lugar:</label>
-                            <span>Mi barrio</span>
+                            <span>{{ incidencia.lugar }}</span>
                         </div>
-                        <div id="informacionIncidencia">
+                        <div id="informacionIncidencia" class="mr-2">
                             <label class="font-weight-bold">
                                 Fecha:
                             </label>
-                            <span>2023-05-02 15:25:53</span>
+                            <span>{{ incidencia.fecha }}</span>
                         </div>
-                        <div id="informacionIncidencia">
+                        <div id="informacionIncidencia" class="mr-2">
                             <label class="font-weight-bold">
                                 Creado por:
                             </label>
-                            <span>María López Perez</span>
+                            <span>{{ incidencia.nombreUsuario }}</span>
                         </div>
-                        <div id="informacionIncidencia">
+                        <div id="informacionIncidencia" class="mr-2">
                             <label class="font-weight-bold">
                                 Palabras clave:
                             </label>
-                            <span>Farolas,vandalismo</span>
+                            <span>{{ incidenca.keywords }}</span>
                         </div>
-                        <div id="informacionIncidencia">
+                        <div id="informacionIncidencia" class="mr-2">
                             <label class="font-weight-bold">
                                 Estado:
                             </label>
-                            <span>Pendiente</span>
+                            <span>{{ incidencia.estado }}</span>
                         </div>
-                        <div id="informacionIncidencia">
+                        <div id="informacionIncidencia" class="mr-2">
                             <label class="font-weight-bold">
                                 Valoraciones:
                             </label>
@@ -55,11 +56,7 @@
                 <div class="row">
                     <div class="col">
                         <div id="informacionIncidencia">
-                            <label>Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                                Voluptatibus quas voluptates quis. Molestiae, nulla error?
-                                Fugiat rem fugit nemo, eos odio id dolores quibusdam eveniet
-                                ipsa nisi, quaerat, autem atque.
-                            </label>
+                            <label>{{ incidencia.descripcion }}</label>
                         </div>
                     </div>
                 </div>
@@ -133,9 +130,9 @@
             </div>
             <div class="row color-card w-100 m-0">
                 <div class="col d-flex justify-content-end">
-                    <input type="image" class="icono m-2" src="../view/img/signo-de-hospital.png"
+                    <input type="image" class="icono m-2" src="../view/img/positivo.png"
                         alt="votoPositivo">
-                    <input type="image" class="icono m-2" src="../view/img/dejar-de-seguir.png"
+                    <input type="image" class="icono m-2" src="../view/img/negativo.png"
                         alt="votoNegativo">
                     <input type="image" class="icono m-2" src="../view/img/comentarios.png" alt="comentario">
                     <input type="image" class="icono m-2" src="../view/img/editar.png" alt="editar">
@@ -143,7 +140,7 @@
                 </div>
             </div>
         </div>
-
+        {% endfor %}
     </div>
 </div>
 {% endblock %}

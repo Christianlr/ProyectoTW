@@ -157,6 +157,13 @@ h1 a {
     height: 320px; /* Elige el tamaño deseado */
 }
 
+.editIncidencia {
+    background-color: #E2FCFB;
+    margin-top: 7px;
+    margin-bottom: 0;
+    padding: 25px;
+    text-align: center;
+}
 /****Animaciones****/
 
 .animacion-logo:hover {

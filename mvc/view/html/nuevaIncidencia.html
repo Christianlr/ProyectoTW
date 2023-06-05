@@ -1,0 +1,76 @@
+{% extends extends %}
+
+
+{% block incidencia %}
+
+{{ incidencia is defined ? '<h2 class="editIncidencia">Crear incidencia</h2>' : ''}}
+
+<div class="row align-items-center form-elements">
+    <div class="col">
+        <form {% if confirmacion %}action="editarIncidenciaController.php"{% else %}action=""{% endif %}
+            class="nueva-incidencia" method="post">
+            <h2>Datos Principales:</h2>
+            <div class="row">
+                <div class="col-12 col-md-2 mb-1">
+                    <label class="col-form-label ml-3 font-weight-bold">Titulo:</label>
+                </div>
+                <div class="col-12 col-md-9 mb-1">
+                    <input type="text" class="form-control" name="titulo"
+                    value="{{datosIncidencia.titulo != '' ? datosIncidencia.titulo : ''}}"
+                    {{ confirmacion ? 'readonly' : '' }}>
+                    {% if datosIncidencia != null and datosIncidencia.titulo == '' %}
+                        <p class="text-danger ml-2">Debe de introducir un titulo</p>
+                    {% endif %}
+                </div>
+                
+            </div>
+            <div class="row">
+                <div class="col-12 col-md-2 mb-1">
+                    <label class="col-form-label ml-3 font-weight-bold">Descripción:</label>
+                </div>
+                <div class="col-12 col-md-9 mb-1">
+                    <textarea class="d-block w-100 form-control" name="descripcion" cols="30" rows="5" 
+                    {{ confirmacion ? 'readonly' : '' }}>{{datosIncidencia.descripcion != '' ? datosIncidencia.descripcion : ''}}</textarea>
+                    {% if datosIncidencia != null and datosIncidencia.descripcion == '' %}
+                        <p class="text-danger ml-2">Debe de introducir una descripción</p>
+                    {% endif %}
+                </div>
+                
+            </div>
+            <div class="row">
+                <div class="col-12 col-md-2 mb-1">
+                    <label class="col-form-label ml-3 font-weight-bold">Lugar:</label>
+                </div>
+                <div class="col-12 col-md-9 mb-1">
+                    <input type="text" class="form-control" name="lugar"
+                    value="{{datosIncidencia.lugar != '' ? datosIncidencia.lugar : ''}}"
+                    {{ confirmacion ? 'readonly' : '' }}>
+                    {% if datosIncidencia != null and datosIncidencia.lugar == '' %}
+                        <p class="text-danger ml-2">Debe de introducir un lugar</p>
+                    {% endif %}
+                </div>
+                
+            </div>
+            <div class="row">
+                <div class="col-12 col-md-2 mb-1">
+                    <label class="col-form-label ml-3 font-weight-bold">Palabras clave:</label>
+                </div>
+                <div class="col-12 col-md-9 mb-1">
+                    <input type="text" class="form-control" name="palabrasClave"
+                    {{ confirmacion ? 'readonly' : '' }}>
+                </div>
+            </div>
+
+            <div class="row ml-1 mt-4">
+                <div class="col-12 col-md-2 mb-1">
+                {% if not confirmacion %}
+                    <input type="submit" name="enviarDatos" value="Enviar datos">
+                {% else %}
+                    <input type="submit" name="confirmarDatos" value="Confirmar datos">
+                {% endif %}
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
