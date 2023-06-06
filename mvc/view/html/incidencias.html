@@ -36,7 +36,7 @@
                             <label class="font-weight-bold">
                                 Palabras clave:
                             </label>
-                            <span>{{ incidenca.keywords }}</span>
+                            <span>{{ incidencia.keywords }}</span>
                         </div>
                         <div id="informacionIncidencia" class="mr-2">
                             <label class="font-weight-bold">
@@ -62,10 +62,13 @@
                 </div>
                 <div class="row">
                     <div class="col d-flex flex-wrap justify-content-around">
-                        <img class="animacion-logo align-self-center" src="../view/img/logo.png">
-                        <img class="animacion-logo align-self-center" src="../view/img/logo.png">
-                        <img class="animacion-logo align-self-center" src="../view/img/logo.png">
-                        <img class="animacion-logo align-self-center" src="../view/img/logo.png">
+                        {% if incidencia.fotos != null %}
+                            {% for foto in incidencia.fotos %}
+                                <img class="imgIncidencia" src="data:image/jpeg;base64,{{ foto.fotografia }}">
+                            {% endfor %}
+                        {% else %}
+                            <p class="text-info m-5">Este usuario aún no ha subido imágenes </p>
+                        {% endif %}
                     </div>
                 </div>
                 <div class="row">
@@ -135,8 +138,12 @@
                     <input type="image" class="icono m-2" src="../view/img/negativo.png"
                         alt="votoNegativo">
                     <input type="image" class="icono m-2" src="../view/img/comentarios.png" alt="comentario">
-                    <input type="image" class="icono m-2" src="../view/img/editar.png" alt="editar">
-                    <input type="image" class="icono m-2" src="../view/img/borrar.png" alt="borrar">
+                    <a href="editarIncidenciaController.php?id={{ incidencia.id }}" class="icono mr-2">
+                        <img class="icono m-2" src="../view/img/editar.png" alt="editar">
+                    </a>
+                    <a href="borrarIncidenciaController.php?id={{ incidencia.id }}" class="icono mr-2">
+                        <img class="icono m-2" src="../view/img/borrar.png" alt="borrar">
+                    </a>
                 </div>
             </div>
         </div>

@@ -179,6 +179,7 @@ class UsuarioModel extends AbstractModel {
                                 );
         return ($existe[0]["C"]==0) ? false : true;
     }
+    
     public function existeUsuario($email, $password) {
         $existe = $this->query("SELECT COUNT(*) as C 
                                 FROM usuarios

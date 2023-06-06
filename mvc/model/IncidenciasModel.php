@@ -10,7 +10,6 @@ class IncidenciasModel extends AbstractModel {
 
     public function createTable() {
         if (!$this->tableExists('incidencias')) {
-            echo "La estoy creando" . PHP_EOL;
 
             $q = "CREATE TABLE incidencias (
                     id int(11) NOT NULL AUTO_INCREMENT,
@@ -30,7 +29,7 @@ class IncidenciasModel extends AbstractModel {
 
     public function get($id) {
         $r = $this->query("SELECT * FROM incidencias WHERE id='" . addslashes($id) ."'");
-        return empty($r) ? null : $r;
+        return empty($r) ? null : $r[0];
     }
 
     // Devuelve el top 3 de los usuarios que mas incidencias han hecho (devuelve el email de cada uno)
@@ -60,6 +59,30 @@ class IncidenciasModel extends AbstractModel {
     
         // Ejecutar la consulta preparada con los parámetros
         $r = $this->query($consulta, $parametros);
+        return $this->lastInsertId();
+    }
+    
+    public function modificarIncidencia($datos) {
+        $consulta = "UPDATE incidencias SET titulo = :titulo, descripcion = :descripcion, lugar = :lugar, 
+                                            keywords = :keywords WHERE id = :id";
+    
+        // Preparar los parámetros para la consulta
+        $parametros = array(
+            ':titulo' => $datos['titulo'],
+            ':descripcion' => $datos['descripcion'],
+            ':lugar' => $datos['lugar'],
+            ':keywords' => $datos['keywords'],
+            ':id' => $datos['id']
+        );
+    
+        // Ejecutar la consulta preparada con los parámetros
+        $this->query($consulta, $parametros);
+    }
+    
+    public function borrarIncidencia($id) {
+        $r = $this->query("DELETE FROM incidencias 
+                            WHERE id = '".addslashes($id). "'"
+                        );
     }
 
     public function getAll() {

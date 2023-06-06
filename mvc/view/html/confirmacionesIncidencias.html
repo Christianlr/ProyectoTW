@@ -1,0 +1,12 @@
+{% extends "prueba.html" %}
+
+{% block main %}
+    {% if tipo == 'editar' %}
+        <h2 class="editIncidencia">Se han modificado los datos de la incidencia</h2>
+    {% elseif tipo == 'borrar' %}
+        <h2 class="editIncidencia">La incidencia ha sido eliminada</h2>
+    
+    {% else %}
+    <h1>AAAAAAAAAAAA</h1>
+    {% endif %}
+{% endblock %}

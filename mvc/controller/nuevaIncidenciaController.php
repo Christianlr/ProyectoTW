@@ -17,6 +17,7 @@ $incidencia = new IncidenciasModel();
 
 //-------------------//
 $confirmacion = null;
+$id = null;
 if (isset($_POST['enviarDatos'])) {
     if (empty($_POST['titulo']) || empty($_POST['descripcion']) || empty($_POST['lugar']))
         $confirmacion = false;
@@ -26,8 +27,8 @@ if (isset($_POST['enviarDatos'])) {
         $datos['usuario'] = $_SESSION['datosUsuario']['email'];
         $datos['fecha'] = date('Y-m-d H:i:s');
         $datos['estado'] = 'pendiente';
-        var_dump($datos);
-        //$incidencia->crearIncidencia($datos);
+
+        $id = $incidencia->crearIncidencia($datos);
     }
 }
 
@@ -39,6 +40,7 @@ echo $twig->render('nuevaIncidencia.html', [
     'datosIncidencia' => $_POST,
     'confirmacion' => $confirmacion,
     'extends' => $extends,
-    'incidencia' => true
+    'tipo' => 'crear',
+    'incidencia' => $id
 ]);
 ?>

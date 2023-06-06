@@ -45,6 +45,10 @@ abstract class AbstractModel {
         return $q[0]["C"];
     }
 
+    public function lastInsertId() {
+        return $this->db->lastInsertId();
+    }
+    
     public abstract function get($publicKey);
     public abstract function createTable();
 }

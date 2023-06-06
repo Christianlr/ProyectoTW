@@ -10,20 +10,23 @@
 <div class="nueva-incidencia">
     <h2>Fotografías adjuntas:</h2>
     <div id="informacionIncidencia">
-        <form action="" class="nueva-incidencia" method="post">
-            <div class="row">
-                {% if fotos is defined %}
-                <div class="col">
-                    <img class="imgUsuario" src="data:image/jpeg;base64,{{datosNuevos.foto}}" alt="Foto actual">
+        <form action="" class="nueva-incidencia" method="post" enctype="multipart/form-data">
+            <div class="row d-flex flex-column">
+                {% for foto in fotos %}
+                <div class="col m-3 w-auto">
+                    <img class="imgUsuario" src="data:image/jpeg;base64,{{ foto.fotografia }}" alt="Foto actual">
+                    <a href="editarIncidenciaController.php?foto={{ foto.id }}" class="icono mr-2">
+                        <img class="icono ml-2" src="../view/img/borrar.png" alt="editar">
+                    </a>
                 </div>
-                {% endif %}
+                {% endfor %}
             </div>
             <div class="row">
                 <div class="col d-flex justify-content-center">
-                    <input type="file" class="color-card me-auto" name="fotografia[]" value="Selecciona una foto">
+                    <input type="file" class="color-card me-auto" name="examinar" value="Selecciona una foto">
                 </div>
                 <div class="col d-flex justify-content-start">
-                    <input type="submit" class="mr-2" name="aniadeFoto" value="Añadir foto">
+                    <input type="submit" class="mr-2" name="addFoto" value="Añadir foto">
                 </div>
             </div>
         </form>

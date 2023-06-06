@@ -3,7 +3,11 @@
 
 {% block incidencia %}
 
-{{ incidencia is defined ? '<h2 class="editIncidencia">Crear incidencia</h2>' : ''}}
+{% if tipo == 'crear' %}
+    <h2 class="editIncidencia">Crear incidencia</h2>
+{% elseif tipo == 'borrar' %}
+    <h2 class="editIncidencia">Borrar incidencia</h2>
+{% endif %}
 
 <div class="row align-items-center form-elements">
     <div class="col">
@@ -17,7 +21,7 @@
                 <div class="col-12 col-md-9 mb-1">
                     <input type="text" class="form-control" name="titulo"
                     value="{{datosIncidencia.titulo != '' ? datosIncidencia.titulo : ''}}"
-                    {{ confirmacion ? 'readonly' : '' }}>
+                    {{ confirmacion or tipo == 'borrar' ? 'readonly' : '' }}>
                     {% if datosIncidencia != null and datosIncidencia.titulo == '' %}
                         <p class="text-danger ml-2">Debe de introducir un titulo</p>
                     {% endif %}
@@ -30,7 +34,7 @@
                 </div>
                 <div class="col-12 col-md-9 mb-1">
                     <textarea class="d-block w-100 form-control" name="descripcion" cols="30" rows="5" 
-                    {{ confirmacion ? 'readonly' : '' }}>{{datosIncidencia.descripcion != '' ? datosIncidencia.descripcion : ''}}</textarea>
+                    {{ confirmacion or tipo == 'borrar' ? 'readonly' : '' }}>{{datosIncidencia.descripcion != '' ? datosIncidencia.descripcion : ''}}</textarea>
                     {% if datosIncidencia != null and datosIncidencia.descripcion == '' %}
                         <p class="text-danger ml-2">Debe de introducir una descripción</p>
                     {% endif %}
@@ -44,7 +48,7 @@
                 <div class="col-12 col-md-9 mb-1">
                     <input type="text" class="form-control" name="lugar"
                     value="{{datosIncidencia.lugar != '' ? datosIncidencia.lugar : ''}}"
-                    {{ confirmacion ? 'readonly' : '' }}>
+                    {{ confirmacion or tipo == 'borrar' ? 'readonly' : '' }}>
                     {% if datosIncidencia != null and datosIncidencia.lugar == '' %}
                         <p class="text-danger ml-2">Debe de introducir un lugar</p>
                     {% endif %}
@@ -56,17 +60,21 @@
                     <label class="col-form-label ml-3 font-weight-bold">Palabras clave:</label>
                 </div>
                 <div class="col-12 col-md-9 mb-1">
-                    <input type="text" class="form-control" name="palabrasClave"
-                    {{ confirmacion ? 'readonly' : '' }}>
+                    <input type="text" class="form-control" name="keywords"
+                    value="{{datosIncidencia.keywords != '' ? datosIncidencia.keywords : ''}}"
+                    {{ confirmacion or tipo == 'borrar' ? 'readonly' : '' }}>
                 </div>
             </div>
 
             <div class="row ml-1 mt-4">
                 <div class="col-12 col-md-2 mb-1">
-                {% if not confirmacion %}
+                {% if not confirmacion and tipo != 'borrar' %}
                     <input type="submit" name="enviarDatos" value="Enviar datos">
+                {% elseif tipo == 'borrar' %}
+                    <input type="submit" name="borrarDatos" value="Borrar incidencia">
                 {% else %}
                     <input type="submit" name="confirmarDatos" value="Confirmar datos">
+                    <input type="hidden" name="id" value="{{ datosIncidencia.id }}">
                 {% endif %}
                 </div>
             </div>
