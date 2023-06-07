@@ -48,16 +48,14 @@ if (isset($_POST['enviarDatos'])) {
         $incidencia->modificarIncidencia($datos);
     }   
 }
-else if (isset($_POST['confirmarDatos'])) {
+else if (isset($_POST['confirmarDatos']) && !empty($_POST['id'])) {
     $archivoRender = 'confirmacionesIncidencias.html';
 }
 
 //Datos asociados a las fotos
-
 // Fotos adjuntas
 if (isset($_FILES['examinar']) && $_FILES['examinar']['error'] === UPLOAD_ERR_OK) {
     $foto_nueva = file_get_contents($_FILES['examinar']['tmp_name']);
-    echo 'holaaaa';
     $fotos->set($foto_nueva, $id);
 }
 //Eliminar foto

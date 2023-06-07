@@ -52,7 +52,7 @@ class IncidenciasModel extends AbstractModel {
             ':descripcion' => $datos['descripcion'],
             ':fecha' => $datos['fecha'],
             ':lugar' => $datos['lugar'],
-            ':keywords' => $datos['palabrasClave'],
+            ':keywords' => $datos['keywords'],
             ':id_usuario' => $datos['usuario'],
             ':estado' => $datos['estado']
         );

@@ -29,6 +29,7 @@ if (isset($_POST['enviarDatos'])) {
         $datos['estado'] = 'pendiente';
 
         $id = $incidencia->crearIncidencia($datos);
+        $_SESSION['incidenciaActual'] = $incidencia->get($id);
     }
 }
 
@@ -41,6 +42,6 @@ echo $twig->render('nuevaIncidencia.html', [
     'confirmacion' => $confirmacion,
     'extends' => $extends,
     'tipo' => 'crear',
-    'incidencia' => $id
+    'incidencia' => true
 ]);
 ?>
