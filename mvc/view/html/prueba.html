@@ -70,7 +70,7 @@
                                     <a class="nav-link" href="nuevaIncidenciaController.php">Nueva incidencia</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">Mis incidencias</a>
+                                    <a class="nav-link" href="verIncidenciasController.php?email={{ datosUsuario.email }}">Mis incidencias</a>
                                 </li>
                             {% endif %}
                             {% if datosUsuario.rol == "administrador" %}

@@ -71,64 +71,39 @@
                         {% endif %}
                     </div>
                 </div>
-                <div class="row">
+                {% for comentario in incidencia.comentarios %}
+                <div class="row {% if loop.index % 2 == 0 %} color-incidencia {% endif %}">
                     <div class="col-2">
                         <div class="row">
                             <div class="col">
                                 <label class="font-weight-bold">
-                                    Mario antonio Lopez
+                                    {{comentario.nombreUsuario }}
                                 </label>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col">
                                 <span>
-                                    2023-05-02 15:25:53
+                                    {{ comentario.fecha }}
                                 </span>
                             </div>
                         </div>
                     </div>
-                    <div class="col">Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                        Impedit
-                        exercitationem eius alias totam neque expedita atque molestiae, autem in,
-                        ratione nostrum. Accusamus provident voluptates iste tempora? Assumenda
-                        dolores
-                        obcaecati est
+                    <div class="col">
+                        {{ comentario.comentario }}
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-2">
-                        <div class="row">
-                            <div class="col color-incidencia">
-                                <label class="font-weight-bold">
-                                    Mario antonio Lopez
-                                </label>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col color-incidencia">
-                                <span>
-                                    2023-05-02 15:25:53
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-10 color-incidencia">Lorem ipsum dolor, sit amet consectetur
-                        adipisicing elit. Impedit
-                        exercitationem eius alias totam neque expedita atque molestiae, autem in,
-                        ratione nostrum. Accusamus provident voluptates iste tempora? Assumenda
-                        dolores
-                        obcaecati est
-                    </div>
-                </div>
+                {% endfor %}
             </div>
             <div class="row color-card w-100 m-auto p-2">
                 <div class="col">
+                    {% if comentar is defined and comentar == incidencia.id %}
                     <form class="p-0" action="" method="post">
                         <textarea class="d-block w-100 form-control" name="comentarioNuevo" cols="30"
                             rows="10"></textarea>
                         <input class="m-auto d-block" type="submit" value="Escribir comentario">
                     </form>
+                    {% endif %}
                 </div>
             </div>
             <div class="row color-card w-100 m-0">
@@ -137,7 +112,9 @@
                         alt="votoPositivo">
                     <input type="image" class="icono m-2" src="../view/img/negativo.png"
                         alt="votoNegativo">
-                    <input type="image" class="icono m-2" src="../view/img/comentarios.png" alt="comentario">
+                    <a href="comentarIncidenciaController.php?id={{ incidencia.id }}" target="_self" class="icono mr-2">
+                        <img class="icono m-2" src="../view/img/comentarios.png" alt="comentar">
+                    </a>
                     <a href="editarIncidenciaController.php?id={{ incidencia.id }}" class="icono mr-2">
                         <img class="icono m-2" src="../view/img/editar.png" alt="editar">
                     </a>

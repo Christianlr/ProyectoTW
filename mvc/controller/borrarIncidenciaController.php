@@ -16,7 +16,7 @@ $usuario = new UsuarioModel();
 $incidencia = new IncidenciasModel();
 
 
-//Obtener datos de la persona a eliminar
+//Obtener datos de la incidencia a eliminar
 $queryString = parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY);
 parse_str($queryString, $params);
 $datosIncidencia = $incidencia->get($params['id']);

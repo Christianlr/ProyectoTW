@@ -89,5 +89,10 @@ class IncidenciasModel extends AbstractModel {
         $r = $this->query("SELECT * FROM incidencias");
         return empty($r) ? null : $r;
     }
+
+    public function getAllByUser($email) {
+        $r = $this->query("SELECT * FROM incidencias WHERE id_usuario = '" . addslashes($email) . "'");
+        return empty($r) ? null : $r;
+    }
     
 }
