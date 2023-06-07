@@ -2,6 +2,7 @@
 require '../twig/vendor/autoload.php';
 require_once "../model/UsuarioModel.php";
 require_once "../model/IncidenciasModel.php";
+require_once "../model/ComentariosModel.php";
 
 session_start();
 
@@ -9,28 +10,44 @@ session_start();
 $loader = new \Twig\Loader\FilesystemLoader('../view/html');
 $twig = new \Twig\Environment($loader);
 
+$usuario = new UsuarioModel();
+$incidencia = new IncidenciasModel();
+$comentarios = new ComentariosModel();
+
+
+//---- FUNCIONES ----//
+
+function obtenerRanking($datos, $usuario) {
+    $ranking = [];
+
+    foreach ($datos as $fila) {
+        $nombreCompleto = $usuario->getNombreApellidos($fila["id_usuario"]);
+        $ranking[] = [
+            'nombre' => $nombreCompleto["nombre"] . " " . $nombreCompleto["apellidos"],
+            'total' => $fila['count']
+        ];
+    }
+
+    return $ranking;
+}
+
+//-------------------//
+
+
 /* Obtencion de los rankings */
 #---------------------------------------------#
 
-$usuario = new UsuarioModel();
-$incidencia = new IncidenciasModel();
+$topIncidencias = $incidencia->getTopUsuarios();
+$topComentarios = $comentarios->getTopUsuarios();
 
-$top = $incidencia->getTopUsuarios();
+$rankingIncidencias = obtenerRanking($topIncidencias, $usuario);
+$rankingComentarios = obtenerRanking($topComentarios, $usuario);
 
-$nombresRanking=[];
-$counter = 0;
-foreach ($top as $fila) {
-    $nombresRanking[] = $usuario->getNombreApellidos($fila["id_usuario"]);
-
-    $nombresRanking[$counter] = $nombresRanking[$counter]["nombre"] . " " . $nombresRanking[$counter]["apellidos"];
-    $counter++;
-}
-
-$total = [];
-foreach ($top as $t)
-    $total[] = $t["count"];
+$_SESSION['ranking']['incidencias'] = $rankingIncidencias;
+$_SESSION['ranking']['comentarios'] = $rankingComentarios;
 
 #----------------------------------------------#
+
 
 /* Comprobacion de usuario registrado */
 #----------------------------------------------#
@@ -70,12 +87,9 @@ else {
 if (empty($_SESSION['datosUsuario']) || (isset($_SESSION['datosUsuario']) && $_SESSION['datosUsuario']['rol'] == 'anonimo'))
     $_SESSION['datosUsuario'] = $datosUsuario;
 
-$_SESSION['rankingAdd'][0] = $total;
-$_SESSION['rankingAdd'][1] = $nombresRanking;
 
 echo $twig->render('index.html', [
-        'total' => $total,
-        'nombresRanking' => $nombresRanking,
+        'ranking' => $_SESSION['ranking'],
         'datosUsuario' => $_SESSION['datosUsuario']
     ]);
 ?>

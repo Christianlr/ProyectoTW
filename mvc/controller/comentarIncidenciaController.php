@@ -33,9 +33,7 @@ if (isset($_POST['comentarioNuevo'])) {
 
 
 echo $twig->render('criteriosBusqueda.html', [
-    'css' => '../view/css/editarUsuario.css',
-    'total' => $_SESSION['rankingAdd'][0],
-    'nombresRanking' => $_SESSION['rankingAdd'][1],
+    'ranking' => $_SESSION['ranking'],
     'datosUsuario' => $_SESSION['datosUsuario'],
     'todasIncidencias' => $_SESSION['todasIncidencias'],
     'comentar' => $id

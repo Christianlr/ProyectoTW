@@ -170,27 +170,27 @@
                             <!--Lo que más añaden  (CARD)-->
                             <div class="card color-bg-card">
                                 <div class="card-header titulo-header text-light p-1">
-                                    Lo que más añaden
+                                    Los que más añaden
                                 </div>
                                 <ol type="i" class="list-group-flush mt-2">
-                                    {% for i in 0..2 %}
-                                        <li>({{ total[i] }}) {{nombresRanking[i]}}</li>
+                                    {% for puesto in ranking.incidencias %}
+                                        <li>({{ puesto.total }}) {{ puesto.nombre }}</li>
                                     {% endfor %}
                                 </ol>
                             </div>
                         </div>
                     </div>
     
-                    <div class="row mt-3"><!--Lo que más opinan  (CARD)-->
+                    <div class="row mt-3"><!--Lo que más comentan  (CARD)-->
                         <div class="col">
                             <div class="card color-bg-card">
                                 <div class="card-header titulo-header text-light p-1">
-                                    Lo que más añaden
+                                    Los que más comentan
                                 </div>
                                 <ol type="i" class="list-group-flush mt-2">
-                                    <li>Hola</li>
-                                    <li>Hola</li>
-                                    <li>Hola</li>
+                                    {% for puesto in ranking.comentarios %}
+                                        <li>({{ puesto.total }}) {{ puesto.nombre }}</li>
+                                    {% endfor %}
                                 </ol>
                             </div>
                         </div>

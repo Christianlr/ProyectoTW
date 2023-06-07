@@ -17,8 +17,7 @@ foreach ($todo as &$parte)
     $parte['nombreCompleto'] = $parte['nombre'] . " " . $parte['apellidos'];
 
 echo $twig->render('accionGestionUsuarios.html', [
-    'total' => $_SESSION['rankingAdd'][0],
-    'nombresRanking' => $_SESSION['rankingAdd'][1],
+    'ranking' => $_SESSION['ranking'],
     'datosUsuario' => $_SESSION['datosUsuario'],
     'datosCompletosUsuarios' => $todo,
     'extends' => 'gestionUsuarios.html'

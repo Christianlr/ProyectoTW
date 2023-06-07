@@ -79,8 +79,7 @@ else if (isset($_POST['confirmarCreacionUsuario'])) {
 echo $twig->render($archivoRender, [
     'extends' => 'editarUsuario.html',
     'css' => '../view/css/editarUsuario.css',
-    'total' => $_SESSION['rankingAdd'][0],
-    'nombresRanking' => $_SESSION['rankingAdd'][1],
+    'ranking' => $_SESSION['ranking'],
     'datosUsuario' => $_SESSION['datosUsuario'],
     'datosNuevos' => $campos,
     'tipo' => 'crear',

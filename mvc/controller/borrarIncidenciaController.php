@@ -31,8 +31,7 @@ if (isset($_POST['borrarDatos'])) {
 
 $extends = 'prueba.html';
 echo $twig->render($archivoRender, [
-    'total' => $_SESSION['rankingAdd'][0],
-    'nombresRanking' => $_SESSION['rankingAdd'][1],
+    'ranking' => $_SESSION['ranking'],
     'datosUsuario' => $_SESSION['datosUsuario'],
     'datosIncidencia' => $datosIncidencia,
     'extends' => $extends,

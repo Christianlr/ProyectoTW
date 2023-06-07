@@ -30,8 +30,7 @@ if (isset($_POST['borrarUsuario'])) {
 
 echo $twig->render($archivoRender, [
     'css' => '../view/css/editarUsuario.css',
-    'total' => $_SESSION['rankingAdd'][0],
-    'nombresRanking' => $_SESSION['rankingAdd'][1],
+    'ranking' => $_SESSION['ranking'],
     'datosUsuario' => $_SESSION['datosUsuario'],
     'datosNuevos' => $datosUsuarioSeleccionado,
     'tipo' => 'borrar',

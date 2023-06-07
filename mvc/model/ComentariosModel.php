@@ -35,6 +35,15 @@ class ComentariosModel extends AbstractModel {
         return empty($r) ? null : $r;
     }
 
+    public function getTopUsuarios() {
+        $r = $this->query("select id_usuario, count(*) as count 
+                            from comentarios 
+                            group by id_usuario
+                            order by count desc
+                            limit 3;");
+        return empty($r) ? null : $r;
+    }
+
     public function set($datos) {
         $consulta = "INSERT INTO comentarios (id_incidencia, id_usuario, comentario, fecha)
                      VALUES (:id_incidencia, :id_usuario, :comentario, :fecha)";

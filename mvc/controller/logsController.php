@@ -16,9 +16,7 @@ $usuario = new UsuarioModel();
 $incidencia = new IncidenciasModel();
 
 echo $twig->render('verLogs.html', [
-    'css' => '../view/css/editarUsuario.css',
-    'total' => $_SESSION['rankingAdd'][0],
-    'nombresRanking' => $_SESSION['rankingAdd'][1],
+    'ranking' => $_SESSION['ranking'],
     'datosUsuario' => $_SESSION['datosUsuario']
 ]);
 ?>

@@ -35,8 +35,7 @@ if (isset($_POST['enviarDatos'])) {
 
 $extends = 'prueba.html';
 echo $twig->render('nuevaIncidencia.html', [
-    'total' => $_SESSION['rankingAdd'][0],
-    'nombresRanking' => $_SESSION['rankingAdd'][1],
+    'ranking' => $_SESSION['ranking'],
     'datosUsuario' => $_SESSION['datosUsuario'],
     'datosIncidencia' => $_POST,
     'confirmacion' => $confirmacion,

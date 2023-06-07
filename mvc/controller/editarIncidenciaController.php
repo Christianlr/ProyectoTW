@@ -14,11 +14,6 @@ $usuario = new UsuarioModel();
 $incidencia = new IncidenciasModel();
 $fotos = new FotosIncidenciasModel();
 
-//---- FUNCIONES ----//
-
-
-//-------------------//
-
 //Obtener id de la incidencia
 $id = null;
 if (isset($_SESSION['incidenciaActual'])) {
@@ -35,9 +30,9 @@ else {
 }
 
 
+// Datos principales
 $confirmacion = null;
 $archivoRender = 'nuevaIncidencia.html';
-// Datos principales
 if (isset($_POST['enviarDatos'])) {
     if (empty($_POST['titulo']) || empty($_POST['descripcion']) || empty($_POST['lugar']))
         $confirmacion = false;
@@ -51,6 +46,7 @@ if (isset($_POST['enviarDatos'])) {
 else if (isset($_POST['confirmarDatos']) && !empty($_POST['id'])) {
     $archivoRender = 'confirmacionesIncidencias.html';
 }
+
 
 //Datos asociados a las fotos
 // Fotos adjuntas
@@ -68,9 +64,9 @@ if (isset($params['foto'])) {
 $_SESSION['incidenciaActual'] = $incidencia->get($id);
 $fotosIncidencia = $fotos->getFotosById($id);
 
+
 echo $twig->render($archivoRender, [
-    'total' => $_SESSION['rankingAdd'][0],
-    'nombresRanking' => $_SESSION['rankingAdd'][1],
+    'ranking' => $_SESSION['ranking'],
     'datosUsuario' => $_SESSION['datosUsuario'],
     'datosIncidencia' => $_SESSION['incidenciaActual'],
     'tipo' => 'editar',
