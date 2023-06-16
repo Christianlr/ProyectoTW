@@ -5,7 +5,10 @@
         <h2 class="editIncidencia">Se han modificado los datos de la incidencia</h2>
     {% elseif tipo == 'borrar' %}
         <h2 class="editIncidencia">La incidencia ha sido eliminada</h2>
-    
+    {% elseif tipo == 'opinionAnonimo' %}
+        <h2 class="editIncidencia">Usted ya ha opinado como usuario anónimo sobre esta incidencia</h2>
+    {% elseif tipo == 'opinionUsuario' %}
+        <h2 class="editIncidencia">Usted ya ha opinado como usuario registrado sobre esta incidencia {{valoracion == 1 ? '(+)' : '(-)'}}</h2>
     {% else %}
     <h1>AAAAAAAAAAAA</h1>
     {% endif %}

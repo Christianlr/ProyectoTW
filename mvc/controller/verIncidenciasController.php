@@ -4,6 +4,7 @@ require_once "../model/UsuarioModel.php";
 require_once "../model/IncidenciasModel.php";
 require_once "../model/FotosIncidenciasModel.php";
 require_once "../model/ComentariosModel.php";
+require_once "../model/ValoracionesModel.php";
 
 session_start();
 unset($_SESSION['incidenciaActual']);
@@ -18,6 +19,7 @@ $usuario = new UsuarioModel();
 $incidencia = new IncidenciasModel();
 $fotos = new FotosIncidenciasModel();
 $comentarios = new ComentariosModel();
+$valoraciones = new ValoracionesModel();
 
 $queryString = parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY);
 parse_str($queryString, $params);
@@ -30,12 +32,18 @@ foreach ($todasIncidencias as &$parte) {
     $nombreCompleto = $usuario->getNombreApellidos($parte['id_usuario']);
     $parte['nombreUsuario'] = $nombreCompleto['nombre'] . " " . $nombreCompleto['apellidos'];
     $parte['fotos'] = $fotos->getFotosById($parte['id']);
+    $parte['valoracion']['positiva'] = $valoraciones->getPosValById($parte['id']);
+    $parte['valoracion']['negativa'] = $valoraciones->getNegValById($parte['id']);
 
     $parte['comentarios'] = $comentarios->getAllById($parte['id']);
     if (!empty($parte['comentarios']))
         foreach ($parte['comentarios'] as &$c) {
-            $nombreCompleto = $usuario->getNombreApellidos($c['id_usuario']);
-            $c['nombreUsuario'] = $nombreCompleto['nombre'] . " " . $nombreCompleto['apellidos'];
+            if ($c['id_usuario'] != null) {
+                $nombreCompleto = $usuario->getNombreApellidos($c['id_usuario']);
+                $c['nombreUsuario'] = $nombreCompleto['nombre'] . " " . $nombreCompleto['apellidos'];
+            } else {
+                $c['nombreUsuario'] = 'Anónimo';
+            }
         }
 }
 $_SESSION['todasIncidencias'] = $todasIncidencias;

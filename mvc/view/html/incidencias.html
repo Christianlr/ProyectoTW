@@ -48,7 +48,7 @@
                             <label class="font-weight-bold">
                                 Valoraciones:
                             </label>
-                            <span>Pos: 2,Neg: 0</span>
+                            <span>Pos: {{ incidencia.valoracion.positiva }},Neg: {{ incidencia.valoracion.negativa }} </span>
                         </div>
 
                     </div>
@@ -77,7 +77,7 @@
                         <div class="row">
                             <div class="col">
                                 <label class="font-weight-bold">
-                                    {{comentario.nombreUsuario }}
+                                    {{ comentario.nombreUsuario }}
                                 </label>
                             </div>
                         </div>
@@ -107,20 +107,28 @@
                 </div>
             </div>
             <div class="row color-card w-100 m-0">
-                <div class="col d-flex justify-content-end">
-                    <input type="image" class="icono m-2" src="../view/img/positivo.png"
-                        alt="votoPositivo">
-                    <input type="image" class="icono m-2" src="../view/img/negativo.png"
-                        alt="votoNegativo">
+                <div class="col d-flex justify-content-end pb-2">
+                    <a href="valoracionesController.php?id_incidencia={{ incidencia.id }}&id_usuario={{ datosUsuario.email == null ? 'anonimo' : datosUsuario.email }}&val=1" 
+                        target="_self" class="icono mr-2">
+                        <img class="icono" src="../view/img/positivo.png" alt="votoPositivo">
+                    </a>
+                    
+                    <a href="valoracionesController.php?id_incidencia={{ incidencia.id }}&id_usuario={{ datosUsuario.email == null ? 'anonimo' : datosUsuario.email }}&val=2" 
+                        target="_self" class="icono mr-2">
+                        <img class="icono" src="../view/img/negativo.png" alt="votoNegativo">
+                    </a>
+                   
                     <a href="comentarIncidenciaController.php?id={{ incidencia.id }}" target="_self" class="icono mr-2">
-                        <img class="icono m-2" src="../view/img/comentarios.png" alt="comentar">
+                        <img class="icono" src="../view/img/comentarios.png" alt="comentar">
                     </a>
-                    <a href="editarIncidenciaController.php?id={{ incidencia.id }}" class="icono mr-2">
-                        <img class="icono m-2" src="../view/img/editar.png" alt="editar">
-                    </a>
-                    <a href="borrarIncidenciaController.php?id={{ incidencia.id }}" class="icono mr-2">
-                        <img class="icono m-2" src="../view/img/borrar.png" alt="borrar">
-                    </a>
+                    {% if incidencia.id_usuario == datosUsuario.email or  datosUsuario.rol == 'administrador' %}
+                        <a href="editarIncidenciaController.php?id={{ incidencia.id }}" class="icono mr-2">
+                            <img class="icono" src="../view/img/editar.png" alt="editar">
+                        </a>
+                        <a href="borrarIncidenciaController.php?id={{ incidencia.id }}" class="icono mr-2">
+                            <img class="icono" src="../view/img/borrar.png" alt="borrar">
+                        </a>
+                    {% endif %}
                 </div>
             </div>
         </div>

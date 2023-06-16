@@ -38,6 +38,7 @@ class ComentariosModel extends AbstractModel {
     public function getTopUsuarios() {
         $r = $this->query("select id_usuario, count(*) as count 
                             from comentarios 
+                            where id_usuario is not null
                             group by id_usuario
                             order by count desc
                             limit 3;");
