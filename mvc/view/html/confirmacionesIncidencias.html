@@ -5,10 +5,16 @@
         <h2 class="editIncidencia">Se han modificado los datos de la incidencia</h2>
     {% elseif tipo == 'borrar' %}
         <h2 class="editIncidencia">La incidencia ha sido eliminada</h2>
+    {% elseif tipo == 'opinionPositiva' %}
+        <h2 class="editIncidencia">Opinion positiva registrada</h2>
+    {% elseif tipo == 'opinionNegativa' %}
+        <h2 class="editIncidencia">Opinion negativa registrada</h2>
     {% elseif tipo == 'opinionAnonimo' %}
-        <h2 class="editIncidencia">Usted ya ha opinado como usuario anónimo sobre esta incidencia</h2>
+        <h2 class="editIncidencia">Usted ya ha opinado como usuario anónimo sobre esta incidencia {{valoracion == 1 ? '(+)' : '(-)'}}</h2>
     {% elseif tipo == 'opinionUsuario' %}
         <h2 class="editIncidencia">Usted ya ha opinado como usuario registrado sobre esta incidencia {{valoracion == 1 ? '(+)' : '(-)'}}</h2>
+    {% elseif tipo == 'comentario' %}
+        <h2 class="editIncidencia">El comentario se ha añadido correctamente</h2>
     {% else %}
     <h1>AAAAAAAAAAAA</h1>
     {% endif %}

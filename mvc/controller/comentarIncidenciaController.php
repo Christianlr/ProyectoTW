@@ -6,6 +6,20 @@ require_once "../model/ComentariosModel.php";
 
 session_start();
 
+
+//---- FUNCIONES ----//
+
+function obtenerIncidencia($todasIncidencias, $id) {
+    foreach ($todasIncidencias as $incidenciaComentada)
+    if ($incidenciaComentada['id'] == $id)
+        return $incidenciaComentada;
+    
+    return null;
+}
+
+//-------------------//
+
+
 /* Cargamos twig para usar el render */
 $loader = new \Twig\Loader\FilesystemLoader('../view/html');
 $twig = new \Twig\Environment($loader);
@@ -22,20 +36,29 @@ $queryString = parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY);
 parse_str($queryString, $params);
 $id = $params['id'];
 
+$archivoRender = 'incidencias.html';
+$incidenciaComentada = null;
 if (isset($_POST['comentarioNuevo'])) {
     $datos['comentario'] = $_POST['comentarioNuevo'];
     $datos['id_incidencia'] = $id;
-    $datos['id_usuario'] = $_SESSION['datosUsuario']['email'];
+    if ($_SESSION['datosUsuario']['rol'] != 'anonimo')
+        $datos['id_usuario'] = $_SESSION['datosUsuario']['email'];
+    else 
+        $datos['id_usuario'] = null;
+
     $datos['fecha'] = date('Y-m-d H:i:s');
     $comentario->set($datos);
-    header("Location: verIncidenciasController.php"); //Para volver a reccargar la pagina con los comentarios nuevos
+    $archivoRender = 'confirmacionesIncidencias.html';
+} else {
+    $incidenciaComentada[] = obtenerIncidencia($_SESSION['todasIncidencias'], $id);
 }
 
 
-echo $twig->render('criteriosBusqueda.html', [
+echo $twig->render($archivoRender, [
     'ranking' => $_SESSION['ranking'],
     'datosUsuario' => $_SESSION['datosUsuario'],
-    'todasIncidencias' => $_SESSION['todasIncidencias'],
-    'comentar' => $id
+    'todasIncidencias' => $incidenciaComentada,
+    'comentar' => $id,
+    'tipo' => 'comentario'
 ]);
 ?>

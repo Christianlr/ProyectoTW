@@ -2,6 +2,13 @@
 
     
 {% block main %}
+
+{% if comentar is defined %}
+    <h2 class="info">Añadir comentario</h2>
+{% else %}
+    <h2 class="info">Listado de incidencias</h2>
+{% endif %}
+
     {% block criterios %}
     
     {% endblock %}
@@ -70,7 +77,18 @@
                             <p class="text-info m-5">Este usuario aún no ha subido imágenes </p>
                         {% endif %}
                     </div>
+                </div> 
+                {% if comentar is defined and comentar == incidencia.id %}
+                <div class="row color-card w-100 m-auto p-2">
+                    <div class="col">  
+                        <form class="p-0" action="" method="post">
+                            <textarea class="d-block w-100 form-control" name="comentarioNuevo" cols="30"
+                                rows="10"></textarea>
+                            <input class="m-auto d-block" type="submit" value="Escribir comentario">
+                        </form>
+                    </div>
                 </div>
+                {% endif %}
                 {% for comentario in incidencia.comentarios %}
                 <div class="row {% if loop.index % 2 != 0 %} color-incidencia {% endif %}">
                     <div class="col-2">
@@ -95,19 +113,8 @@
                 </div>
                 {% endfor %}
             </div>
-            <div class="row color-card w-100 m-auto p-2">
-                <div class="col">
-                    {% if comentar is defined and comentar == incidencia.id %}
-                    <form class="p-0" action="" method="post">
-                        <textarea class="d-block w-100 form-control" name="comentarioNuevo" cols="30"
-                            rows="10"></textarea>
-                        <input class="m-auto d-block" type="submit" value="Escribir comentario">
-                    </form>
-                    {% endif %}
-                </div>
-            </div>
             <div class="row color-card w-100 m-0">
-                <div class="col d-flex justify-content-end pb-2">
+                <div class="col d-flex justify-content-end pb-2 pt-2">
                     <a href="valoracionesController.php?id_incidencia={{ incidencia.id }}&id_usuario={{ datosUsuario.email == null ? 'anonimo' : datosUsuario.email }}&val=1" 
                         target="_self" class="icono mr-2">
                         <img class="icono" src="../view/img/positivo.png" alt="votoPositivo">

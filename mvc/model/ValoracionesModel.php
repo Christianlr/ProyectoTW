@@ -67,7 +67,8 @@ class ValoracionesModel extends AbstractModel {
             ':id_incidencia' => $id_incidencia
         );
         $val = $this->query($consulta, $parametros);
-        return $val['valoracion'];
+
+        return $val == false ? null : $val['valoracion'];
     }
 
     public function set($datos) {
