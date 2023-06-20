@@ -8,6 +8,19 @@ require_once "../model/ValoracionesModel.php";
 
 session_start();
 unset($_SESSION['incidenciaActual']);
+
+//---- FUNCIONES ----//
+
+function getCriterios() {
+    if (isset($_SESSION['criteriosBusqueda']))
+        return $_SESSION['criteriosBusqueda'];
+    return null;
+}
+
+
+//-------------------//
+
+
 /* Cargamos twig para usar el render */
 $loader = new \Twig\Loader\FilesystemLoader('../view/html');
 $twig = new \Twig\Environment($loader);
@@ -23,6 +36,14 @@ $valoraciones = new ValoracionesModel();
 
 $queryString = parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY);
 parse_str($queryString, $params);
+
+$criterios = getCriterios();
+if ($criterios) {
+    $idsFiltradas = $incidencia->filtrado($_SESSION['criteriosBusqueda']);
+    $incidenciasMax = $_SESSION['criteriosBusqueda']['numeroIncidencias'];
+}
+
+
 if (!isset($params['email'])) 
     $todasIncidencias = $incidencia->getAll();
 else

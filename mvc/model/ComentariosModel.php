@@ -61,4 +61,18 @@ class ComentariosModel extends AbstractModel {
         $r = $this->query($consulta, $parametros);
     }
 
+    public function borrarComentario($id) {
+        $consulta = "DELETE FROM comentarios 
+                     WHERE id = :id_comentario";
+
+        // Preparar los parámetros para la consulta
+        $parametros = array(
+            ':id_comentario' => $id
+        );
+    
+        // Ejecutar la consulta preparada con los parámetros
+        $r = $this->query($consulta, $parametros);
+        
+    }
+
 }

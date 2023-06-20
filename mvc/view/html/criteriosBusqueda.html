@@ -3,25 +3,25 @@
 {% block criterios %}
 <div class="row">
     <div class="col">
-        <form class="criterios-busqueda" method="post">
+        <form action="criteriosBusquedaController.php" class="criterios-busqueda" method="post">
             <h2>Criterios de búsqueda</h2>
             <div class="datos">
                 <fieldset class="d-flex flex-wrap justify-content-start">
                     <legend>Ordenar por:</legend>
                     <div class="form-check m-0">
-                        <input type="radio" name="ordenar">
+                        <input type="radio" name="ordenar" value="antiguedad">
                         <label class="form-check-label m-0">
-                            Antiguedad (primero la más reciente)
+                            Antigüedad (primero la más reciente)
                         </label>
                     </div>
                     <div class="form-check m-0">
-                        <input type="radio" name="ordenar">
+                        <input type="radio" name="ordenar" value="positivos">
                         <label class="form-check-label m-0">
                             Número de positivos (de más a menos)
                         </label>
                     </div>
                     <div class="form-check m-0">
-                        <input type="radio" name="ordenar">
+                        <input type="radio" name="ordenar" value="netos">
                         <label class="form-check-label m-0">
                             Número de positivos netos (de más a menos)
                         </label>
@@ -53,31 +53,31 @@
                 <fieldset class="d-flex flex-wrap justify-content-start">
                     <legend>Estado:</legend>
                     <div class="form-check mr-5">
-                        <input class="form-check-input" type="checkbox" name="estado[]" id="estadoPendiente">
+                        <input class="form-check-input" type="checkbox" name="estado[]" value="pendiente" id="estadoPendiente">
                         <label class="form-check-label m-0" for="estadoPendiente">
                             Pendiente
                         </label>
                     </div>
                     <div class="form-check mr-5">
-                        <input class="form-check-input" type="checkbox" name="estado[]" id="estadoComprobada">
+                        <input class="form-check-input" type="checkbox" name="estado[]" value="comprobada" id="estadoComprobada">
                         <label class="form-check-label m-0" for="estadoComprobada">
                             Comprobada
                         </label>
                     </div>
                     <div class="form-check mr-5">
-                        <input class="form-check-input" type="checkbox" name="estado[]" id="estadoTramitada">
+                        <input class="form-check-input" type="checkbox" name="estado[]"  value="tramitada" id="estadoTramitada">
                         <label class="form-check-label m-0" for="estadoTramitada">
                             Tramitada
                         </label>
                     </div>
                     <div class="form-check mr-5">
-                        <input class="form-check-input" type="checkbox" name="estado[]" id="estadoIrresoluble">
+                        <input class="form-check-input" type="checkbox" name="estado[]" value="irresoluble" id="estadoIrresoluble">
                         <label class="form-check-label m-0" for="estadoIrresoluble">
                             Irresoluble
                         </label>
                     </div>
                     <div class="form-check mr-5">
-                        <input class="form-check-input" type="checkbox" name="estado[]" id="estadoResuelta">
+                        <input class="form-check-input" type="checkbox" name="estado[]" value="resuelta" id="estadoResuelta">
                         <label class="form-check-label m-0" for="estadoResuelta">
                             Resuelta
                         </label>

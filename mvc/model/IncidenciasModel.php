@@ -94,5 +94,153 @@ class IncidenciasModel extends AbstractModel {
         $r = $this->query("SELECT * FROM incidencias WHERE id_usuario = '" . addslashes($email) . "'");
         return empty($r) ? null : $r;
     }
+
+    private function filtradoOrden($condiciones) {
+        $datosOrden = array();
+        
+        if (isset($condiciones['orden'])) {
+            if($condiciones['orden'] == 'antiguedad') {
+                $datosOrden['select'] = 'id ';
+                $datosOrden['from'] = 'incidencias ';
+                $datosOrden['join'] = '';
+                $datosOrden['orderBy'] = 'ORDER BY fecha desc ';
+                $datosOrden['groupBy'] = '';
+            } else {
+                $datosOrden['from'] = 'incidencias i ';
+                $datosOrden['join'] = 'LEFT JOIN valoraciones v ON i.id = v.id_incidencia ';
+                $datosOrden['groupBy'] = 'GROUP BY i.id ';
+                $datosOrden['orderBy'] = 'ORDER BY total_valoraciones DESC ';
+
+                if ($condiciones['orden'] == 'positivos') 
+                    $datosOrden['select'] = 'i.id AS id, COUNT(CASE WHEN v.valoracion = 1 THEN 1 END) AS total_valoraciones ';                   
+                else
+                    $datosOrden['select'] = 'i.id AS id_incidencia, (COUNT(CASE WHEN v.valoracion = 1 THEN 1 END) - COUNT(CASE WHEN v.valoracion = 2 THEN 2 END)) AS total_valoraciones ';
+            }
+        } else {
+            $datosOrden['select'] = 'id';
+            $datosOrden['from'] = 'incidencias';
+            $datosOrden['join'] = '';
+            $datosOrden['orderBy'] = '';
+            $datosOrden['groupBy'] = '';
+        }
+
+        return $datosOrden;
+    }
+
+    private function filtradoTexto($condiciones) {
+        $datosTexto = null;
+
+        if (!empty($condiciones['textoBusqueda'])) {
+            $datosTexto = '(';
+            $keywords = explode(', ', $condiciones['textoBusqueda']);
+            $primerElemento = true;
+            
+            foreach ($keywords as $parte) {
+                if (!$primerElemento) 
+                    $datosTexto .= " or ";
+                else 
+                    $primerElemento = false;
+                
+                $datosTexto .= " keywords LIKE '%" . trim($parte) . "%'";
+            }
+            
+            $datosTexto .= ") ";
+        } 
+
+        return $datosTexto;
+    } 
+
+    private function filtradoLugar($condiciones) {
+        $datosLugar = null;
+
+        if (!empty($condiciones['lugar'])) {
+            $datosLugar = '(';
+            $lugares = explode(', ', $condiciones['lugar']);
+            $primerElemento = true;
+            
+            foreach ($lugares as $parte) {
+                if (!$primerElemento) 
+                    $datosLugar .= " or ";
+                else 
+                    $primerElemento = false;
+                
+                $datosLugar .= " lugar LIKE '%" . trim($parte) . "%'";
+            }
+            
+            $datosLugar .= ") ";
+        } 
+
+        return $datosLugar;
+    } 
+
+    private function filtradoEstado($condiciones) {
+        $datosEstado = null;
+
+        if (isset($condiciones['estado'])) {
+            $datosEstado = "(";
+            $primerElemento = true;
+
+            foreach ($condiciones['estado'] as $estado) {
+                if (!$primerElemento) 
+                    $datosEstado .= " or ";
+                else 
+                    $primerElemento = false;
+
+                $datosEstado .= "estado = '" . $estado . "'";
+            }
+
+            $datosEstado .= ") ";
+        }
+
+        return $datosEstado;
+    }
+
+    private function addWhereDatos($datosTexto, $datosLugar, $datosEstado) {
+        $totalDatosAux = [];
+        if ($datosTexto != null) 
+            $totalDatosAux[] = $datosTexto;
+        if ($datosLugar != null) 
+            $totalDatosAux[] = $datosLugar;
+        if ($datosEstado != null) 
+            $totalDatosAux[] = $datosEstado;
+
+        $datosWhere = null;
+        $primerElemento = true;
+        foreach($totalDatosAux as $dato) {
+            if (!$primerElemento) 
+                    $datosWhere .= " OR ";
+            else 
+                $primerElemento = false;
+            
+            $datosWhere .= $dato;  
+        }
+
+        return $datosWhere;
+    }
+
+    private function addClausulaWhere($datosTexto, $datosLugar, $datosEstado) {
+        $datosWhere = $this->addWhereDatos($datosTexto, $datosLugar, $datosEstado);
+        if ($datosWhere != null) 
+            return " WHERE " . $datosWhere;
+
+        return '';
+    }
+
+    public function filtrado($condiciones) {
+        $datosOrden = $this->filtradoOrden($condiciones);
+        $datosTexto = $this->filtradoTexto($condiciones);
+        $datosLugar = $this->filtradoLugar($condiciones);
+        $datosEstado = $this->filtradoEstado($condiciones);
+        $clausulaWhere = $this->addClausulaWhere($datosTexto, $datosLugar, $datosEstado);
+        
+        $consulta = "SELECT " . $datosOrden['select'] .
+                    " FROM " . $datosOrden['from'] . 
+                    $datosOrden['join'] . 
+                    $clausulaWhere . 
+                    $datosOrden['groupBy'] . 
+                    $datosOrden['orderBy'] . ";" ;
+
+        $r = $this->query($consulta);
+    }
     
 }

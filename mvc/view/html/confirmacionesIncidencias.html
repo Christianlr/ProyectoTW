@@ -1,7 +1,9 @@
 {% extends "prueba.html" %}
 
 {% block main %}
-    {% if tipo == 'editar' %}
+    {% if tipo == 'criteriosBusqueda' %}
+        <h2 class="editIncidencia">Se han guardado los criterios de busqueda de las incidencias</h2>
+    {% elseif tipo == 'editar' %}
         <h2 class="editIncidencia">Se han modificado los datos de la incidencia</h2>
     {% elseif tipo == 'borrar' %}
         <h2 class="editIncidencia">La incidencia ha sido eliminada</h2>
@@ -15,6 +17,8 @@
         <h2 class="editIncidencia">Usted ya ha opinado como usuario registrado sobre esta incidencia {{valoracion == 1 ? '(+)' : '(-)'}}</h2>
     {% elseif tipo == 'comentario' %}
         <h2 class="editIncidencia">El comentario se ha añadido correctamente</h2>
+    {% elseif tipo == 'borrarComentario' %}
+        <h2 class="editIncidencia">El comentario ha sido eliminado correctamente</h2>
     {% else %}
     <h1>AAAAAAAAAAAA</h1>
     {% endif %}
