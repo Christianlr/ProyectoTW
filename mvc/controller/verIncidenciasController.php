@@ -11,9 +11,11 @@ unset($_SESSION['incidenciaActual']);
 
 //---- FUNCIONES ----//
 
-function getCriterios() {
-    if (isset($_SESSION['criteriosBusqueda']))
-        return $_SESSION['criteriosBusqueda'];
+function getCriterios($propias) {
+    $criterios =  $propias ? 'criteriosBusquedaPropia' : 'criteriosBusqueda';
+
+    if (isset($_SESSION[$criterios]))
+        return $_SESSION[$criterios];
     return null;
 }
 
@@ -37,17 +39,28 @@ $valoraciones = new ValoracionesModel();
 $queryString = parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY);
 parse_str($queryString, $params);
 
-$criterios = getCriterios();
-if ($criterios) {
-    $idsFiltradas = $incidencia->filtrado($_SESSION['criteriosBusqueda']);
-    $incidenciasMax = $_SESSION['criteriosBusqueda']['numeroIncidencias'];
+
+$propias = false;
+$id_usuario = null;
+if (isset($params['email'])) {
+    $propias = true;
+    $id_usuario = $params['email'];
 }
 
+$criterios = getCriterios($propias);
+if ($criterios) {
+    $todasIncidencias = $incidencia->filtrado($criterios, $propias, $id_usuario);
 
-if (!isset($params['email'])) 
+    if ($propias)
+        $incidenciasMax = $_SESSION['criteriosBusquedaPropia']['numeroIncidencias'];
+    else
+        $incidenciasMax = $_SESSION['criteriosBusqueda']['numeroIncidencias'];
+}
+else {
+    $incidenciasMax = 5;
     $todasIncidencias = $incidencia->getAll();
-else
-    $todasIncidencias = $incidencia->getAllByUser($params['email']);
+}
+
 
 foreach ($todasIncidencias as &$parte) {
     $nombreCompleto = $usuario->getNombreApellidos($parte['id_usuario']);
@@ -73,5 +86,6 @@ echo $twig->render('criteriosBusqueda.html', [
     'ranking' => $_SESSION['ranking'],
     'datosUsuario' => $_SESSION['datosUsuario'],
     'todasIncidencias' => $todasIncidencias,
+    'propias' => $propias
 ]);
 ?>

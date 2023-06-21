@@ -7,7 +7,6 @@ require_once "../model/ComentariosModel.php";
 require_once "../model/ValoracionesModel.php";
 
 session_start();
-unset($_SESSION['criteriosBusqueda']);
 
 /* Cargamos twig para usar el render */
 $loader = new \Twig\Loader\FilesystemLoader('../view/html');
@@ -22,17 +21,26 @@ $fotos = new FotosIncidenciasModel();
 $comentarios = new ComentariosModel();
 $valoraciones = new ValoracionesModel();
 
+$queryString = parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY);
+parse_str($queryString, $params);
+
+$tipoCriterios = 'criteriosBusqueda';
+if (isset($params['info']) && $params['info'] == 'propias') 
+    $tipoCriterios = 'criteriosBusquedaPropia';
+
+unset($_SESSION[$tipoCriterios]);
 
 if(isset($_POST['ordenar'])) 
-    $_SESSION['criteriosBusqueda']['orden'] = $_POST['ordenar']; 
+    $_SESSION[$tipoCriterios]['orden'] = $_POST['ordenar']; 
 if(isset($_POST['textoBusqueda'])) 
-    $_SESSION['criteriosBusqueda']['textoBusqueda'] = $_POST['textoBusqueda'];
+    $_SESSION[$tipoCriterios]['textoBusqueda'] = $_POST['textoBusqueda'];
 if(isset($_POST['lugar'])) 
-    $_SESSION['criteriosBusqueda']['lugar'] = $_POST['lugar'];
+    $_SESSION[$tipoCriterios]['lugar'] = $_POST['lugar'];
 if(isset($_POST['estado'])) 
-    $_SESSION['criteriosBusqueda']['estado'] = $_POST['estado'];
+    $_SESSION[$tipoCriterios]['estado'] = $_POST['estado'];
 if(isset($_POST['numeroIncidencias'])) 
-    $_SESSION['criteriosBusqueda']['numeroIncidencias'] = $_POST['numeroIncidencias'];
+    $_SESSION[$tipoCriterios]['numeroIncidencias'] = $_POST['numeroIncidencias'];
+
 
 echo $twig->render('confirmacionesIncidencias.html', [
     'ranking' => $_SESSION['ranking'],

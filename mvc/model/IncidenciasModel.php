@@ -100,7 +100,7 @@ class IncidenciasModel extends AbstractModel {
         
         if (isset($condiciones['orden'])) {
             if($condiciones['orden'] == 'antiguedad') {
-                $datosOrden['select'] = 'id ';
+                $datosOrden['select'] = '* ';
                 $datosOrden['from'] = 'incidencias ';
                 $datosOrden['join'] = '';
                 $datosOrden['orderBy'] = 'ORDER BY fecha desc ';
@@ -112,12 +112,12 @@ class IncidenciasModel extends AbstractModel {
                 $datosOrden['orderBy'] = 'ORDER BY total_valoraciones DESC ';
 
                 if ($condiciones['orden'] == 'positivos') 
-                    $datosOrden['select'] = 'i.id AS id, COUNT(CASE WHEN v.valoracion = 1 THEN 1 END) AS total_valoraciones ';                   
+                    $datosOrden['select'] = 'i.id AS id, titulo, descripcion, fecha, lugar, keywords, i.id_usuario, estado, COUNT(CASE WHEN v.valoracion = 1 THEN 1 END) AS total_valoraciones ';                   
                 else
-                    $datosOrden['select'] = 'i.id AS id_incidencia, (COUNT(CASE WHEN v.valoracion = 1 THEN 1 END) - COUNT(CASE WHEN v.valoracion = 2 THEN 2 END)) AS total_valoraciones ';
+                    $datosOrden['select'] = 'i.id AS id, titulo, descripcion, fecha, lugar, keywords, i.id_usuario, estado, (COUNT(CASE WHEN v.valoracion = 1 THEN 1 END) - COUNT(CASE WHEN v.valoracion = 2 THEN 2 END)) AS total_valoraciones ';
             }
         } else {
-            $datosOrden['select'] = 'id';
+            $datosOrden['select'] = '*';
             $datosOrden['from'] = 'incidencias';
             $datosOrden['join'] = '';
             $datosOrden['orderBy'] = '';
@@ -195,7 +195,7 @@ class IncidenciasModel extends AbstractModel {
         return $datosEstado;
     }
 
-    private function addWhereDatos($datosTexto, $datosLugar, $datosEstado) {
+    private function addWhereDatos($condiciones, $datosTexto, $datosLugar, $datosEstado, $propias, $id_usuario) {
         $totalDatosAux = [];
         if ($datosTexto != null) 
             $totalDatosAux[] = $datosTexto;
@@ -203,35 +203,48 @@ class IncidenciasModel extends AbstractModel {
             $totalDatosAux[] = $datosLugar;
         if ($datosEstado != null) 
             $totalDatosAux[] = $datosEstado;
-
+        
         $datosWhere = null;
         $primerElemento = true;
         foreach($totalDatosAux as $dato) {
-            if (!$primerElemento) 
+            if (!$primerElemento) {
+                if (strpos($dato, "(estado =") !== false)  
+                    $datosWhere .= " AND ";
+                else
                     $datosWhere .= " OR ";
-            else 
+            } else {
                 $primerElemento = false;
-            
+            }
+
             $datosWhere .= $dato;  
         }
+        if ($propias) {
+            if (!$primerElemento) 
+                $datosWhere .= " AND ";
+            if (isset($condiciones['orden']) && $condiciones['orden'] != 'antiguedad')
+                $datosWhere .= "i.";
+
+            $datosWhere .= "id_usuario = '" . $id_usuario . "' ";
+        }
+        
 
         return $datosWhere;
     }
 
-    private function addClausulaWhere($datosTexto, $datosLugar, $datosEstado) {
-        $datosWhere = $this->addWhereDatos($datosTexto, $datosLugar, $datosEstado);
+    private function addClausulaWhere($condiciones, $datosTexto, $datosLugar, $datosEstado, $propias, $id_usuario) {
+        $datosWhere = $this->addWhereDatos($condiciones, $datosTexto, $datosLugar, $datosEstado, $propias, $id_usuario);
         if ($datosWhere != null) 
             return " WHERE " . $datosWhere;
 
         return '';
     }
 
-    public function filtrado($condiciones) {
+    public function filtrado($condiciones, $propias, $id_usuario) {
         $datosOrden = $this->filtradoOrden($condiciones);
         $datosTexto = $this->filtradoTexto($condiciones);
         $datosLugar = $this->filtradoLugar($condiciones);
         $datosEstado = $this->filtradoEstado($condiciones);
-        $clausulaWhere = $this->addClausulaWhere($datosTexto, $datosLugar, $datosEstado);
+        $clausulaWhere = $this->addClausulaWhere($condiciones, $datosTexto, $datosLugar, $datosEstado, $propias, $id_usuario);
         
         $consulta = "SELECT " . $datosOrden['select'] .
                     " FROM " . $datosOrden['from'] . 
@@ -241,6 +254,8 @@ class IncidenciasModel extends AbstractModel {
                     $datosOrden['orderBy'] . ";" ;
 
         $r = $this->query($consulta);
+
+        return $r;
     }
     
 }

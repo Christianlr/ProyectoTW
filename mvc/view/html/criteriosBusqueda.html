@@ -3,7 +3,7 @@
 {% block criterios %}
 <div class="row">
     <div class="col">
-        <form action="criteriosBusquedaController.php" class="criterios-busqueda" method="post">
+        <form action={{ propias ? '"criteriosBusquedaController.php?info=propias"' : '"criteriosBusquedaController.php?info=generales"'}} class="criterios-busqueda" method="post">
             <h2>Criterios de búsqueda</h2>
             <div class="datos">
                 <fieldset class="d-flex flex-wrap justify-content-start">
