@@ -9,19 +9,19 @@
                 <fieldset class="d-flex flex-wrap justify-content-start">
                     <legend>Ordenar por:</legend>
                     <div class="form-check m-0">
-                        <input type="radio" name="ordenar" value="antiguedad">
+                        <input type="radio" name="ordenar" value="antiguedad" {{listaCriterios.orden is defined and listaCriterios.orden == 'antiguedad'? 'checked' : ''}}>
                         <label class="form-check-label m-0">
                             Antigüedad (primero la más reciente)
                         </label>
                     </div>
                     <div class="form-check m-0">
-                        <input type="radio" name="ordenar" value="positivos">
+                        <input type="radio" name="ordenar" value="positivos" {{listaCriterios.orden is defined and listaCriterios.orden == 'positivos'? 'checked' : ''}}>
                         <label class="form-check-label m-0">
                             Número de positivos (de más a menos)
                         </label>
                     </div>
                     <div class="form-check m-0">
-                        <input type="radio" name="ordenar" value="netos">
+                        <input type="radio" name="ordenar" value="netos" {{listaCriterios.orden is defined and listaCriterios.orden == 'netos'? 'checked' : ''}}>
                         <label class="form-check-label m-0">
                             Número de positivos netos (de más a menos)
                         </label>
@@ -37,13 +37,13 @@
                                 <label class="col-form-label m-0">Texto de búsqueda:</label>
                             </div>
                             <div class="col-11 col-md-9 col-sm-11  mb-1 m-0">
-                                <input type="text" class="form-control" name="textoBusqueda">
+                                <input type="text" class="form-control" name="textoBusqueda" value={{listaCriterios.textoBusqueda != "" ? listaCriterios.textoBusqueda : ''}}>
                             </div>
                             <div class="col-12 col-md-2 col-sm-12 mb-1">
                                 <label class="col-form-label  m-0">Lugar:</label>
                             </div>
                             <div class="col-11 col-md-9 col-sm-11 mb-1 m-0">
-                                <input type="text" class="form-control" name="lugar">
+                                <input type="text" class="form-control" name="lugar" value={{listaCriterios.lugar != "" ? listaCriterios.lugar : ''}}>
                             </div>
                         </div>
                     </div>
@@ -53,31 +53,31 @@
                 <fieldset class="d-flex flex-wrap justify-content-start">
                     <legend>Estado:</legend>
                     <div class="form-check mr-5">
-                        <input class="form-check-input" type="checkbox" name="estado[]" value="pendiente" id="estadoPendiente">
+                        <input class="form-check-input" type="checkbox" name="estado[]" value="pendiente" id="estadoPendiente" {{"pendiente" in listaCriterios.estado ? 'checked' : ''}}>
                         <label class="form-check-label m-0" for="estadoPendiente">
                             Pendiente
                         </label>
                     </div>
                     <div class="form-check mr-5">
-                        <input class="form-check-input" type="checkbox" name="estado[]" value="comprobada" id="estadoComprobada">
+                        <input class="form-check-input" type="checkbox" name="estado[]" value="comprobada" id="estadoComprobada" {{"comprobada" in listaCriterios.estado ? 'checked' : ''}}>
                         <label class="form-check-label m-0" for="estadoComprobada">
                             Comprobada
                         </label>
                     </div>
                     <div class="form-check mr-5">
-                        <input class="form-check-input" type="checkbox" name="estado[]"  value="tramitada" id="estadoTramitada">
+                        <input class="form-check-input" type="checkbox" name="estado[]"  value="tramitada" id="estadoTramitada" {{"tramitada" in listaCriterios.estado ? 'checked' : ''}}>
                         <label class="form-check-label m-0" for="estadoTramitada">
                             Tramitada
                         </label>
                     </div>
                     <div class="form-check mr-5">
-                        <input class="form-check-input" type="checkbox" name="estado[]" value="irresoluble" id="estadoIrresoluble">
+                        <input class="form-check-input" type="checkbox" name="estado[]" value="irresoluble" id="estadoIrresoluble" {{"irresoluble" in listaCriterios.estado ? 'checked' : ''}}>
                         <label class="form-check-label m-0" for="estadoIrresoluble">
                             Irresoluble
                         </label>
                     </div>
                     <div class="form-check mr-5">
-                        <input class="form-check-input" type="checkbox" name="estado[]" value="resuelta" id="estadoResuelta">
+                        <input class="form-check-input" type="checkbox" name="estado[]" value="resuelta" id="estadoResuelta" {{"resuelta" in listaCriterios.estado ? 'checked' : ''}}>
                         <label class="form-check-label m-0" for="estadoResuelta">
                             Resuelta
                         </label>
@@ -88,11 +88,11 @@
                     <label class="d-block">
                         Incidencias por página
                         <select name="numeroIncidencias">
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
+                            <option value="1" {{listaCriterios.numeroIncidencias == "1" ? 'selected' : ''}}>1</option>
+                            <option value="2" {{listaCriterios.numeroIncidencias == "2" ? 'selected' : ''}}>2</option>
+                            <option value="3" {{listaCriterios.numeroIncidencias == "3" ? 'selected' : ''}}>3</option>
+                            <option value="4" {{listaCriterios.numeroIncidencias == "4" ? 'selected' : ''}}>4</option>
+                            <option value="5" {{listaCriterios.numeroIncidencias == "5" ? 'selected' : ''}}>5</option>
                         </select>
                     </label>
                     <input class="d-block m-auto" type="submit" value="Aplicar criterios de búsqueda"

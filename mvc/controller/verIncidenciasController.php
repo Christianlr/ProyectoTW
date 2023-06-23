@@ -63,21 +63,21 @@ else if (!$criterios && !$propias && !isset($_SESSION['incidenciasMaximo'])) {
 //Si le hemos dado al boton de avanzar a las siguientes incidencias
 if (isset($params['avanzar'])) {
     if ($params['avanzar'] == 'siguiente') {
-        if (isset($params['tipo']) && $params['tipo'] == 'propias' && 
+        if ($propias && 
             ($_SESSION['incidenciasPropiasMaximo']['indice'] < ($incidencia->getCountAllByUser($_SESSION['datosUsuario']['email']) - $_SESSION['incidenciasPropiasMaximo']['maximo']))) {
             $_SESSION['incidenciasPropiasMaximo']['indice'] += $_SESSION['incidenciasPropiasMaximo']['maximo'];
         } else if ($_SESSION['incidenciasMaximo']['indice'] < ($incidencia->getCountAll()-$_SESSION['incidenciasMaximo']['maximo'])) {
             $_SESSION['incidenciasMaximo']['indice'] += $_SESSION['incidenciasMaximo']['maximo'];
         }
     } else if ($params['avanzar'] == 'final') {
-        if (isset($params['tipo']) && $params['tipo'] == 'propias')
+        if ($propias)
             $_SESSION['incidenciasPropiasMaximo']['indice'] = $incidencia->getCountAllByUser($_SESSION['datosUsuario']['email']) - $_SESSION['incidenciasPropiasMaximo']['maximo'];
         else
             $_SESSION['incidenciasMaximo']['indice'] = $incidencia->getCountAll() - $_SESSION['incidenciasMaximo']['maximo'];
     } 
 } else if (isset($params['retroceder'])) {
     if ($params['retroceder'] == 'anterior') {
-        if (isset($params['tipo']) && $params['tipo'] == 'propias') {
+        if ($propias) {
             $_SESSION['incidenciasPropiasMaximo']['indice'] -= $_SESSION['incidenciasPropiasMaximo']['maximo'];
             if ($_SESSION['incidenciasPropiasMaximo']['indice'] <= 0)
                 $_SESSION['incidenciasPropiasMaximo']['indice'] = $_SESSION['incidenciasPropiasMaximo']['maximo'];
@@ -87,7 +87,7 @@ if (isset($params['avanzar'])) {
                 $_SESSION['incidenciasMaximo']['indice'] = 0;
         }
     } else if ($params['retroceder'] == 'inicio') {
-        if (isset($params['tipo']) && $params['tipo'] == 'propias')
+        if ($propias)
             $_SESSION['incidenciasPropiasMaximo']['indice'] = 0;
         else
             $_SESSION['incidenciasMaximo']['indice'] = 0;
@@ -105,9 +105,16 @@ else {
     $indice = $_SESSION['incidenciasMaximo']['indice'];
 }
 
-
+$listaCriterios = null;
 if ($criterios) {
     $todasIncidencias = $incidencia->filtrado($criterios, $propias, $id_usuario, $limite, $indice);
+    
+    if ($propias) {
+        $listaCriterios = $_SESSION['criteriosBusquedaPropia'];
+    } else {
+        $listaCriterios = $_SESSION['criteriosBusqueda'];
+    }
+    
 } else {
     if ($propias) {
         $todasIncidencias = $incidencia->getAllByUser($_SESSION['datosUsuario']['email'], $limite, $indice);
@@ -141,6 +148,7 @@ echo $twig->render('criteriosBusqueda.html', [
     'ranking' => $_SESSION['ranking'],
     'datosUsuario' => $_SESSION['datosUsuario'],
     'todasIncidencias' => $todasIncidencias,
-    'propias' => $propias
+    'propias' => $propias,
+    'listaCriterios' => $listaCriterios
 ]);
 ?>
