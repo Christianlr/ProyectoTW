@@ -85,13 +85,27 @@ class IncidenciasModel extends AbstractModel {
                         );
     }
 
-    public function getAll() {
-        $r = $this->query("SELECT * FROM incidencias");
+    public function getAll($limite, $indice) {
+        $r = $this->query("SELECT * FROM incidencias LIMIT " . $indice . ", " . $limite);
         return empty($r) ? null : $r;
     }
 
-    public function getAllByUser($email) {
-        $r = $this->query("SELECT * FROM incidencias WHERE id_usuario = '" . addslashes($email) . "'");
+    public function getCountAll() {
+        $r = $this->query("SELECT COUNT(*) FROM incidencias");
+        return empty($r) ? null : $r[0]['COUNT(*)'];
+    }
+
+    public function getCountAllByUser($email) {
+        $r = $this->query("SELECT COUNT(*) FROM incidencias WHERE id_usuario = '" . addslashes($email) . "'");
+        return empty($r) ? null : $r[0]['COUNT(*)'];
+    }
+
+    public function getAllByUser($email, $limite, $indice) {
+        $r = $this->query("SELECT * 
+                            FROM incidencias 
+                            WHERE id_usuario = '" . addslashes($email) . "'
+                            LIMIT " . $indice . ", " . $limite);
+        
         return empty($r) ? null : $r;
     }
 
@@ -239,7 +253,7 @@ class IncidenciasModel extends AbstractModel {
         return '';
     }
 
-    public function filtrado($condiciones, $propias, $id_usuario) {
+    public function filtrado($condiciones, $propias, $id_usuario, $limite, $indice) {
         $datosOrden = $this->filtradoOrden($condiciones);
         $datosTexto = $this->filtradoTexto($condiciones);
         $datosLugar = $this->filtradoLugar($condiciones);
@@ -251,7 +265,8 @@ class IncidenciasModel extends AbstractModel {
                     $datosOrden['join'] . 
                     $clausulaWhere . 
                     $datosOrden['groupBy'] . 
-                    $datosOrden['orderBy'] . ";" ;
+                    $datosOrden['orderBy'] .  
+                    " LIMIT " . $indice . ", " . $limite . ";";
 
         $r = $this->query($consulta);
 

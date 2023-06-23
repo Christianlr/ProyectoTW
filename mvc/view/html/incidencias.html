@@ -148,6 +148,15 @@
             </div>
         </div>
         {% endfor %}
+
+        <div class="row">
+            <div class="col d-flex justify-content-center">
+                <a href="verIncidenciasController.php?retroceder=inicio&tipo={{propias ? 'propias' : 'generales'}}"><img class="icono m-2" src="../view/img/siguiente-pagina-i.png"></a>
+                <a href="verIncidenciasController.php?retroceder=anterior&tipo={{propias ? 'propias' : 'generales'}}"><img class="icono m-2" src="../view/img/siguiente-pagina-i-f.png"></a>
+                <a href="verIncidenciasController.php?avanzar=siguiente&tipo={{propias ? 'propias' : 'generales'}}"><img class="icono m-2" src="../view/img/siguiente-pagina-d-f.png"></a>
+                <a href="verIncidenciasController.php?avanzar=final&tipo={{propias ? 'propias' : 'generales'}}"><img class="icono m-2" src="../view/img/siguiente-pagina-d.png"></a>
+            </div>
+        </div>
     </div>
 </div>
 {% endblock %}

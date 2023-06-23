@@ -33,6 +33,9 @@ function obtenerRanking($datos, $usuario) {
 
 //-------------------//
 
+// Si es logout se quita todo lo relacionado con la sesion
+if (isset($_POST['logout'])) 
+    $_SESSION = array();
 
 /* Obtencion de los rankings */
 #---------------------------------------------#
@@ -51,8 +54,6 @@ $_SESSION['ranking']['comentarios'] = $rankingComentarios;
 
 /* Comprobacion de usuario registrado */
 #----------------------------------------------#
-if (isset($_POST['logout'])) 
-    $_SESSION['datosUsuario'] = array();
 
 $datosUsuario;
 $verificacion = true; //Si true todo esta bien

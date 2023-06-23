@@ -39,26 +39,81 @@ $valoraciones = new ValoracionesModel();
 $queryString = parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY);
 parse_str($queryString, $params);
 
-
+//Si hay email o hemos avanzando con tipo propias quiere decir que estamos en ver nuestras propias incidencias
 $propias = false;
 $id_usuario = null;
-if (isset($params['email'])) {
+if (isset($params['email']) || (isset($params['tipo']) && $params['tipo'] == 'propias')) {
     $propias = true;
-    $id_usuario = $params['email'];
+    $id_usuario = $_SESSION['datosUsuario']['email'];
 }
 
+//Obtener los criterios
 $criterios = getCriterios($propias);
-if ($criterios) {
-    $todasIncidencias = $incidencia->filtrado($criterios, $propias, $id_usuario);
 
-    if ($propias)
-        $incidenciasMax = $_SESSION['criteriosBusquedaPropia']['numeroIncidencias'];
-    else
-        $incidenciasMax = $_SESSION['criteriosBusqueda']['numeroIncidencias'];
+// Si no hay ningun criterop ponemos que se muestren 3 incidencias por pagina. Los criterios dependen de si son incidencias propias o generales
+if (isset($param['email']) || (!$criterios && $propias && !isset($_SESSION['incidenciasPropiasMaximo']))) {
+    $_SESSION['incidenciasPropiasMaximo']['indice'] = 0;
+    $_SESSION['incidenciasPropiasMaximo']['maximo'] = 3;
+}
+else if (!$criterios && !$propias && !isset($_SESSION['incidenciasMaximo'])) {
+    $_SESSION['incidenciasMaximo']['indice'] = 0;
+    $_SESSION['incidenciasMaximo']['maximo'] = 3;
+}
+
+//Si le hemos dado al boton de avanzar a las siguientes incidencias
+if (isset($params['avanzar'])) {
+    if ($params['avanzar'] == 'siguiente') {
+        if (isset($params['tipo']) && $params['tipo'] == 'propias' && 
+            ($_SESSION['incidenciasPropiasMaximo']['indice'] < ($incidencia->getCountAllByUser($_SESSION['datosUsuario']['email']) - $_SESSION['incidenciasPropiasMaximo']['maximo']))) {
+            $_SESSION['incidenciasPropiasMaximo']['indice'] += $_SESSION['incidenciasPropiasMaximo']['maximo'];
+        } else if ($_SESSION['incidenciasMaximo']['indice'] < ($incidencia->getCountAll()-$_SESSION['incidenciasMaximo']['maximo'])) {
+            $_SESSION['incidenciasMaximo']['indice'] += $_SESSION['incidenciasMaximo']['maximo'];
+        }
+    } else if ($params['avanzar'] == 'final') {
+        if (isset($params['tipo']) && $params['tipo'] == 'propias')
+            $_SESSION['incidenciasPropiasMaximo']['indice'] = $incidencia->getCountAllByUser($_SESSION['datosUsuario']['email']) - $_SESSION['incidenciasPropiasMaximo']['maximo'];
+        else
+            $_SESSION['incidenciasMaximo']['indice'] = $incidencia->getCountAll() - $_SESSION['incidenciasMaximo']['maximo'];
+    } 
+} else if (isset($params['retroceder'])) {
+    if ($params['retroceder'] == 'anterior') {
+        if (isset($params['tipo']) && $params['tipo'] == 'propias') {
+            $_SESSION['incidenciasPropiasMaximo']['indice'] -= $_SESSION['incidenciasPropiasMaximo']['maximo'];
+            if ($_SESSION['incidenciasPropiasMaximo']['indice'] <= 0)
+                $_SESSION['incidenciasPropiasMaximo']['indice'] = $_SESSION['incidenciasPropiasMaximo']['maximo'];
+        } else {
+            $_SESSION['incidenciasMaximo']['indice'] -= $_SESSION['incidenciasMaximo']['maximo'];
+            if ($_SESSION['incidenciasMaximo']['indice'] <= 0)
+                $_SESSION['incidenciasMaximo']['indice'] = 0;
+        }
+    } else if ($params['retroceder'] == 'inicio') {
+        if (isset($params['tipo']) && $params['tipo'] == 'propias')
+            $_SESSION['incidenciasPropiasMaximo']['indice'] = 0;
+        else
+            $_SESSION['incidenciasMaximo']['indice'] = 0;
+    } 
+}
+
+$limite = null;
+$indice = null;
+if ($propias) {
+    $limite = $_SESSION['incidenciasPropiasMaximo']['maximo'];
+    $indice = $_SESSION['incidenciasPropiasMaximo']['indice'];
 }
 else {
-    $incidenciasMax = 5;
-    $todasIncidencias = $incidencia->getAll();
+    $limite = $_SESSION['incidenciasMaximo']['maximo'];
+    $indice = $_SESSION['incidenciasMaximo']['indice'];
+}
+
+
+if ($criterios) {
+    $todasIncidencias = $incidencia->filtrado($criterios, $propias, $id_usuario, $limite, $indice);
+} else {
+    if ($propias) {
+        $todasIncidencias = $incidencia->getAllByUser($_SESSION['datosUsuario']['email'], $limite, $indice);
+    } else {
+        $todasIncidencias = $incidencia->getAll($limite, $indice);
+    }
 }
 
 

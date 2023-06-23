@@ -27,6 +27,7 @@ parse_str($queryString, $params);
 $tipoCriterios = 'criteriosBusqueda';
 if (isset($params['info']) && $params['info'] == 'propias') 
     $tipoCriterios = 'criteriosBusquedaPropia';
+    
 
 unset($_SESSION[$tipoCriterios]);
 
@@ -40,7 +41,13 @@ if(isset($_POST['estado']))
     $_SESSION[$tipoCriterios]['estado'] = $_POST['estado'];
 if(isset($_POST['numeroIncidencias'])) 
     $_SESSION[$tipoCriterios]['numeroIncidencias'] = $_POST['numeroIncidencias'];
-
+    if ($tipoCriterios == 'criteriosBusqueda') {
+        $_SESSION['incidenciasMaximo']['maximo'] = $_POST['numeroIncidencias'];
+        $_SESSION['incidenciasMaximo']['indice'] = 0; 
+    } else {
+        $_SESSION['incidenciasPropiasMaximo']['maximo'] = $_POST['numeroIncidencias'];
+        $_SESSION['incidenciasPropiasMaximo']['indice'] = 0; 
+    }
 
 echo $twig->render('confirmacionesIncidencias.html', [
     'ranking' => $_SESSION['ranking'],
