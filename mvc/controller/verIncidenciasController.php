@@ -123,24 +123,26 @@ if ($criterios) {
     }
 }
 
+//Si hay alguna incidencia que poder mostrar
+if ($todasIncidencias != null) {
+    foreach ($todasIncidencias as &$parte) {
+        $nombreCompleto = $usuario->getNombreApellidos($parte['id_usuario']);
+        $parte['nombreUsuario'] = $nombreCompleto['nombre'] . " " . $nombreCompleto['apellidos'];
+        $parte['fotos'] = $fotos->getFotosById($parte['id']);
+        $parte['valoracion']['positiva'] = $valoraciones->getPosValById($parte['id']);
+        $parte['valoracion']['negativa'] = $valoraciones->getNegValById($parte['id']);
 
-foreach ($todasIncidencias as &$parte) {
-    $nombreCompleto = $usuario->getNombreApellidos($parte['id_usuario']);
-    $parte['nombreUsuario'] = $nombreCompleto['nombre'] . " " . $nombreCompleto['apellidos'];
-    $parte['fotos'] = $fotos->getFotosById($parte['id']);
-    $parte['valoracion']['positiva'] = $valoraciones->getPosValById($parte['id']);
-    $parte['valoracion']['negativa'] = $valoraciones->getNegValById($parte['id']);
-
-    $parte['comentarios'] = $comentarios->getAllById($parte['id']);
-    if (!empty($parte['comentarios']))
-        foreach ($parte['comentarios'] as &$c) {
-            if ($c['id_usuario'] != null) {
-                $nombreCompleto = $usuario->getNombreApellidos($c['id_usuario']);
-                $c['nombreUsuario'] = $nombreCompleto['nombre'] . " " . $nombreCompleto['apellidos'];
-            } else {
-                $c['nombreUsuario'] = 'Anónimo';
+        $parte['comentarios'] = $comentarios->getAllById($parte['id']);
+        if (!empty($parte['comentarios']))
+            foreach ($parte['comentarios'] as &$c) {
+                if ($c['id_usuario'] != null) {
+                    $nombreCompleto = $usuario->getNombreApellidos($c['id_usuario']);
+                    $c['nombreUsuario'] = $nombreCompleto['nombre'] . " " . $nombreCompleto['apellidos'];
+                } else {
+                    $c['nombreUsuario'] = 'Anónimo';
+                }
             }
-        }
+    }
 }
 $_SESSION['todasIncidencias'] = $todasIncidencias;
 

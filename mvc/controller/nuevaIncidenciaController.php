@@ -2,6 +2,7 @@
 require '../twig/vendor/autoload.php';
 require_once "../model/UsuarioModel.php";
 require_once "../model/IncidenciasModel.php";
+require_once "../model/LogsModel.php";
 
 session_start();
 
@@ -11,6 +12,7 @@ $twig = new \Twig\Environment($loader);
 
 $usuario = new UsuarioModel();
 $incidencia = new IncidenciasModel();
+$log = new LogsModel();
 
 //---- FUNCIONES ----//
 
@@ -29,6 +31,7 @@ if (isset($_POST['enviarDatos'])) {
         $datos['estado'] = 'pendiente';
 
         $id = $incidencia->crearIncidencia($datos);
+        $log->setCrearIncidencia(date('Y-m-d H:i:s'), $_SESSION['datosUsuario']['email'], $id);
         $_SESSION['incidenciaActual'] = $incidencia->get($id);
     }
 }

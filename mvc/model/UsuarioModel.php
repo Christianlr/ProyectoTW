@@ -157,8 +157,8 @@ class UsuarioModel extends AbstractModel {
             ':telefono' => $campos['telefono'],
             ':direccion' => $campos['direccion'],
             ':foto' => $campos['foto'],
-            ':estado' => $campos['estado'],
-            ':rol' => $campos['rol']
+            ':estado' => strtolower($campos['estado']),
+            ':rol' => strtolower($campos['rol'])
         );
     
         // Ejecutar la consulta preparada con los parámetros

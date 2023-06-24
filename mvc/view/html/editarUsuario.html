@@ -41,7 +41,7 @@
             <input type="text" class="form-control" name="nombre" 
                     value="{{datosNuevos.nombre != 'incorrecto' ? datosNuevos.nombre : ''}}"
                     {{ confirmacion ? 'readonly' : '' }}>
-            {% if datosNuevos.nombre == 'incorrecto' %}
+            {% if datosNuevos.nombre == ' ' %}
                 <p class="text-danger ml-2">Debe introducir un nombre válido</p>
             {% endif %}
         </div>
@@ -53,7 +53,7 @@
             <input type="text" class="form-control" name="apellidos" 
                     value="{{datosNuevos.apellidos != 'incorrecto' ? datosNuevos.apellidos : ''}}"
                     {{ confirmacion ? 'readonly' : '' }}>
-            {% if datosNuevos.apellidos == 'incorrecto' %}
+            {% if datosNuevos.apellidos == ' ' %}
                 <p class="text-danger ml-2">Debe introducir al menos un apellido</p>
             {% endif %}
 

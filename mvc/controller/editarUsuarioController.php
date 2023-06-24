@@ -2,6 +2,7 @@
 require '../twig/vendor/autoload.php';
 require_once "../model/UsuarioModel.php";
 require_once "../model/IncidenciasModel.php";
+require_once "../model/LogsModel.php";
 
 session_start();
 
@@ -10,7 +11,7 @@ $twig = new \Twig\Environment($loader);
 
 $usuario = new UsuarioModel();
 $incidencia = new IncidenciasModel();
-
+$log = new LogsModel();
 
 //---- FUNCIONES ----//
 
@@ -66,17 +67,21 @@ function comprobarFallos(&$campos) {
 
 }
 
-function addToDb($usuario, $datosUsuarioSeleccionado, $campos) {
+function addToDb($usuario, $datosUsuarioSeleccionado, $campos , $log) {
+    // Si es un campo como foto o contraseña se modifica de una forma especial
     foreach ($campos as $clave => $valor) {
         if ($clave != 'email') {
             $usuario->setDatos($datosUsuarioSeleccionado['email'], $clave, $valor);
             $datosUsuarioSeleccionado[$clave] = $campos[$clave];
         }
     }
+    // Si es email se modifica otros campos
     if (isset($campos['email'])) {
         $usuario->setDatos($datosUsuarioSeleccionado['email'], 'email', $campos['email']);
         $datosUsuarioSeleccionado['email'] = $campos['email'];
     }
+
+    $log->setEditarUsuario(date('Y-m-d H:i:s'), $_SESSION['datosUsuario']['email'], $datosUsuarioSeleccionado['email']);
 }
 
 //-------------------//
@@ -111,7 +116,7 @@ if (isset($_POST['modificarUsuario']) ) {
             $confirmacion = false;
         } else {
             $confirmacion = true;
-            addToDb($usuario, $datosUsuarioSeleccionado, $camposCambiados);
+            addToDb($usuario, $datosUsuarioSeleccionado, $camposCambiados, $log);
 
             $datosNuevos['nombreCompleto'] = $datosNuevos['nombre'] . " " . $datosNuevos['apellidos'];
             if ($datosUsuarioSeleccionado['email'] == $_SESSION['datosUsuario']['email']) 

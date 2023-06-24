@@ -3,6 +3,7 @@ require '../twig/vendor/autoload.php';
 require_once "../model/UsuarioModel.php";
 require_once "../model/IncidenciasModel.php";
 require_once "../model/ComentariosModel.php";
+require_once "../model/LogsModel.php";
 
 session_start();
 
@@ -30,6 +31,7 @@ $twig = new \Twig\Environment($loader);
 $usuario = new UsuarioModel();
 $incidencia = new IncidenciasModel();
 $comentario = new ComentariosModel();
+$log = new LogsModel();
 
 // Obtener id de la incidencia a comentar
 $queryString = parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY);
@@ -48,6 +50,7 @@ if (isset($_POST['comentarioNuevo'])) {
 
     $datos['fecha'] = date('Y-m-d H:i:s');
     $comentario->set($datos);
+    $log->setComentarioIncidencia(date('Y-m-d H:i:s'), $_SESSION['datosUsuario']['email'], $id);
     $archivoRender = 'confirmacionesIncidencias.html';
 } else {
     $incidenciaComentada[] = obtenerIncidencia($_SESSION['todasIncidencias'], $id);

@@ -3,6 +3,7 @@ require '../twig/vendor/autoload.php';
 require_once "../model/UsuarioModel.php";
 require_once "../model/IncidenciasModel.php";
 require_once "../model/FotosIncidenciasModel.php";
+require_once "../model/LogsModel.php";
 
 session_start();
 
@@ -13,6 +14,7 @@ $twig = new \Twig\Environment($loader);
 $usuario = new UsuarioModel();
 $incidencia = new IncidenciasModel();
 $fotos = new FotosIncidenciasModel();
+$log = new LogsModel();
 
 //Obtener id de la incidencia
 $id = null;
@@ -33,6 +35,7 @@ else {
 // Datos principales
 $confirmacion = null;
 $archivoRender = 'nuevaIncidencia.html';
+$tipo = 'editar';
 if (isset($_POST['enviarDatos'])) {
     if (empty($_POST['titulo']) || empty($_POST['descripcion']) || empty($_POST['lugar']))
         $confirmacion = false;
@@ -41,9 +44,15 @@ if (isset($_POST['enviarDatos'])) {
         $datos = $_POST;
         $datos['id'] = $id;
         $incidencia->modificarIncidencia($datos);
+        $log->setEditarIncidencia(date('Y-m-d H:i:s'), $_SESSION['datosUsuario']['email'], $id);
     }   
-}
-else if (isset($_POST['confirmarDatos']) && !empty($_POST['id'])) {
+} else if(isset($_POST['modificarEstado'])) {
+    $incidencia->modificarEstado($_POST['estadoIncidencia'], $id);
+    $log->setModificarEstadoIncidencia(date('Y-m-d H:i:s'), $_SESSION['datosUsuario']['email'], $id);
+
+    $archivoRender = 'confirmacionesIncidencias.html';
+    $tipo = 'editarEstado';
+} else if (isset($_POST['confirmarDatos']) && !empty($_POST['id'])) {
     $archivoRender = 'confirmacionesIncidencias.html';
 }
 
@@ -53,6 +62,7 @@ else if (isset($_POST['confirmarDatos']) && !empty($_POST['id'])) {
 if (isset($_FILES['examinar']) && $_FILES['examinar']['error'] === UPLOAD_ERR_OK) {
     $foto_nueva = file_get_contents($_FILES['examinar']['tmp_name']);
     $fotos->set($foto_nueva, $id);
+    $log->setAddFotoIncidencia(date('Y-m-d H:i:s'), $_SESSION['datosUsuario']['email'], $id);
 }
 //Eliminar foto
 $queryString = parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY);
@@ -60,6 +70,7 @@ parse_str($queryString, $params);
 if (isset($params['foto'])) {
     $idFoto = $params['foto'];
     $fotos->eliminarFoto($idFoto);
+    $log->setEliminarFotoIncidencia(date('Y-m-d H:i:s'), $_SESSION['datosUsuario']['email'], $id);
 }
 $_SESSION['incidenciaActual'] = $incidencia->get($id);
 $fotosIncidencia = $fotos->getFotosById($id);
@@ -69,7 +80,7 @@ echo $twig->render($archivoRender, [
     'ranking' => $_SESSION['ranking'],
     'datosUsuario' => $_SESSION['datosUsuario'],
     'datosIncidencia' => $_SESSION['incidenciaActual'],
-    'tipo' => 'editar',
+    'tipo' => $tipo,
     'fotos' => $fotosIncidencia,
     'confirmacion' => $confirmacion,
     'extends' => 'editarIncidencia.html'

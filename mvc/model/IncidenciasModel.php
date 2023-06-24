@@ -79,6 +79,17 @@ class IncidenciasModel extends AbstractModel {
         $this->query($consulta, $parametros);
     }
     
+    public function modificarEstado($estado, $id) {
+        $consulta = "UPDATE incidencias SET estado = :estado WHERE id = :id";
+
+        $parametros = array(
+            ':estado' => $estado,
+            ':id' => $id
+        );
+
+        $this->query($consulta, $parametros);
+    }
+
     public function borrarIncidencia($id) {
         $r = $this->query("DELETE FROM incidencias 
                             WHERE id = '".addslashes($id). "'"

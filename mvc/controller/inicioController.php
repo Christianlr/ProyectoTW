@@ -3,6 +3,7 @@ require '../twig/vendor/autoload.php';
 require_once "../model/UsuarioModel.php";
 require_once "../model/IncidenciasModel.php";
 require_once "../model/ComentariosModel.php";
+require_once "../model/LogsModel.php";
 
 session_start();
 
@@ -13,7 +14,7 @@ $twig = new \Twig\Environment($loader);
 $usuario = new UsuarioModel();
 $incidencia = new IncidenciasModel();
 $comentarios = new ComentariosModel();
-
+$log = new LogsModel();
 
 //---- FUNCIONES ----//
 
@@ -71,6 +72,8 @@ if (!empty($_POST['email']) && !empty($_POST['contrasenia'])) {
         $datosUsuario['telefono'] = $usuario->getTelefono($_POST['email']);
         $datosUsuario['estado'] = $usuario->getEstado($_POST['email']);
         $datosUsuario['nombreCompleto'] = $datosUsuario['nombre'] . " " . $datosUsuario['apellidos'];
+
+        $log->setInicioSesion(date('Y-m-d H:i:s'), $datosUsuario['email']);
     } 
     else {
         $datosUsuario['nombre'] = 'incorrecto';
@@ -82,6 +85,8 @@ else {
         $datosUsuario['nombre'] = 'incorrecto';
 
     $datosUsuario['rol'] = 'anonimo';
+    if(empty($_SESSION['datosUsuario']))
+        $log->setInicioSesion(date('Y-m-d H:i:s'), null);
 }
 
 /* Si vamos a la pagina de inicio mantenemos la sesion */

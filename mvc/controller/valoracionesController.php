@@ -1,6 +1,7 @@
 <?php
 require '../twig/vendor/autoload.php';
 require_once "../model/ValoracionesModel.php";
+require_once "../model/LogsModel.php";
 
 session_start();
 
@@ -44,6 +45,7 @@ $twig = new \Twig\Environment($loader);
 #---------------------------------------------#
 
 $valoracion = new ValoracionesModel();
+$log = new LogsModel();
 
 // Obtener id de la incidencia a comentar
 $queryString = parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY);
@@ -61,6 +63,7 @@ if ($id_usuario != 'anonimo') {
         $datos['id_usuario'] = $id_usuario;
         $datos['valoracion'] = $val;
         $valoracion->set($datos);
+        $log->setValoracion(date('Y-m-d H:i:s'), $datos['id_usuario'], $datos['id_incidencia'], $datos['valoracion']);
         $tipoOpinion = opinionSeleccionada($val);
     } else {
         $tipoOpinion = 'opinionUsuario';
@@ -83,6 +86,7 @@ if ($id_usuario != 'anonimo') {
         $datos['id_usuario'] = null;
         $datos['valoracion'] = $val;
         $valoracion->set($datos);
+        $log->setValoracion(date('Y-m-d H:i:s'), $datos['id_usuario'], $datos['id_incidencia'], $datos['valoracion']);
         $tipoOpinion = opinionSeleccionada($val);
     } else {
         $tipoOpinion = 'opinionAnonimo';

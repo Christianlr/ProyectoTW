@@ -2,17 +2,18 @@
 require '../twig/vendor/autoload.php';
 require_once "../model/UsuarioModel.php";
 require_once "../model/IncidenciasModel.php";
+require_once "../model/LogsModel.php";
 
 session_start();
 
 function comprobarFallos($usuario, &$campos) {
     $fallos = false;
     if (empty($campos['nombre'])) {
-        $campos['nombre'] = 'incorrecto';
+        $campos['nombre'] = ' ';
         $fallos = true;
     }
     if (empty($campos['apellidos'])) {
-        $campos['apellidos'] = 'incorrecto';
+        $campos['apellidos'] = ' ';
         $fallos = true;
     }
 
@@ -42,6 +43,7 @@ $twig = new \Twig\Environment($loader);
 
 $usuario = new UsuarioModel();
 $incidencia = new IncidenciasModel();
+$log = new LogsModel();
 
 $confirmacion = null;
 $campos = null;
@@ -68,6 +70,7 @@ if (isset($_POST['crearUsuario'])) {
     else {
         $confirmacion = true;
         $usuario->crearUsuario($campos);
+        $log->setCrearUsuario(date('Y-m-d H:i:s'), $_SESSION['datosUsuario']['email'], $campos['email']);
     }
     $campos['foto'] = base64_encode($campos['foto']);
 }
