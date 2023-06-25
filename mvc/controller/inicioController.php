@@ -21,14 +21,21 @@ $log = new LogsModel();
 function obtenerRanking($datos, $usuario) {
     $ranking = [];
 
-    foreach ($datos as $fila) {
-        $nombreCompleto = $usuario->getNombreApellidos($fila["id_usuario"]);
+    if (!empty($datos)) {
+        foreach ($datos as $fila) {
+            $nombreCompleto = $usuario->getNombreApellidos($fila["id_usuario"]);
+            $ranking[] = [
+                'nombre' => $nombreCompleto["nombre"] . " " . $nombreCompleto["apellidos"],
+                'total' => $fila['count']
+            ];
+        }
+    }
+    else {
         $ranking[] = [
-            'nombre' => $nombreCompleto["nombre"] . " " . $nombreCompleto["apellidos"],
-            'total' => $fila['count']
+            'nombre' => 'Sin datos',
+            'total' => ''
         ];
     }
-
     return $ranking;
 }
 

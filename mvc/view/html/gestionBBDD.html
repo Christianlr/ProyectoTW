@@ -7,22 +7,38 @@
         <h3>Indique la acción a realizar</h3>
         <div class="acciones w-90 m-auto color-card">
             <ul class="list-unstyled ml-2">
-                <li><a href="gestionDbController.php">Descargar copia de seguridad</a></li>
-                <li><a href="">Restaurar copia de seguridad</a></li>
-                <li><a href="">Borrar la BBDD (se reinicia)</a></li>
+                <li><a href="gestionDbController.php?tipo=copia">Descargar copia de seguridad</a></li>
+                <li><a href="gestionDbController.php?tipo=restaurar1">Restaurar copia de seguridad</a></li>
+                <li><a href="gestionDbController.php?tipo=borrar1">Borrar la BBDD (se reinicia)</a></li>
             </ul>
         </div>
     </div>
 </div>
+{% if tipo is defined and tipo == 'restaurar' %}
+<div class="row w-100 m-0">
+    <div class="col-12 d-flex justify-content-center color-bg-card">
+        <h2>Indique el archivo con la copia de seguridad que desea restaurar (sintaxis SQL)</h2>
+    </div>
+    <div class="col-12 p-2 color-card d-flex justify-content-center">
+        <form action="gestionDbController.php?tipo=restaurar2" method="post" enctype="multipart/form-data">
+            <input type="file" name="archivoSQL" id="archivoSQL" accept=".sql" required>
+            <input type="submit" value="Subir copia de seguridad">
+        </form>
+    </div>
+</div>
+{% endif %}
+
+{% if tipo is defined and tipo == 'borrar' %}
 <div class="row w-100 m-0">
     <div class="col-12 d-flex justify-content-center color-bg-card">
         <h2>Vas a proceder al borrado de la BBDD completa. Si pulsa el botón no hay forma de restaurar
             la información. ¿Estás seguro de que desea borrar la BBDD?</h2>
     </div>
     <div class="col-12 p-2 color-card d-flex justify-content-center">
-        <form action="" method="post">
+        <form action="gestionDbController.php?tipo=borrar2" method="post">
             <input type="submit" name="borrarBBDD" value="Borrar BBDD">
         </form>
     </div>
 </div>
+{% endif %}
 {% endblock %}

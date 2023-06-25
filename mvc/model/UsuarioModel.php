@@ -6,7 +6,18 @@ class UsuarioModel extends AbstractModel {
     function __construct() { 
         parent::__construct();
         if (!$this->tableExists('usuarios')) 
-            $this->createTable(); 
+            $this->createTable();
+            
+            $campos['email'] = 'admin@admin.admin';
+            $campos['nombre'] = 'Enrique';
+            $campos['apellidos'] = 'Araque Espinosa';
+            $campos['password'] = 'contraseña';
+            $campos['telefono'] = '655123321';
+            $campos['direccion'] = 'c/mi profesor el mejor';
+            $campos['foto'] = file_get_contents('../view/img/defaultProfile.png');
+            $campos['estado'] = 'activo';
+            $campos['rol'] = 'administrador';
+            $this->crearUsuario($campos); 
     }
 
     public function createTable() {

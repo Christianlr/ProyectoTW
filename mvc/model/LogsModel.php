@@ -148,9 +148,26 @@ class LogsModel extends AbstractModel {
             } else {
                 $descripcion = "INFO: El usuario " . $usuario . " ha hecho una valoración negativa en la incidencia con id " . $id;
             }
-        }
+        }      
         
-        
+        $this->setLog($fecha, $descripcion);
+    }
+
+    public function setCopiaSeguridad($fecha, $usuario) {
+        $descripcion = "INFO: EL administrador " . $usuario . " ha hecho una copia de seguridad de la BBDD";
+
+        $this->setLog($fecha, $descripcion);
+    }
+
+    public function setRestaurarCopiaSeguridad($fecha, $usuario) {
+        $descripcion = "INFO: EL administrador " . $usuario . " ha restaurado la BBDD";
+
+        $this->setLog($fecha, $descripcion);
+    }
+
+    public function setBorrarDb($fecha, $usuario) {
+        $descripcion = "INFO: EL administrador " . $usuario . " ha borrado la BBDD";
+
         $this->setLog($fecha, $descripcion);
     }
 }
