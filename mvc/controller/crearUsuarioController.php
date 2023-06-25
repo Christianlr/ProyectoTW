@@ -41,6 +41,11 @@ function comprobarFallos($usuario, &$campos) {
 $loader = new \Twig\Loader\FilesystemLoader('../view/html');
 $twig = new \Twig\Environment($loader);
 
+//Si no es administrador se redirige al inicio
+if ($_SESSION['datosUsuario']['rol'] != 'administrador') {
+    header('Location: inicioController.php');
+}
+
 $usuario = new UsuarioModel();
 $incidencia = new IncidenciasModel();
 $log = new LogsModel();

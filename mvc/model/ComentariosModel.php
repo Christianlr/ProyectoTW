@@ -1,5 +1,6 @@
 <?php
 require_once "AbstractModel.php";
+require_once "LogsModel.php";
 
 class ComentariosModel extends AbstractModel {
     function __construct() { 
@@ -22,6 +23,8 @@ class ComentariosModel extends AbstractModel {
                 CONSTRAINT fk_comentarios_incidencia FOREIGN KEY (id_incidencia) REFERENCES incidencias (id) ON DELETE CASCADE ON UPDATE CASCADE
             );";
             $rr = $this->db->query($q); 
+            $log = new LogsModel();
+            $log->setTablaCreada(date('Y-m-d H:i:s') ,'comentarios');
         }
     }
 
@@ -59,6 +62,20 @@ class ComentariosModel extends AbstractModel {
     
         // Ejecutar la consulta preparada con los parámetros
         $r = $this->query($consulta, $parametros);
+    }
+
+    public function getUserById() {
+        $consulta = "SELECT id_usuario FROM comentarios WHERE id = :id";
+
+        $parametros = array(
+            ':id' => $id
+        );
+
+        $r = $this->query($consulta, $parametros);
+        
+        return empty($r) ? null : $r['id_usuario']; 
+            
+        
     }
 
     public function borrarComentario($id) {

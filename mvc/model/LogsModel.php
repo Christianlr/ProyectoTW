@@ -17,7 +17,9 @@ class LogsModel extends AbstractModel {
                 descripcion text COLLATE utf8_spanish2_ci,
                 PRIMARY KEY (id)
                 );";
-            $rr = $this->db->query($q); 
+            $rr = $this->db->query($q);
+            
+            $this->setTablaCreada(date('Y-m-d H:i:s'), 'logs');
         }
     }
 
@@ -32,7 +34,7 @@ class LogsModel extends AbstractModel {
         
     }
 
-    public function setLog($fecha, $descripcion) {
+    private function setLog($fecha, $descripcion) {
         $consulta = "INSERT INTO logs(fecha, descripcion) VALUES(:fecha, :descripcion)";
 
         $parametros = array(
@@ -41,6 +43,11 @@ class LogsModel extends AbstractModel {
         );
 
         $r = $this->query($consulta, $parametros);
+    }
+
+    public function setTablaCreada($fecha, $tabla) {
+        $descripcion = "INFO: Se ha creado la tabla de " . $tabla . " en el sistema";
+        $this->setLog($fecha, $descripcion); 
     }
 
     public function setInicioSesion($fecha, $usuario) {

@@ -1,0 +1,9 @@
+{% extends "prueba.html" %}
+
+{% block main %}
+    {% if tipo == 'crear' %}
+    <h2 class="editIncidencia">Se ha generado un archivo de copia de seguridad de la base de datos</h2>
+    {% else %}
+    <h1>error</h1>
+    {% endif %}
+{% endblock %}

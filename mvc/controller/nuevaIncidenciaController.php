@@ -10,14 +10,15 @@ session_start();
 $loader = new \Twig\Loader\FilesystemLoader('../view/html');
 $twig = new \Twig\Environment($loader);
 
+//Si es anonimo se redirige al inicio
+if ($_SESSION['datosUsuario']['rol'] == 'anonimo') {
+    header('Location: inicioController.php');
+}
+
 $usuario = new UsuarioModel();
 $incidencia = new IncidenciasModel();
 $log = new LogsModel();
 
-//---- FUNCIONES ----//
-
-
-//-------------------//
 $confirmacion = null;
 $id = null;
 if (isset($_POST['enviarDatos'])) {

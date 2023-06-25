@@ -1,5 +1,6 @@
 <?php
 require_once "AbstractModel.php";
+require_once "LogsModel.php";
 
 class UsuarioModel extends AbstractModel {
     function __construct() { 
@@ -23,6 +24,9 @@ class UsuarioModel extends AbstractModel {
                     PRIMARY KEY (email)
                 );";
             $rr = $this->db->query($q); 
+
+            $log = new LogsModel();
+            $log->setTablaCreada(date('Y-m-d H:i:s') ,'usuarios');
         }
     }
 

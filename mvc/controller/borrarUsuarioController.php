@@ -10,8 +10,10 @@ session_start();
 $loader = new \Twig\Loader\FilesystemLoader('../view/html');
 $twig = new \Twig\Environment($loader);
 
-/* Obtencion de los rankings */
-#---------------------------------------------#
+//Si no es administrador se redirige al inicio
+if ($_SESSION['datosUsuario']['rol'] != 'administrador') {
+    header('Location: inicioController.php');
+}
 
 $usuario = new UsuarioModel();
 $incidencia = new IncidenciasModel();

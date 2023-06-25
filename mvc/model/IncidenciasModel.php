@@ -1,5 +1,6 @@
 <?php
 require_once "AbstractModel.php";
+require_once "LogsModel.php";
 
 class IncidenciasModel extends AbstractModel {
     function __construct() { 
@@ -23,7 +24,9 @@ class IncidenciasModel extends AbstractModel {
                     PRIMARY KEY (id),
                     CONSTRAINT fk_incidencia_usuario FOREIGN KEY (id_usuario) REFERENCES usuarios (email) ON DELETE CASCADE ON UPDATE CASCADE
                 );";
-            $rr = $this->db->query($q); 
+            $rr = $this->db->query($q);
+            $log = new LogsModel();
+            $log->setTablaCreada(date('Y-m-d H:i:s'), 'incidencias'); 
         }
     }
 
@@ -118,6 +121,19 @@ class IncidenciasModel extends AbstractModel {
                             LIMIT " . $indice . ", " . $limite);
         
         return empty($r) ? null : $r;
+    }
+    
+    public function getUserById($id) {
+        $consulta = "SELECT id_usuario FROM incidencias WHERE id = :id";
+
+        $parametros = array(
+            ':id' => $id
+        );
+
+        $r = $this->query($consulta, $parametros);
+       
+        return empty($r) ? null : $r['id_usuario']; 
+        
     }
 
     private function filtradoOrden($condiciones) {

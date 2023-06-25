@@ -31,6 +31,13 @@ else {
     }
 }
 
+$usuarioIncidencia = $incidencia->getUserById($id);
+
+//Si no es administrador o se intenta editar una incidencia que no es suya se redirige a la pagina principal
+if ($_SESSION['datosUsuario']['rol'] == 'anonimo' ||
+    ($_SESSION['datosUsuario']['email']) != $usuarioIncidencia && $_SESSION['datosUsuario']['rol'] != 'administrador') {
+    header('Location: inicioController.php');
+}
 
 // Datos principales
 $confirmacion = null;

@@ -86,11 +86,18 @@ function addToDb($usuario, $datosUsuarioSeleccionado, $campos , $log) {
 
 //-------------------//
 
+
 //Obtener datos de la persona a modificar
 $queryString = parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY);
 parse_str($queryString, $params);
 $datosUsuarioSeleccionado = $usuario->get($params['email']);
 $datosUsuarioSeleccionado['nombreCompleto'] = $datosUsuarioSeleccionado['nombre'] . " " . $datosUsuarioSeleccionado['apellidos'];
+
+//Si no es administrador o el usuario a editar no puede hacer edicion de su ficha
+if ($_SESSION['datosUsuario']['rol'] == 'anonimo' ||
+    ($_SESSION['datosUsuario']['email']) != $params['email'] && $_SESSION['datosUsuario']['rol'] != 'administrador') {
+    header('Location: inicioController.php');
+}
 
 //Si se ha dado a modificar usuario
 $confirmacion = null;

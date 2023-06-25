@@ -1,7 +1,7 @@
 <?php
 require '../twig/vendor/autoload.php';
-require_once "../model/UsuarioModel.php";
-require_once "../model/IncidenciasModel.php";
+require_once "../model/Db.php";
+
 
 session_start();
 
@@ -14,17 +14,19 @@ if ($_SESSION['datosUsuario']['rol'] != 'administrador') {
     header('Location: inicioController.php');
 }
 
-$usuario = new UsuarioModel();
-$incidencia = new IncidenciasModel();
 
-$todo = $usuario->getAll();
-foreach ($todo as &$parte)
-    $parte['nombreCompleto'] = $parte['nombre'] . " " . $parte['apellidos'];
+$archivoRender = 'gestionBBDD.html';
+$tipo = '';
+if (Db::crearCopiaDeSeguridad()) {
+    $archivoRender = 'confirmacionesBaseDatos.html';
+    $tipo = 'crear';
+}
 
-echo $twig->render('accionGestionUsuarios.html', [
+
+
+echo $twig->render($archivoRender, [
     'ranking' => $_SESSION['ranking'],
     'datosUsuario' => $_SESSION['datosUsuario'],
-    'datosCompletosUsuarios' => $todo,
-    'extends' => 'gestionUsuarios.html'
+    'tipo' => $tipo
 ]);
 ?>

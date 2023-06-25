@@ -1,5 +1,6 @@
 <?php
 require_once "AbstractModel.php";
+require_once "LogsModel.php";
 
 class ValoracionesModel extends AbstractModel {
     function __construct() { 
@@ -22,6 +23,9 @@ class ValoracionesModel extends AbstractModel {
             
             );";
             $rr = $this->db->query($q); 
+
+            $log = new LogsModel();
+            $log->setTablaCreada(date('Y-m-d H:i:s') ,'valoraciones');
         }
     }
 

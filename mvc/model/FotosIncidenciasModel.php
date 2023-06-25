@@ -1,5 +1,6 @@
 <?php
 require_once "AbstractModel.php";
+require_once "LogsModel.php";
 
 class FotosIncidenciasModel extends AbstractModel {
     function __construct() { 
@@ -19,6 +20,9 @@ class FotosIncidenciasModel extends AbstractModel {
                 CONSTRAINT fk_fotos_incidencia FOREIGN KEY (id_incidencia) REFERENCES incidencias (id) ON DELETE CASCADE ON UPDATE CASCADE
                 );";
             $rr = $this->db->query($q); 
+
+            $log = new LogsModel();
+            $log->setTablaCreada(date('Y-m-d H:i:s'), 'fotos');
         }
     }
 

@@ -10,8 +10,10 @@ unset($_SESSION['incidenciaActual']);
 $loader = new \Twig\Loader\FilesystemLoader('../view/html');
 $twig = new \Twig\Environment($loader);
 
-/* Obtencion de los rankings */
-#---------------------------------------------#
+//Si no es administrador o usuario registrado se redirige al inicio
+if ($_SESSION['datosUsuario']['rol'] == 'anonimo') {
+    header('Location: inicioController.php');
+}
 
 $usuario = new UsuarioModel();
 $incidencia = new IncidenciasModel();

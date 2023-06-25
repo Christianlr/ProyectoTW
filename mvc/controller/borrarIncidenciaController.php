@@ -10,8 +10,6 @@ session_start();
 $loader = new \Twig\Loader\FilesystemLoader('../view/html');
 $twig = new \Twig\Environment($loader);
 
-/* Obtencion de los rankings */
-#---------------------------------------------#
 
 $usuario = new UsuarioModel();
 $incidencia = new IncidenciasModel();
@@ -21,6 +19,14 @@ $log = new LogsModel();
 $queryString = parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY);
 parse_str($queryString, $params);
 $datosIncidencia = $incidencia->get($params['id']);
+$id = $params['id'];
+
+$usuarioIncidencia = $incidencia->getUserById($id);
+//Si no es administrador o se intenta borrar una incidencia que no es suya se redirige a la pagina principal
+if ($_SESSION['datosUsuario']['rol'] == 'anonimo' ||
+    ($_SESSION['datosUsuario']['email']) != $usuarioIncidencia && $_SESSION['datosUsuario']['rol'] != 'administrador') {
+    header('Location: inicioController.php');
+}
 
 $archivoRender = 'nuevaIncidencia.html';
 $dialogo = true; // Necesario para que se muestre el dialogo dee incidencia en el main
