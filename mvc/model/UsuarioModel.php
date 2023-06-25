@@ -7,7 +7,7 @@ class UsuarioModel extends AbstractModel {
         parent::__construct();
         if (!$this->tableExists('usuarios')) 
             $this->createTable();
-            
+
             $campos['email'] = 'admin@admin.admin';
             $campos['nombre'] = 'Enrique';
             $campos['apellidos'] = 'Araque Espinosa';
@@ -200,6 +200,13 @@ class UsuarioModel extends AbstractModel {
                                 FROM usuarios
                                 WHERE email = '".addslashes($email)."' and 
                                 password = SHA2('".addslashes($password)."', 256)");
+        return ($existe[0]["C"]==0) ? false : true;
+    }
+    public function existeUsuarioById($email) {
+        $existe = $this->query("SELECT COUNT(*) as C 
+                                FROM usuarios
+                                WHERE email = '".addslashes($email) . "'");
+
         return ($existe[0]["C"]==0) ? false : true;
     }
 }

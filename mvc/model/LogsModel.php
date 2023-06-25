@@ -113,7 +113,12 @@ class LogsModel extends AbstractModel {
     }
 
     public function setComentarioIncidencia($fecha, $usuario, $id) {
-        $descripcion = "INFO: El usuario " . $usuario . " ha hecho un comentario en la incidencia con id " . $id;
+        if ($usuario == null) {
+            $descripcion = "INFO: Un usuario anónimo ha hecho un comentario en la incidencia con id " . $id;
+        } else {
+            $descripcion = "INFO: El usuario " . $usuario . " ha hecho un comentario en la incidencia con id " . $id;
+        }
+        
         
         $this->setLog($fecha, $descripcion);
     }

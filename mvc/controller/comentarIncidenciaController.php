@@ -50,7 +50,11 @@ if (isset($_POST['comentarioNuevo'])) {
 
     $datos['fecha'] = date('Y-m-d H:i:s');
     $comentario->set($datos);
-    $log->setComentarioIncidencia(date('Y-m-d H:i:s'), $_SESSION['datosUsuario']['email'], $id);
+    if (isset($_SESSION['datosUsuario']['email']))
+        $log->setComentarioIncidencia(date('Y-m-d H:i:s'), $_SESSION['datosUsuario']['email'], $id);
+    else {
+        $log->setComentarioIncidencia(date('Y-m-d H:i:s'), null, $id);
+    }
     $archivoRender = 'confirmacionesIncidencias.html';
 } else {
     $incidenciaComentada[] = obtenerIncidencia($_SESSION['todasIncidencias'], $id);

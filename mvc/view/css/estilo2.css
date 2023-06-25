@@ -1,8 +1,8 @@
 /*****Colores*****/
-.color-aside{
+.color-aside {
     background-color: #fddab9;
 }
-.color-card{
+.color-card {
     background-color: #ffefd5;
 }
 .color-boton-encima:hover{
@@ -175,6 +175,8 @@ h1 a {
     margin:7px 15px 0 15px;
     padding: 25px;
 }
+
+
 /****Animaciones****/
 
 .animacion-logo:hover {

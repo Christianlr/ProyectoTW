@@ -64,7 +64,7 @@ class ComentariosModel extends AbstractModel {
         $r = $this->query($consulta, $parametros);
     }
 
-    public function getUserById() {
+    public function getUserById($id) {
         $consulta = "SELECT id_usuario FROM comentarios WHERE id = :id";
 
         $parametros = array(

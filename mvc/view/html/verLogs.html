@@ -5,7 +5,7 @@
     <div class="col color-card p-0">
         <h2 class="pt-3 pb-3">Eventos del sistema</h2>
         {% for log in todosLogs %}
-        <div class="row w-100 m-0 color-aside">
+        <div class="row w-100 m-0 color-aside {% if loop.index % 2 == 0 %} color-card {% endif %}">
             <div class="col-3 p-0"><span>{{ log.fecha }}</span></div>
             <div class="col-8 p-0">{{ log.descripcion }}</div>
         </div>
