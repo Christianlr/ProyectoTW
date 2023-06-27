@@ -3,5 +3,7 @@
 {% block main %}
     {% if tipo == 'crear' %}
     <h2 class="editIncidencia">Se ha generado un archivo de copia de seguridad de la base de datos</h2>
+    {% elseif tipo == 'error' %}
+    <h2 class="editIncidencia">Por razones de seguridad no se permite hacer uso de esta opción</h2>
     {% endif %}
 {% endblock %}

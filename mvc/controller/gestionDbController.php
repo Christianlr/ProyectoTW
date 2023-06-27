@@ -30,22 +30,27 @@ if (isset($params['tipo'])) {
 
 
 $archivoRender = 'gestionBBDD.html';
-if ($tipo == 'copia' && Db::crearCopiaDeSeguridad()) {
-    $log->setCopiaSeguridad(date('Y-m-d H:i:s'), $_SESSION['datosUsuario']['email']);
+
+if ($tipo != '') {
+    $tipo = 'error';
     $archivoRender = 'confirmacionesBaseDatos.html';
-    $tipo = 'crear';
+}
+if ($tipo == 'copia' && Db::crearCopiaDeSeguridad()) {
+    // $log->setCopiaSeguridad(date('Y-m-d H:i:s'), $_SESSION['datosUsuario']['email']);
+    // $archivoRender = 'confirmacionesBaseDatos.html';
+    // $tipo = 'crear';
 } else if ($tipo == 'restaurar1') {
-    $tipo = 'restaurar';
+    // $tipo = 'restaurar';
 } else if ($tipo == 'restaurar2' && Db::restaurarCopiaDeSeguridad($archivoRestauracion)) {
-    $log->setRestaurarCopiaSeguridad(date('Y-m-d H:i:s'), $_SESSION['datosUsuario']['email']);
-    header('Location: inicioController.php');
-    $_SESSION = array();
+    // $log->setRestaurarCopiaSeguridad(date('Y-m-d H:i:s'), $_SESSION['datosUsuario']['email']);
+    // header('Location: inicioController.php');
+    // $_SESSION = array();
 } else if ($tipo == 'borrar1') {
-    $tipo = 'borrar';
+    // $tipo = 'borrar';
 } else if ($tipo == 'borrar2' && Db::borrarDb()) {
-    $log->setBorrarDb(date('Y-m-d H:i:s'), $_SESSION['datosUsuario']['email']);
-    header('Location: inicioController.php');
-    $_SESSION = array();
+    // $log->setBorrarDb(date('Y-m-d H:i:s'), $_SESSION['datosUsuario']['email']);
+    // header('Location: inicioController.php');
+    // $_SESSION = array();
 }
 
 
